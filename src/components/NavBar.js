@@ -1,15 +1,21 @@
 import styled from 'styled-components';
+import trooper from '../images/trooper.png';
+import { CartOutline } from 'react-ionicons'
 
 export default function NavBar(){
     return(
         <>
             <Navbar>
                 <div>
-                    <h6>img logo</h6>
+                    <img src={trooper} alt='trooper'/>
                     <p>Olá, Stormtrooper</p>                
                 </div>
 
-                <button>carr</button>
+                <button>
+
+                <ion-icon name="cart-outline"></ion-icon>
+
+                </button>
     
             </Navbar> 
             <div className='sized-box'></div>       
@@ -19,13 +25,17 @@ export default function NavBar(){
 }
 
 const Navbar = styled.div`
-    width: 100%;
+    width: 550px;
     height: 90px;
-    position: absolute;
+    background-color: #030C22;
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
     top: 0;
+    img{
+        height: 35px;
+    }
 
 
     p{
@@ -37,11 +47,28 @@ const Navbar = styled.div`
 
     button{
         border-radius: 50%;
-        margin-right: 10px;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        font-size: 40px;
+        transition: font-size 0.5s;
+        color: #D49943;
+
+        &:hover{
+            font-size: 46px;
+        }
+
+ 
     }
 
     div{
         display: flex;
+        align-items: center;
+ 
+    }
+
+    @media(max-width: 550px) {
+        width: 100%
     }
 
 `

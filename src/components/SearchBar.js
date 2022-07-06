@@ -28,9 +28,12 @@ const Searchbar = styled.div`
     justify-content: center;
 
     input{
-        width: 70%;
+        width: 80%;
 
         border-radius: 10px  0 0 10px;
+    }
+    input:focus {
+        border-right: none;
     }
 
     button{
@@ -44,4 +47,6 @@ const Searchbar = styled.div`
         cursor: pointer;
         border-radius: 0px  10px 10px 0px;
     }
+
+
 `
