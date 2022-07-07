@@ -39,6 +39,8 @@ const Navbar = styled.div`
     z-index: 1;
     img{
         height: 35px;
+        margin-left: 5px;
+        
     }
 
 
@@ -54,12 +56,12 @@ const Navbar = styled.div`
         cursor: pointer;
         background: transparent;
         border: none;
-        font-size: 40px;
+        font-size: 30px;
         transition: font-size 0.5s;
         color: #D49943;
 
         &:hover{
-            font-size: 46px;
+            font-size: 35px;
         }
 
  
