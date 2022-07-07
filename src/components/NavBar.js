@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import trooper from '../images/trooper.png';
-import { CartOutline } from 'react-ionicons'
 
 export default function NavBar(){
     return(
