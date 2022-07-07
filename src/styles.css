@@ -6,10 +6,46 @@ body{
     min-height: 100vh;
     width: 550px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 
+
+input{
+    background-color: #3096B7;
+    border: none;
+    text-indent:15px;
+    height: 50px;
+
+   
+    color: white;
+}
+input:focus {
+    outline: none;
+    border: solid 2px #D49943;
+ }
+
+ ::placeholder{
+    color: white;
+    font-weight: normal;
+    opacity: 1;
+    font-size: 16px;
+}
+
+
+.add-button{
+    font-size: 20px;
+    color: #D49943;
+}
+
+.sized-box{
+    height: 90px;
+}
 @media(max-width: 550px) {
     .main-container{
         width: 100%;
     }
 }
+
