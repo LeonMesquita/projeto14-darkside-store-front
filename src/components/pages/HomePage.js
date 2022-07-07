@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import Context from '../../Context';
 import styled from 'styled-components';
 import ConfirmationButton from "../ConfirmationButton";
 import ProductCard from "../ProductCard";
@@ -7,6 +8,7 @@ import SuggestionsArea from "../styled/SuggestionsArea";
 export default function HomePage(){
     const [searchedProduct, setSearchedProduct] = useState('');
     const [itemsQuantity, setItemsQuantity] = useState(0);
+    const {apiUrl, authorization,token, setToken} = useContext(Context);
     //#D49943
     //#F5C974
     const productTypeList = ['Tudo', 'Camisetas', 'Canecas', 'Funkos', 'Actions'];
