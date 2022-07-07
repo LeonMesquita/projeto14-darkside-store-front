@@ -35,7 +35,10 @@ input:focus {
 }
 
 
-
+.add-button{
+    font-size: 20px;
+    color: #D49943;
+}
 
 .sized-box{
     height: 90px;

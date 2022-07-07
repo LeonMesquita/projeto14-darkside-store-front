@@ -11,12 +11,15 @@ export default function NavBar(){
                     <p>Olá, Stormtrooper</p>                
                 </div>
 
-                <button>
-
+              <div>
+              <button>
                 <ion-icon name="cart-outline"></ion-icon>
-
                 </button>
-    
+
+            <button>
+            <ion-icon name="person-outline"></ion-icon>
+            </button>
+              </div>
             </Navbar> 
             <div className='sized-box'></div>       
         </>
@@ -33,6 +36,7 @@ const Navbar = styled.div`
     align-items: center;
     justify-content: space-between;
     top: 0;
+    z-index: 1;
     img{
         height: 35px;
     }
@@ -64,7 +68,8 @@ const Navbar = styled.div`
     div{
         display: flex;
         align-items: center;
- 
+        min-width: 20%;
+        justify-content: space-between;
     }
 
     @media(max-width: 550px) {
