@@ -15,14 +15,11 @@ export default function HomePage(){
     //#D49943
     //#F5C974
     const productTypeList = ['Tudo', 'Camisetas', 'Canecas', 'Funkos', 'Actions'];
-    const products = Array(20).fill(
-        {
-            title: 'Camiseta Dupla Face Star Wars Saga',
-            type: 'camiseta',
-            price: '89,90',
-            image: 'https://lojapiticas.vteximg.com.br/arquivos/ids/165002-258-258/star-wars-duplace-face-5.png?v=637637756454970000'
-        }
-    );
+
+
+
+    
+
     async function getProducts(){
         try{
             const promise = await axios.get(`${apiUrl}products`);
@@ -38,6 +35,9 @@ export default function HomePage(){
         getProducts();
 
     }, []);
+
+
+
 
     function addItem(){
         setItemsQuantity(itemsQuantity+1);
