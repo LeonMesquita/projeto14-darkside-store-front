@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const SuggestionsArea = styled.div`
-    height: 35px;
+    height: 50px;
     width: 100%;
-    background: #D69A44;
+    background: #FCCB6F;
     display: flex;
-    margin-top: 50px;
+
     align-items: center;
     justify-content: space-evenly;
     overflow: hidden;
@@ -14,15 +14,15 @@ const SuggestionsArea = styled.div`
      
         border: none;
         background: transparent;
-        color: white;
+        color: #03223F;
         font-weight: 700;
         font-size: 17px;
         cursor: pointer;
         transition: font-size 0.2s;
-
         &:hover{
        
             font-size: 20px;
+            text-decoration: underline;
 
     }
 

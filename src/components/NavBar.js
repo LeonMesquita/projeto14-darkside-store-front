@@ -1,24 +1,26 @@
 import styled from 'styled-components';
 import trooper from '../images/trooper.png';
+import star from '../images/Death_Star.svg';
+import yoda from '../images/Yoda.svg';
 
 export default function NavBar(){
     return(
         <>
             <Navbar>
                 <div>
-                    <img src={trooper} alt='trooper'/>
-                    <p>Olá, Stormtrooper</p>                
+                    <img src={star} alt='trooper'/>
+                    <span>
+                    <p>DARKSIDE</p>
+                    <h2>STORE</h2>                         
+                    </span>
+               
                 </div>
 
-              <div>
-              <button>
-                <ion-icon name="cart-outline"></ion-icon>
-                </button>
+           
 
             <button>
-            <ion-icon name="person-outline"></ion-icon>
+                <img src={yoda} alt=''/>
             </button>
-              </div>
             </Navbar> 
             <div className='sized-box'></div>       
         </>
@@ -27,27 +29,46 @@ export default function NavBar(){
 }
 
 const Navbar = styled.div`
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Mega&family=Playball&family=Raleway:wght@400;700&family=Saira+Stencil+One&display=swap');
+
+
     width: 550px;
-    height: 90px;
-    background-color: #030C22;
+    height: 110px;
+    background-image: linear-gradient(to right, #031027, #08203D, #031027);
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
     top: 0;
     z-index: 1;
+    border-bottom: solid 2px #A7A7A7;;
     img{
-        height: 35px;
+        height: 37px;
         margin-left: 5px;
+        transition: height 0.5s;
         
     }
 
 
     p{
-        color: #F5C974;
-        margin-left: 10px;
+        font-family: 'Lexend Mega', sans-serif;
+
+        font-style: normal;
         font-weight: 400;
-        font-size: 20px;
+        font-size: 25px;
+        letter-spacing: 5px;
+        color: #FFFFFF;
+    }
+
+    h2{
+        font-family: 'Lexend Mega';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        letter-spacing: 1.825em;
+        color: #E19F41;
+        margin-top: 3px;
+        text-align: center;
     }
 
     button{
@@ -56,11 +77,14 @@ const Navbar = styled.div`
         background: transparent;
         border: none;
         font-size: 30px;
-        transition: font-size 0.5s;
+        
         color: #D49943;
+        margin-right: 10px;
 
         &:hover{
-            font-size: 35px;
+           img{
+            height: 42px;
+           }
         }
 
  
@@ -71,6 +95,13 @@ const Navbar = styled.div`
         align-items: center;
         min-width: 20%;
         justify-content: space-between;
+    }
+    span{
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     @media(max-width: 550px) {

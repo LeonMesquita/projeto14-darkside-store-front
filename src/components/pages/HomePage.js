@@ -15,11 +15,7 @@ export default function HomePage(){
     //#D49943
     //#F5C974
     const productTypeList = ['Tudo', 'Camisetas', 'Canecas', 'Funkos', 'Actions'];
-    
 
-
-
-    
 
     async function getProducts(productType){
         console.log(productType)
@@ -53,6 +49,7 @@ export default function HomePage(){
             <SearchBar value={searchedProduct} setValue={setSearchedProduct}/>
             <SuggestionsArea>
                 {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}>{type}</button>)}
+
             </SuggestionsArea>
             <ProductsArea>
                 {productsList.map((product, index) => 
