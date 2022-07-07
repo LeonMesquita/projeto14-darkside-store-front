@@ -17,12 +17,10 @@ export default function HomePage(){
     const productTypeList = ['Tudo', 'Camisetas', 'Canecas', 'Funkos', 'Actions'];
 
 
-
-    
-
-    async function getProducts(){
+    async function getProducts(productType){
+        console.log(productType)
         try{
-            const promise = await axios.get(`${apiUrl}products`);
+            const promise = await axios.get(`${apiUrl}products/${productType}`);
             console.log(promise.data);
             setProductsList(promise.data);
 
@@ -32,7 +30,7 @@ export default function HomePage(){
     }
 
     useEffect(() => {
-        getProducts();
+        getProducts('Tudo');
 
     }, []);
 
@@ -50,7 +48,8 @@ export default function HomePage(){
         <>
             <SearchBar value={searchedProduct} setValue={setSearchedProduct}/>
             <SuggestionsArea>
-                {productTypeList.map((type, index) => <button key={index}>{type}</button>)}
+                {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}>{type}</button>)}
+
             </SuggestionsArea>
             <ProductsArea>
                 {productsList.map((product, index) => 
