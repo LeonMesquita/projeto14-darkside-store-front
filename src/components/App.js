@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import { useState } from "react";
 import Context from "../Context";
 export default function App(){
+    //const apiUrl = 'http://localhost:5000/'
     const apiUrl = "https://darkside-store-api.herokuapp.com/";
     const [token, setToken] = useState('');
 
