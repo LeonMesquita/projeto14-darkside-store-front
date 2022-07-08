@@ -20,7 +20,6 @@ export default function App(){
                 <NavBar />
                     <Routes>
                         <>
-                    
                         <Route path="/" element={<HomePage />}/>
                         </>
                         
