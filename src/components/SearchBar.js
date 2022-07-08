@@ -10,8 +10,8 @@ export default function SearchBar({value, setValue, onclick}){
                     <button>
                     <SearchOutline
                         color={'#D69A44'}
-                        height="45px"
-                        width="45px"
+                        height="30px"
+                        width="30px"
                         curor="pointer"
                         onClick={onclick}
                     />
@@ -23,22 +23,28 @@ export default function SearchBar({value, setValue, onclick}){
 
 const Searchbar = styled.div`
     width: 100%;
+    max-width: 550px;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 70px;
+
 
     input{
         width: 80%;
-
         border-radius: 10px  0 0 10px;
+        background: rgba(255, 255, 255, 0.2);
+        height: 35px;
     }
     input:focus {
         border-right: none;
     }
 
+
+
     button{
         width: 50px;
-        height: 50px;
+        height: 35px;
         background: #0d1f49;
         display: flex;
         align-items: center;
@@ -47,6 +53,7 @@ const Searchbar = styled.div`
         cursor: pointer;
         border-radius: 0px  10px 10px 0px;
     }
+
 
 
 `

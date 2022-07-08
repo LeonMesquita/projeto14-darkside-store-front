@@ -1,31 +1,36 @@
 import styled from 'styled-components';
 
 const SuggestionsArea = styled.div`
-    height: 35px;
+    height: 50px;
     width: 100%;
-    background: #D69A44;
-    display: flex;
-    margin-top: 50px;
-    align-items: center;
-    justify-content: space-evenly;
-    overflow: hidden;
-    
+    background: #FCCB6F; 
     button{
      
         border: none;
         background: transparent;
-        color: white;
+        color: #03223F;
         font-weight: 700;
         font-size: 17px;
         cursor: pointer;
         transition: font-size 0.2s;
-
         &:hover{
        
             font-size: 20px;
+            text-decoration: underline;
 
     }
 
+    }
+
+    div{
+        height: 100%;
+        max-width: 550px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        overflow: hidden;
+        margin: auto;
+        
     }
 `
 export default SuggestionsArea;

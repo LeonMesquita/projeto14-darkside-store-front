@@ -6,6 +6,7 @@ import ProductCard from "../ProductCard";
 import SearchBar from "../SearchBar";
 import SuggestionsArea from "../styled/SuggestionsArea";
 import axios from 'axios';
+import AvailableArea from "../styled/AvailableArea";
 export default function HomePage(){
     const [searchedProduct, setSearchedProduct] = useState('');
     const [itemsQuantity, setItemsQuantity] = useState(0);
@@ -48,9 +49,12 @@ export default function HomePage(){
         <>
             <SearchBar value={searchedProduct} setValue={setSearchedProduct}/>
             <SuggestionsArea>
-                {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}>{type}</button>)}
+                <div>
+                    {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}>{type}</button>)}
+                </div>
 
             </SuggestionsArea>
+        <AvailableArea>    
             <ProductsArea>
                 {productsList.map((product, index) => 
                 <ProductCard key={index} src={product.image} title={product.title}
@@ -58,6 +62,7 @@ export default function HomePage(){
             </ProductsArea>
             <div className="sized-box"></div>
             <ConfirmationButton />
+        </AvailableArea>
         </>
     );
 }

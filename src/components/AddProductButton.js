@@ -24,7 +24,7 @@ const AddProduct = styled.div`
 
     ion-icon{
         cursor: pointer;
-        font-size: 30px;
+        font-size: 35px;
         color: #D49943;
     }
 
