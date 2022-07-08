@@ -30,7 +30,6 @@ const Productcard = styled.div`
     margin: 15px 00px;
     border-radius: 5px;
 
-
     transition: height 0.5s;
     transition: width 0.5s;
     transition: border 0.3s;
@@ -56,6 +55,8 @@ const Productcard = styled.div`
         border-radius: 5px 5px 0 0;
         object-fit: cover;
         cursor: pointer;
+
+
 
     }
 
@@ -85,8 +86,10 @@ const Productcard = styled.div`
         align-items: center;
 
         h2{
-            color: white;
+            letter-spacing: -0.12em;
+            color: #ECECEC;
             margin-left: 5px;
+            font-weight: 700;
         }
     }
 

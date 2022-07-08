@@ -23,6 +23,7 @@ export default function SearchBar({value, setValue, onclick}){
 
 const Searchbar = styled.div`
     width: 100%;
+    max-width: 550px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,6 +53,7 @@ const Searchbar = styled.div`
         cursor: pointer;
         border-radius: 0px  10px 10px 0px;
     }
+
 
 
 `

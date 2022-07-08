@@ -7,20 +7,30 @@ export default function NavBar(){
     return(
         <>
             <Navbar>
-                <div>
-                    <img src={star} alt='trooper'/>
-                    <span>
-                    <p>DARKSIDE</p>
-                    <h2>STORE</h2>                         
-                    </span>
-               
+                <div className='navbar-container'>
+                    <div>
+                        <img src={star} alt='trooper'/>
+                        <span>
+                        <p>DARKSIDE</p>
+                        <h2>STORE</h2>                         
+                        </span>
+                
+                    </div>
+
+                    <div>
+                        <button>
+                        <ion-icon name="cart-outline"></ion-icon>
+                        </button>
+
+                
+                        <button>
+                            <img src={yoda} alt=''/>
+                        </button>
+                    </div>                    
                 </div>
 
-           
 
-            <button>
-                <img src={yoda} alt=''/>
-            </button>
+
             </Navbar> 
             <div className='sized-box'></div>       
         </>
@@ -32,7 +42,7 @@ const Navbar = styled.div`
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Mega&family=Playball&family=Raleway:wght@400;700&family=Saira+Stencil+One&display=swap');
 
 
-    width: 550px;
+    width: 100%;
     height: 110px;
     background-image: linear-gradient(to right, #031027, #08203D, #031027);
     position: fixed;
@@ -47,6 +57,11 @@ const Navbar = styled.div`
         margin-left: 5px;
         transition: height 0.5s;
         
+    }
+
+    .navbar-container{
+        width: 550px;
+        margin: auto;
     }
 
 
@@ -76,14 +91,17 @@ const Navbar = styled.div`
         cursor: pointer;
         background: transparent;
         border: none;
-        font-size: 30px;
+        font-size: 32px;
+        transition: font-size 0.5s;
+
         
-        color: #D49943;
+        color: #F9D978;
         margin-right: 10px;
 
         &:hover{
+            font-size: 35px;
            img{
-            height: 42px;
+            height: 40px;
            }
         }
 

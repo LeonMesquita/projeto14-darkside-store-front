@@ -3,13 +3,7 @@ import styled from 'styled-components';
 const SuggestionsArea = styled.div`
     height: 50px;
     width: 100%;
-    background: #FCCB6F;
-    display: flex;
-
-    align-items: center;
-    justify-content: space-evenly;
-    overflow: hidden;
-    
+    background: #FCCB6F; 
     button{
      
         border: none;
@@ -26,6 +20,17 @@ const SuggestionsArea = styled.div`
 
     }
 
+    }
+
+    div{
+        height: 100%;
+        max-width: 550px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        overflow: hidden;
+        margin: auto;
+        
     }
 `
 export default SuggestionsArea;
