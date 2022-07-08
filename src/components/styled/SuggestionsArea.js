@@ -32,5 +32,11 @@ const SuggestionsArea = styled.div`
         margin: auto;
         
     }
+    
+    @media(max-width: 400px) {
+        h5{
+            font-size: 13px;
+        }
+    }
 `
 export default SuggestionsArea;

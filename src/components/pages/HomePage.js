@@ -51,13 +51,13 @@ export default function HomePage(){
             <SearchBar value={searchedProduct} setValue={setSearchedProduct}/>
             <SuggestionsArea>
                 <div>
-                    {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}>{type}</button>)}
+                    {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}><h5>{type}</h5></button>)}
                 </div>
             </SuggestionsArea>
         <AvailableArea>    
             <ProductsArea>
-                {productsList.map((product, index) => 
-                <ProductCard key={index} src={product.image} title={product.title}
+                {productsList.map((product) => 
+                <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
                 price={product.price} quantity={itemsQuantity} add={addItem} remove={removeItem}/>)}
             </ProductsArea>
             <div className="sized-box"></div>

@@ -3,11 +3,29 @@ import trooper from '../images/trooper.png';
 import star from '../images/Death_Star.svg';
 import yoda from '../images/Yoda.svg';
 import Context from '../Context';
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
-
+import axios from 'axios';
 export default function NavBar(){
-    const {totalOfProducts} = useContext(Context);
+    const {apiUrl, totalOfProducts, setTotalOfProducts} = useContext(Context);
+    useEffect(async () => {
+        try{
+            const promise = await axios.get(`${apiUrl}cart`);
+            console.log(promise.data);
+            calcTotalPrice(promise.data);
+        }catch(error){
+            console.log(error);
+        }
+
+    },[]);
+
+    function calcTotalPrice(cart){  
+        let sum = 0;
+        cart.map((item) => {
+            sum += item.itemQuantity;
+        });
+        setTotalOfProducts(sum);
+    }
 
 
     return(
@@ -151,6 +169,15 @@ const Navbar = styled.div`
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    @media(max-width: 400px) {
+        p{
+            font-size: 18px;
+        }
+        h2{
+            font-size: 10px;
+        }
     }
 
     @media(max-width: 550px) {

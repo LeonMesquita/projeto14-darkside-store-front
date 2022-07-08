@@ -1,18 +1,57 @@
 import styled from 'styled-components';
 import AddProductButton from './AddProductButton';
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Context from '../Context';
-export default function ProductCard({src, title, price, quantity, add, remove, mark}){
-    const {totalOfProducts, setTotalOfProducts} = useContext(Context);
+import axios from 'axios';
+export default function ProductCard({src, title, price, productId, quantity, add, remove, mark}){
+    const {apiUrl, totalOfProducts, setTotalOfProducts} = useContext(Context);
     const [itemQuantity, setItemQuantity] = useState(0);
+    const [cartList, setCartList] = useState([]);
+    useEffect(async () => {
+        try{
+            const promise = await axios.get(`${apiUrl}cart`);
+            setCartList(promise.data);
+            setQuantity(promise.data);
+            
+        }catch(error){
+            console.log(error);
+        }
+
+    },[]);
+
+    function setQuantity(cart){
+        cart.map((item) => {
+            if (item.productId === productId){
+                setItemQuantity(item.itemQuantity);
+                console.log(item.itemQuantity);
+      
+            }
+        });
+    }
+    async function setCart(quantity){
+        try{
+            await axios.post(`${apiUrl}cart`,
+            {
+                productId,
+                itemQuantity: quantity
+            })
+        }catch(error){
+
+        }
+    }
     function addItem(){
+
         setItemQuantity(itemQuantity+1);
         setTotalOfProducts(totalOfProducts+1);
+        setCart(itemQuantity+1);
+
     }
-    function removeItem(){
+   function removeItem(){
+    console.log(productId)
         if (itemQuantity > 0){
             setItemQuantity(itemQuantity-1);
-            setTotalOfProducts(totalOfProducts-1);            
+            setTotalOfProducts(totalOfProducts-1);
+            setCart(itemQuantity-1);            
         }
 
     }
