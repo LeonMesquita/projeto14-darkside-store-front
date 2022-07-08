@@ -1,7 +1,11 @@
 import styled from 'styled-components';
-export default function ConfirmationButton(){
+import Context from '../Context';
+import { useState, useContext } from "react";
+export default function ConfirmationButton({onclick}){
+    const {totalOfProducts} = useContext(Context);
+
     return(
-        <Confirmationbutton>
+        <Confirmationbutton background={totalOfProducts > 0 ? "#D49943" : "lightgrey"} onClick={totalOfProducts > 0 ? onclick : null}>
             <p>Prosseguir para o carrinho</p>
         </Confirmationbutton>
     );
@@ -10,7 +14,7 @@ export default function ConfirmationButton(){
 const Confirmationbutton = styled.button`
     width: 550px;
     height: 70px;
-    background-color: #D49943;
+    background-color: ${props => props.background};
     position: fixed;
     bottom: 0;
     border: none;
@@ -27,3 +31,5 @@ const Confirmationbutton = styled.button`
         width: 100%;
     }
 `
+
+//

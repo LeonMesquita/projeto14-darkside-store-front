@@ -2,8 +2,32 @@ import styled from 'styled-components';
 import trooper from '../images/trooper.png';
 import star from '../images/Death_Star.svg';
 import yoda from '../images/Yoda.svg';
+import Context from '../Context';
+import { useState, useContext, useEffect } from "react";
 
+import axios from 'axios';
 export default function NavBar(){
+    const {apiUrl, totalOfProducts, setTotalOfProducts} = useContext(Context);
+    useEffect(async () => {
+        try{
+            const promise = await axios.get(`${apiUrl}cart`);
+            console.log(promise.data);
+            calcTotalPrice(promise.data);
+        }catch(error){
+            console.log(error);
+        }
+
+    },[]);
+
+    function calcTotalPrice(cart){  
+        let sum = 0;
+        cart.map((item) => {
+            sum += item.itemQuantity;
+        });
+        setTotalOfProducts(sum);
+    }
+
+
     return(
         <>
             <Navbar>
@@ -20,6 +44,9 @@ export default function NavBar(){
                     <div>
                         <button>
                         <ion-icon name="cart-outline"></ion-icon>
+                        {totalOfProducts > 0 ? <div className='cart-products'><h6>{totalOfProducts}</h6></div>
+                        : null    
+                        }
                         </button>
 
                 
@@ -64,6 +91,21 @@ const Navbar = styled.div`
         margin: auto;
     }
 
+    .cart-products{
+  
+        width: 25px;
+        height: 25px;
+        background: red;
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        align-items: center;
+        justify-content: center;
+        transition: height 0.5s;
+        transition: width 0.5s;
+        border-radius: 50%;
+    }
+
 
     p{
         font-family: 'Lexend Mega', sans-serif;
@@ -86,6 +128,12 @@ const Navbar = styled.div`
         text-align: center;
     }
 
+    h6{
+        color: white;
+        font-size: 17px;
+        font-weight: 900;
+    }
+
     button{
         border-radius: 50%;
         cursor: pointer;
@@ -93,6 +141,7 @@ const Navbar = styled.div`
         border: none;
         font-size: 32px;
         transition: font-size 0.5s;
+        position: relative;
 
         
         color: #F9D978;
@@ -120,6 +169,15 @@ const Navbar = styled.div`
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    @media(max-width: 400px) {
+        p{
+            font-size: 18px;
+        }
+        h2{
+            font-size: 10px;
+        }
     }
 
     @media(max-width: 550px) {
