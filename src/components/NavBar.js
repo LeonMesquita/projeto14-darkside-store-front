@@ -4,6 +4,7 @@ import star from '../images/Death_Star.svg';
 import yoda from '../images/Yoda.svg';
 
 export default function NavBar(){
+
     return(
         <>
             <Navbar>
@@ -21,11 +22,15 @@ export default function NavBar(){
                         <button>
                         <ion-icon name="cart-outline"></ion-icon>
                         </button>
-
                 
-                        <button>
+                        <Dropdown>
                             <img src={yoda} alt=''/>
-                        </button>
+                            <ul className='dropdown-content'>
+                                <li>Meus pedidos</li>
+                                <li>Favoritos</li>
+                                <li>Sair</li>
+                            </ul>
+                        </Dropdown>
                     </div>                    
                 </div>
 
@@ -93,8 +98,7 @@ const Navbar = styled.div`
         border: none;
         font-size: 32px;
         transition: font-size 0.5s;
-
-        
+   
         color: #F9D978;
         margin-right: 10px;
 
@@ -104,8 +108,6 @@ const Navbar = styled.div`
             height: 40px;
            }
         }
-
- 
     }
 
     div{
@@ -125,5 +127,39 @@ const Navbar = styled.div`
     @media(max-width: 550px) {
         width: 100%
     }
+`
 
+const Dropdown = styled.button`
+    position: relative;
+    display: inline-block;
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;   
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        color: #4D4D4D; 
+        font-size: 16px;
+        padding: 8px 16px;
+        text-align: start;
+    }
+
+    li {
+        margin-bottom: 8px;
+        white-space: nowrap;
+
+        &:last-child{
+            margin-bottom: 0;
+        }
+
+        &:hover {
+            color: #08203C;
+        }
+    }
+
+    &:hover .dropdown-content {
+        display: block;
+    }
 `
