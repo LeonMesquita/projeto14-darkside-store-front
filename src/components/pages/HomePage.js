@@ -7,6 +7,8 @@ import SearchBar from "../SearchBar";
 import SuggestionsArea from "../styled/SuggestionsArea";
 import axios from 'axios';
 import AvailableArea from "../styled/AvailableArea";
+
+
 export default function HomePage(){
     const [searchedProduct, setSearchedProduct] = useState('');
     const [itemsQuantity, setItemsQuantity] = useState(0);

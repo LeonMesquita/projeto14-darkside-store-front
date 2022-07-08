@@ -2,8 +2,17 @@ import styled from 'styled-components';
 import trooper from '../images/trooper.png';
 import star from '../images/Death_Star.svg';
 import yoda from '../images/Yoda.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function NavBar(){
+
+    const navigate = useNavigate();
+
+    function logout() {
+        if(window.confirm("Você realmente deseja sair? :(")) {
+            navigate("/");
+        }
+    }
 
     return(
         <>
@@ -26,9 +35,9 @@ export default function NavBar(){
                         <Dropdown>
                             <img src={yoda} alt=''/>
                             <ul className='dropdown-content'>
-                                <li>Meus pedidos</li>
-                                <li>Favoritos</li>
-                                <li>Sair</li>
+                                <li onClick={() => navigate("/historic")}>Meus pedidos</li>
+                                <li onClick={() => navigate("/favorites")}>Favoritos</li>
+                                <li onClick={logout}>Sair</li>
                             </ul>
                         </Dropdown>
                     </div>                    

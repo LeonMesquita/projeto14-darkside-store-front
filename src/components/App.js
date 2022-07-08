@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import HomePage from "./pages/HomePage";
+import Favorites from "./pages/Favorites";
+import Historic from "./pages/Historic";
 import { useState } from "react";
 import Context from "../Context";
 export default function App(){
@@ -21,6 +23,8 @@ export default function App(){
                     <Routes>
                         <>
                         <Route path="/" element={<HomePage />}/>
+                        <Route path="/favorites" element={<Favorites />}/>
+                        <Route path="/historic" element={<Historic />}/>
                         </>
                         
                     </Routes>
