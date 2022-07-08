@@ -52,6 +52,7 @@ export default function HomePage(){
                 <div>
                     {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}>{type}</button>)}
                 </div>
+
             </SuggestionsArea>
         <AvailableArea>    
             <ProductsArea>
