@@ -1,6 +1,21 @@
 import styled from 'styled-components';
 import AddProductButton from './AddProductButton';
+import { useState, useContext } from "react";
+import Context from '../Context';
 export default function ProductCard({src, title, price, quantity, add, remove, mark}){
+    const {totalOfProducts, setTotalOfProducts} = useContext(Context);
+    const [itemQuantity, setItemQuantity] = useState(0);
+    function addItem(){
+        setItemQuantity(itemQuantity+1);
+        setTotalOfProducts(totalOfProducts+1);
+    }
+    function removeItem(){
+        if (itemQuantity > 0){
+            setItemQuantity(itemQuantity-1);
+            setTotalOfProducts(totalOfProducts-1);            
+        }
+
+    }
     return(
         <Productcard>
             <div className='image-container'>
@@ -14,7 +29,7 @@ export default function ProductCard({src, title, price, quantity, add, remove, m
                 <p>{title}</p>
                 <div className='separate-div'>
                     <h2>R$ {price}</h2>
-                    <AddProductButton text={quantity} pressAdd={add} pressSub={remove}/>
+                    <AddProductButton text={itemQuantity} pressAdd={addItem} pressSub={removeItem}/>
 
                 </div>                
             </span>

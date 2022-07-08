@@ -12,6 +12,7 @@ export default function HomePage(){
     const [itemsQuantity, setItemsQuantity] = useState(0);
     const {token, setToken, apiUrl, authorization} = useContext(Context);
     const [productsList, setProductsList] = useState([]);
+    const [totalOfProducts, setTotalOfProducts] = useState(0);
     
     //#D49943
     //#F5C974

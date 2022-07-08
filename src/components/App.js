@@ -7,6 +7,8 @@ export default function App(){
     const apiUrl = 'http://localhost:5000/'
     //const apiUrl = "https://darkside-store-api.herokuapp.com/";
     const [token, setToken] = useState('');
+    const [totalOfProducts, setTotalOfProducts] = useState(0);
+
 
     const authorization = {
         headers: {
@@ -15,7 +17,7 @@ export default function App(){
     }
     return(
         <div className="main-container">
-            <Context.Provider value={{token, setToken, apiUrl, authorization}}>
+            <Context.Provider value={{token, setToken, apiUrl, authorization, totalOfProducts, setTotalOfProducts}}>
                 <BrowserRouter>
                 <NavBar />
                     <Routes>
