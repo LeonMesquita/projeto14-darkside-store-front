@@ -81,7 +81,6 @@ const SuggestionsArea = styled.div`
     width: 100%;
     background: #FCCB6F; 
     button{
-     
         border: none;
         background: transparent;
         color: #03223F;
@@ -90,10 +89,8 @@ const SuggestionsArea = styled.div`
         cursor: pointer;
         transition: font-size 0.2s;
         &:hover{
-       
             font-size: 20px;
             text-decoration: underline;
-
     }
 
     }

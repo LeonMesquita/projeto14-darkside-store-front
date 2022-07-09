@@ -40,8 +40,6 @@ const Searchbar = styled.div`
         border-right: none;
     }
 
-
-
     button{
         width: 50px;
         height: 35px;
@@ -53,7 +51,4 @@ const Searchbar = styled.div`
         cursor: pointer;
         border-radius: 0px  10px 10px 0px;
     }
-
-
-
 `
