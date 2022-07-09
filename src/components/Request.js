@@ -51,9 +51,11 @@ export default function Request({ request }) {
             </Products>
             <Summary>
                 <h2>Resumo da compra</h2>
-                <h3>Número do pedido: {request.id}</h3>
-                <h3>Data: {request.date}</h3>
-                <h3>Valor total: R${total}</h3>
+                <div>
+                    <h3>Número do pedido: <strong>{request.id}</strong></h3>
+                    <h3>Data: <strong>{request.date}</strong></h3>
+                    <h3>Valor total: <strong>R${total}</strong></h3>
+                </div>
             </Summary>
         </Container>
     )
@@ -62,11 +64,12 @@ export default function Request({ request }) {
 const Container = styled.div`
     display: flex;
     justify-content: center;
-    background-color: #03223F;
-    margin-bottom: 25px;
+    background-color: rgba(215, 215, 215, 0.1);
+    margin: 0 auto 25px auto;
     border-radius: 3px;
     padding: 20px 0;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    width: 100%;
 `
 
 const Products = styled.div`
@@ -79,18 +82,27 @@ const Products = styled.div`
 
 const Summary = styled.div`
     width: 50%;
-    padding: 0px 20px;
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    word-break: break-all;
 
     h2 {
         font-weight: bold;
         font-size: 16px;
         line-height: 9px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        color: #E19F41;
     }
 
     h3 {
         font-size: 14px;
         line-height: 9px;
         margin-bottom: 7px;
+    }
+
+    strong {
+        font-weight: bold;
     }
 `

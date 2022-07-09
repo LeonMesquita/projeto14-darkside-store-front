@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../../images/Death Star.png";
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function SignIn() {
 
@@ -14,10 +15,14 @@ export default function SignIn() {
     const navigate = useNavigate();
     const {apiUrl} = useContext(Context);
     
+    const [carregando, setCarregando] = useState(false);
 
     async function SignUp(e) {
 
         e.preventDefault();
+
+        setCarregando(true);
+
         const body = {name, email, password, confirmPassword};
         try {
             await axios.post(`${apiUrl}/sign-up`, body);
@@ -25,9 +30,36 @@ export default function SignIn() {
         }
         catch(error) {
             console.log(error)
+            setCarregando(false);
             //alert("Deu erro ao cadastrar")
         }
     }
+
+    function makeFormSignUp() {
+        if (!carregando) {
+            return (
+                <>
+                    <input type = "text" placeholder = "Nome" value = {name} onChange = {e => setName(e.target.value)} required />
+                    <input type = "email" placeholder = "Email" value = {email} onChange = {e => setEmail(e.target.value)} required />
+                    <input type = "password" placeholder = "Senha" value = {password} onChange = {e => setPassword(e.target.value)} required />
+                    <input type = "password" placeholder = "Confirmar senha" value = {confirmPassword} onChange = {e => setConfirmPassword(e.target.value)} required />
+                    <button onClick = {SignUp} >Cadastrar</button>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <input type = "text" placeholder = "Nome" value = {name} onChange = {e => setName(e.target.value)} required disabled={true} />
+                    <input type = "email" placeholder = "Email" value = {email} onChange = {e => setEmail(e.target.value)} required disabled={true} />
+                    <input type = "password" placeholder = "Senha" value = {password} onChange = {e => setPassword(e.target.value)} required disabled={true} />
+                    <input type = "password" placeholder = "Confirmar senha" value = {confirmPassword} onChange = {e => setConfirmPassword(e.target.value)} required disabled={true} />
+                    <button disabled={true}><ThreeDots height={70} width={70} color="#07203D" /></button>
+                </>
+            )
+        }
+    }
+
+    const formSignUp = makeFormSignUp();
 
     return (
         <Body>
@@ -38,11 +70,7 @@ export default function SignIn() {
             </Logomarca>
             
             <Container>
-                <input type = "text" placeholder = "Nome" value = {name} onChange = {e => setName(e.target.value)} />
-                <input type = "email" placeholder = "Email" value = {email} onChange = {e => setEmail(e.target.value)} />
-                <input type = "password" placeholder = "Senha" value = {password} onChange = {e => setPassword(e.target.value)} />
-                <input type = "password" placeholder = "Confirmar senha" value = {confirmPassword} onChange = {e => setConfirmPassword(e.target.value)} />
-                <button onClick = {SignUp}> <h4>Cadastrar</h4> </button>
+                {formSignUp}
                 <Link to = "/"><h5>Já possui uma conta? <strong>Entre aqui</strong></h5> </Link>
             </Container>
         </Body>
@@ -66,7 +94,7 @@ const Container = styled.div `
     padding: 20px 0 30px 0;
     margin-top: 40px;
 
-    input{
+    input {
         width: 90%;
         height: 40px;
         background-color: rgba(255, 255, 255, 0.8);
@@ -81,11 +109,18 @@ const Container = styled.div `
             font-size: 20px;
             color: #ADADAD;
         }
+
+        &:disabled {
+            background-color: #F2F2F2;
+            color: #AFAFAF;
+        }
     }
-    strong{
+
+    strong {
         color: #FCCB6F;
     }
-    button{
+
+    button {
         width: 90%;
         height: 40px;
         background-color: #FCCB6F;
@@ -96,8 +131,16 @@ const Container = styled.div `
         border: none;
         font-size: 18px;
         font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:disabled {
+            opacity: 0.7;
+        }
     }
-    h5{
+
+    h5 {
         color: white;
         font-size: 14px;
     }
