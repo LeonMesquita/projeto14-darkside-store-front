@@ -61,12 +61,12 @@ export default function ProductCard({ src, title, price, productId, mark }) {
 
     return (
         <Productcard>
-            <div className='image-container'>
+            <ImageContainer>
                 <img src={src} alt='' />
                 <BookMark onClick={mark}>
                     <ion-icon name="bookmark-outline"></ion-icon>
                 </BookMark>
-            </div>
+            </ImageContainer>
 
             <span>
                 <p>{title}</p>
@@ -80,6 +80,14 @@ export default function ProductCard({ src, title, price, productId, mark }) {
         </Productcard>
     );
 }
+
+const ImageContainer = styled.div`
+    @media(max-width: 350px) {
+        width: 100%;
+        height: 65%;
+        position: relative;
+    }
+`
 
 const Productcard = styled.div`
     height: 350px;
@@ -99,13 +107,6 @@ const Productcard = styled.div`
        margin: auto;
        margin-top: 15px;
        margin-bottom: 15px;
-    }
-    
-    .image-container{
-        width: 100%;
-        height: 65%;
-        position: relative;
-       
     }
 
     img{
