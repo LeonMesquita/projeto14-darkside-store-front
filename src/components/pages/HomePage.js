@@ -10,7 +10,7 @@ import AvailableArea from "../styled/AvailableArea";
 export default function HomePage(){
     const [searchedProduct, setSearchedProduct] = useState('');
     const [itemsQuantity, setItemsQuantity] = useState(0);
-    const {token, setToken, apiUrl, authorization} = useContext(Context);
+    const {token, setToken, apiUrl, authorization, user, setUser} = useContext(Context);
     const [productsList, setProductsList] = useState([]);
     const [totalOfProducts, setTotalOfProducts] = useState(0);
     
@@ -22,7 +22,7 @@ export default function HomePage(){
     async function getProducts(productType){
         console.log(productType)
         try{
-            const promise = await axios.get(`${apiUrl}products/${productType}`);
+            const promise = await axios.get(`${apiUrl}/products/${productType}`);
             console.log(promise.data);
             setProductsList(promise.data);
 

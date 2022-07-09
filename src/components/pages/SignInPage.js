@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import Context from '../../Context';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -11,18 +12,20 @@ export default function SignIn() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const navigate = useNavigate();
-    const apiUrl = "";
+    const {apiUrl} = useContext(Context);
+    
 
     async function SignUp(e) {
 
         e.preventDefault();
         const body = {name, email, password, confirmPassword};
         try {
-            await axios.post(`${apiUrl}/auth/sign-in`, body);
+            await axios.post(`${apiUrl}/sign-up`, body);
             navigate("/login");
         }
-        catch {
-            alert("Deu erro ao cadastrar")
+        catch(error) {
+            console.log(error)
+            //alert("Deu erro ao cadastrar")
         }
     }
 
@@ -40,7 +43,7 @@ export default function SignIn() {
                 <input type = "password" placeholder = "Senha" value = {password} onChange = {e => setPassword(e.target.value)} />
                 <input type = "password" placeholder = "Confirmar senha" value = {confirmPassword} onChange = {e => setConfirmPassword(e.target.value)} />
                 <button onClick = {SignUp}> <h4>Cadastrar</h4> </button>
-                <Link to = "/login"><h5>Já possui uma conta?</h5> <p>Entre aqui</p> </Link>
+                <Link to = "/"><h5>Já possui uma conta?</h5> <p>Entre aqui</p> </Link>
             </Container>
         </Body>
     )
