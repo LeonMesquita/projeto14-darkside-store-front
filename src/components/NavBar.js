@@ -164,12 +164,7 @@ const Navbar = styled.div`
         color: #F9D978;
         margin-right: 10px;
 
-        &:hover{
-            font-size: 35px;
-           img{
-            height: 40px;
-           }
-        }
+
     }
 
     div{

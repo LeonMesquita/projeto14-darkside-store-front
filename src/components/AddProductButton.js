@@ -1,11 +1,13 @@
 import styled from 'styled-components';
+import '../css/product-style.css';
+
 export default function AddProductButton({text, pressAdd, pressSub}){
     return(
-        <AddProduct>
+        <div className='add-product'>
                 <ion-icon onClick={pressSub} name="remove-circle-outline"></ion-icon>
                 <h3>{text}</h3>
                 <ion-icon onClick={pressAdd} className="add-button" name="add-circle-outline" ></ion-icon>
-        </AddProduct>
+        </div>
     )
 }
 
