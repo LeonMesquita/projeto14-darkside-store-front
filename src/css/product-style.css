@@ -65,6 +65,27 @@
 }
 
 
+
+.add-product{
+    margin-right: 5px;
+    border: none;
+    display: flex;
+    align-items: center;
+    min-width: 30%;
+    justify-content: space-between;
+}
+
+.add-product     h3{
+    color: white;
+    font-size: 15px;
+}
+
+.add-product     ion-icon{
+    cursor: pointer;
+    font-size: 35px;
+    color: #D49943;
+}
+
 @media(max-width: 350px) {
     .product-card{
         width: 80%;
