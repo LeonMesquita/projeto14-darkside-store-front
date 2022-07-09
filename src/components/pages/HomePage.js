@@ -46,11 +46,11 @@ export default function HomePage(){
                 </div>
             </SuggestionsArea>
             <div className="available-area">    
-                <ProductsArea>
+                <div className="products-area">
                     {productsList.map((product) => 
                     <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
                     price={product.price} quantity={itemsQuantity} />)}
-                </ProductsArea>
+                </div>
                 <div className="sized-box"></div>
                 <ConfirmationButton />
             </div>
