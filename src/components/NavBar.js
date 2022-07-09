@@ -5,6 +5,7 @@ import yoda from '../images/Yoda.svg';
 import { useNavigate } from 'react-router-dom';
 import Context from '../Context';
 import { useState, useContext, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 
 import axios from 'axios';
 export default function NavBar(){
@@ -18,9 +19,10 @@ export default function NavBar(){
     }
 
     const {apiUrl, totalOfProducts, setTotalOfProducts} = useContext(Context);
+    const location = useLocation();
     useEffect(async () => {
         try{
-            const promise = await axios.get(`${apiUrl}cart`);
+            const promise = await axios.get(`${apiUrl}/cart`);
             console.log(promise.data);
             calcTotalPrice(promise.data);
         }catch(error){
@@ -39,6 +41,7 @@ export default function NavBar(){
 
 
     return(
+        location.pathname === '/' || location.pathname === '/sign-up' ? null :
         <>
             <Navbar>
                 <div className='navbar-container'>
@@ -74,7 +77,7 @@ export default function NavBar(){
 
             </Navbar> 
             <div className='sized-box'></div>       
-        </>
+        </> 
 
     );
 }

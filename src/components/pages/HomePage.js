@@ -12,8 +12,7 @@ import NavBar from "../NavBar";
 
 export default function HomePage(){
     const [searchedProduct, setSearchedProduct] = useState('');
-    const [itemsQuantity, setItemsQuantity] = useState(0);
-    const {token, setToken, apiUrl, authorization} = useContext(Context);
+    const {token, setToken, apiUrl, authorization, user, setUser, itemsQuantity, setItemsQuantity} = useContext(Context);
     const [productsList, setProductsList] = useState([]);
     const [totalOfProducts, setTotalOfProducts] = useState(0);
     
@@ -25,7 +24,7 @@ export default function HomePage(){
     async function getProducts(productType){
         console.log(productType)
         try{
-            const promise = await axios.get(`${apiUrl}products/${productType}`);
+            const promise = await axios.get(`${apiUrl}/products/${productType}`);
             console.log(promise.data);
             setProductsList(promise.data);
 
@@ -39,16 +38,6 @@ export default function HomePage(){
 
     }, []);
 
-
-
-
-    function addItem(){
-        setItemsQuantity(itemsQuantity+1);
-    }
-    function removeItem(){
-        if (itemsQuantity > 0)
-        setItemsQuantity(itemsQuantity-1);
-    }
     return(
         <>
             <NavBar />
@@ -63,7 +52,7 @@ export default function HomePage(){
             <ProductsArea>
                 {productsList.map((product) => 
                 <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
-                price={product.price} quantity={itemsQuantity} add={addItem} remove={removeItem}/>)}
+                price={product.price} quantity={itemsQuantity} />)}
             </ProductsArea>
             <div className="sized-box"></div>
             <ConfirmationButton />
