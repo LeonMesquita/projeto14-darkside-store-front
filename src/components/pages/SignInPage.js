@@ -21,7 +21,7 @@ export default function SignIn() {
         const body = {name, email, password, confirmPassword};
         try {
             await axios.post(`${apiUrl}/sign-up`, body);
-            navigate("/login");
+            navigate("/");
         }
         catch(error) {
             console.log(error)
