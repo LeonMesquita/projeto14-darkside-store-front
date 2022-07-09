@@ -3,76 +3,78 @@ import AddProductButton from './AddProductButton';
 import { useState, useContext, useEffect } from "react";
 import Context from '../Context';
 import axios from 'axios';
-export default function ProductCard({src, title, price, productId, quantity, add, remove, mark}){
-    const {apiUrl, totalOfProducts, setTotalOfProducts, authorization} = useContext(Context);
+export default function ProductCard({ src, title, price, productId, mark }) {
+    const { apiUrl, totalOfProducts, setTotalOfProducts, authorization } = useContext(Context);
     const [itemQuantity, setItemQuantity] = useState(0);
     const [cartList, setCartList] = useState([]);
+
     useEffect(async () => {
-        try{
+        try {
             const promise = await axios.get(`${apiUrl}/cart`);
             setCartList(promise.data);
             setQuantity(promise.data);
-            
-        }catch(error){
+
+        } catch (error) {
             console.log(error);
         }
 
-    },[]);
+    }, []);
 
-    function setQuantity(cart){
+    function setQuantity(cart) {
         cart.map((item) => {
-            if (item.productId === productId){
+            if (item.productId === productId) {
                 setItemQuantity(item.itemQuantity);
                 console.log(item.itemQuantity);
-      
             }
         });
     }
 
 
-    async function setCart(quantity){
-        try{
+    async function setCart(quantity) {
+        try {
             await axios.post(`${apiUrl}/cart`,
-            {
-                productId,
-                itemQuantity: quantity
-            }, authorization);
-        }catch(error){
+                {
+                    productId,
+                    itemQuantity: quantity
+                }, authorization);
+        } catch (error) {
             console.log(error);
         }
     }
-    function addItem(){
 
-        setItemQuantity(itemQuantity+1);
-        setTotalOfProducts(totalOfProducts+1);
-        setCart(itemQuantity+1);
+    function addItem() {
+
+        setItemQuantity(itemQuantity + 1);
+        setTotalOfProducts(totalOfProducts + 1);
+        setCart(itemQuantity + 1);
 
     }
-   function removeItem(){
-    console.log(productId)
-        if (itemQuantity > 0){
-            setItemQuantity(itemQuantity-1);
-            setTotalOfProducts(totalOfProducts-1);
-            setCart(itemQuantity-1);            
+
+    function removeItem() {
+        console.log(productId)
+        if (itemQuantity > 0) {
+            setItemQuantity(itemQuantity - 1);
+            setTotalOfProducts(totalOfProducts - 1);
+            setCart(itemQuantity - 1);
         }
-
     }
-    return(
+
+    return (
         <Productcard>
             <div className='image-container'>
-                 <img src={src} alt=''/>
-                 <BookMark onClick={mark}>
+                <img src={src} alt='' />
+                <BookMark onClick={mark}>
                     <ion-icon name="bookmark-outline"></ion-icon>
-                 </BookMark>
+                </BookMark>
             </div>
-           
+
             <span>
                 <p>{title}</p>
                 <div className='separate-div'>
                     <h2>R$ {price}</h2>
-                    <AddProductButton text={itemQuantity} pressAdd={addItem} pressSub={removeItem}/>
+                    <AddProductButton text={itemQuantity} pressAdd={addItem} pressSub={removeItem} />
 
-                </div>                
+                </div>
             </span>
 
         </Productcard>
@@ -111,9 +113,6 @@ const Productcard = styled.div`
         border-radius: 5px 5px 0 0;
         object-fit: cover;
         cursor: pointer;
-
-
-
     }
 
     p{

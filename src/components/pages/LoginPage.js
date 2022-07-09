@@ -52,8 +52,6 @@ const Body = styled.div `
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
-
 `
 const Container = styled.div `
     display: flex;
@@ -107,7 +105,7 @@ const Container = styled.div `
 const Logomarca = styled.div `
     display: flex;    
     position: relative;
-    margin-top: 180;
+    margin-top: 120px;
     margin-bottom: 65px;
 
     h1{

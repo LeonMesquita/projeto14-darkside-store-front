@@ -2,12 +2,22 @@ import styled from 'styled-components';
 import trooper from '../images/trooper.png';
 import star from '../images/Death_Star.svg';
 import yoda from '../images/Yoda.svg';
+import { useNavigate } from 'react-router-dom';
 import Context from '../Context';
 import { useState, useContext, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 
 import axios from 'axios';
 export default function NavBar(){
+
+    const navigate = useNavigate();
+
+    function logout() {
+        if(window.confirm("Você realmente deseja sair? :(")) {
+            navigate("/");
+        }
+    }
+
     const {apiUrl, totalOfProducts, setTotalOfProducts} = useContext(Context);
     const location = useLocation();
     useEffect(async () => {
@@ -51,11 +61,15 @@ export default function NavBar(){
                         : null    
                         }
                         </button>
-
                 
-                        <button>
+                        <Dropdown>
                             <img src={yoda} alt=''/>
-                        </button>
+                            <ul className='dropdown-content'>
+                                <li onClick={() => navigate("/historic")}>Meus pedidos</li>
+                                <li onClick={() => navigate("/favorites")}>Favoritos</li>
+                                <li onClick={logout}>Sair</li>
+                            </ul>
+                        </Dropdown>
                     </div>                    
                 </div>
 
@@ -156,8 +170,6 @@ const Navbar = styled.div`
             height: 40px;
            }
         }
-
- 
     }
 
     div{
@@ -186,5 +198,39 @@ const Navbar = styled.div`
     @media(max-width: 550px) {
         width: 100%
     }
+`
 
+const Dropdown = styled.button`
+    position: relative;
+    display: inline-block;
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;   
+        background-color: #f9f9f9;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        color: #4D4D4D; 
+        font-size: 16px;
+        padding: 8px 16px;
+        text-align: start;
+    }
+
+    li {
+        margin-bottom: 8px;
+        white-space: nowrap;
+
+        &:last-child{
+            margin-bottom: 0;
+        }
+
+        &:hover {
+            color: #08203C;
+        }
+    }
+
+    &:hover .dropdown-content {
+        display: block;
+    }
 `
