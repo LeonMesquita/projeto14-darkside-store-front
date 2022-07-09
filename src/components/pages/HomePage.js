@@ -6,6 +6,7 @@ import ProductCard from "../ProductCard";
 import SearchBar from "../SearchBar";
 import axios from 'axios';
 import NavBar from "../NavBar";
+import { useNavigate } from "react-router-dom";
 
 
 export default function HomePage(){
@@ -13,6 +14,7 @@ export default function HomePage(){
     const {token, setToken, apiUrl, authorization, user, setUser, itemsQuantity, setItemsQuantity} = useContext(Context);
     const [productsList, setProductsList] = useState([]);
     const [totalOfProducts, setTotalOfProducts] = useState(0);
+    const navigate = useNavigate();
     
     //#D49943
     //#F5C974
@@ -38,7 +40,7 @@ export default function HomePage(){
 
     return(
         <>
-            <NavBar />
+            
             <SearchBar value={searchedProduct} setValue={setSearchedProduct}/>
             <SuggestionsArea>
                 <div>
@@ -52,7 +54,7 @@ export default function HomePage(){
                     price={product.price} quantity={itemsQuantity} />)}
                 </div>
                 <div className="sized-box"></div>
-                <ConfirmationButton />
+                <ConfirmationButton onclick={() => navigate('/cart')}/>
             </div>
         </>
     );
