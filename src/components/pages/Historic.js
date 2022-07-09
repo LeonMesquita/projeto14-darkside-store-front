@@ -4,7 +4,7 @@ import NavBar from "../NavBar";
 
 export default function Historic() {
 
-    //pegar os dados com axios.get
+    //pegar os dados com axios.get("/historic")
     
     //só para teste
     const requestsList = [

@@ -36,12 +36,14 @@ export default function Login() {
             </Logomarca>
             
             <Container>
-                <h3>Seja bem-vindo! Faça seu login para continuar</h3>
+                <div>
+                    <h3>Seja bem-vindo!</h3>
+                    <h6>Faça seu login para continuar</h6>
+                </div>
                 <input type = "email" placeholder = "Email" value = {email} onChange = {e => setEmail(e.target.value)} />
                 <input type = "password" placeholder = "Senha" value = {password} onChange = {e => setPassword(e.target.value)} />
-                <p>Esqueceu a senha?</p>
                 <button onClick = {LogIn}> <h4>Entrar</h4> </button>
-                <Link to = "/sign-up"><h5>Ainda não tem uma conta?</h5> <p>Cadastre aqui</p> </Link>
+                <Link to = "/sign-up"><h5>Ainda não tem uma conta? <strong>Cadastre aqui</strong></h5></Link>
             </Container>
         </Body>
     )
@@ -59,54 +61,70 @@ const Container = styled.div `
     justify-content: center;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.4);
-    width: 223px;
-    height: 270px;
+    width: 330px;
     border-radius: 10px;
+    padding: 20px 0 30px 0;
+    margin-top: 40px;
 
-    h3{
-        width: 133px;
+    div{
+        width: 80%;
         height: 45px;
-        overflow-wrap: break-word;  
-        word-wrap: break-word; 
-        word-break: break-word;
-        font-size: 18px;
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    h3 {
+        font-size: 28px;
+        color: #E19F41;
+        line-height: 15px;
+        margin-bottom: 10px;
+    }
+    h6 {
+        font-size: 16px;
         color: white;
         line-height: 15px;
-        margin-bottom: 21px;
-        margin-top: 19px;
     }
     input{
-        width: 192px;
-        height: 25px;
+        width: 90%;
+        height: 40px;
         background-color: rgba(255, 255, 255, 0.8);
         border-radius: 5px;
-        margin-top: 7px;
-        margin-bottom: 7px;
-        color: black;
+        margin-bottom: 10px;
+        color: #051731;
+        font-size: 20px;
+
+        &::placeholder {
+            font-family: 'Lexend Mega';
+            font-weight: 400;
+            font-size: 20px;
+            color: #ADADAD;
+        }
     }
-    p{
+    strong{
         color: #FCCB6F;
-        font-size: 12px;
     }
     button{
-        width: 192px;
-        height: 25px;
+        width: 90%;
+        height: 40px;
         background-color: #FCCB6F;
-        color: black;
+        color: #051731;
         border-radius: 5px;
-        margin-top: 21px;
-        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
     }
     h5{
         color: white;
-        font-size: 12px;
+        font-size: 14px;
     }
 `
 const Logomarca = styled.div `
     display: flex;    
     position: relative;
     margin-top: 120px;
-    margin-bottom: 65px;
 
     h1{
         color: white;
