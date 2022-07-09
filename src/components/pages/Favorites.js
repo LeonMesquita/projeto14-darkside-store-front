@@ -4,7 +4,6 @@ import NavBar from "../NavBar";
 import ProductCard from "../ProductCard";
 import ConfirmationButton from "../ConfirmationButton";
 import Context from '../../Context';
-import AvailableArea from "../styled/AvailableArea";
 
 export default function Favorites() {
 
@@ -54,4 +53,13 @@ const ProductsArea = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
+`
+
+const AvailableArea = styled.div`
+    width: 550px;
+    min-height: 500px;
+
+    @media(max-width: 550px) {
+        width: 100%;
+    }
 `

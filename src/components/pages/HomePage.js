@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import ConfirmationButton from "../ConfirmationButton";
 import ProductCard from "../ProductCard";
 import SearchBar from "../SearchBar";
-import SuggestionsArea from "../styled/SuggestionsArea";
 import axios from 'axios';
-import AvailableArea from "../styled/AvailableArea";
 import NavBar from "../NavBar";
 
 
@@ -61,7 +59,6 @@ export default function HomePage(){
     );
 }
 
-
 const ProductsArea = styled.div`
     margin-top: 40px;
     width: 100%;
@@ -69,4 +66,53 @@ const ProductsArea = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
+`
+
+const AvailableArea = styled.div`
+    width: 550px;
+    min-height: 500px;
+
+    @media(max-width: 550px) {
+        width: 100%;
+    }
+`
+
+const SuggestionsArea = styled.div`
+    height: 50px;
+    width: 100%;
+    background: #FCCB6F; 
+    button{
+     
+        border: none;
+        background: transparent;
+        color: #03223F;
+        font-weight: 700;
+        font-size: 17px;
+        cursor: pointer;
+        transition: font-size 0.2s;
+        &:hover{
+       
+            font-size: 20px;
+            text-decoration: underline;
+
+    }
+
+    }
+
+    div{
+        height: 100%;
+        max-width: 550px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        overflow: hidden;
+        margin: auto;
+        
+    }
+    
+    @media(max-width: 400px) {
+        h5{
+            font-size: 13px;
+        }
+    }
 `
