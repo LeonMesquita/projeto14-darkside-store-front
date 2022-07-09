@@ -43,7 +43,7 @@ export default function SignIn() {
                 <input type = "password" placeholder = "Senha" value = {password} onChange = {e => setPassword(e.target.value)} />
                 <input type = "password" placeholder = "Confirmar senha" value = {confirmPassword} onChange = {e => setConfirmPassword(e.target.value)} />
                 <button onClick = {SignUp}> <h4>Cadastrar</h4> </button>
-                <Link to = "/"><h5>Já possui uma conta?</h5> <p>Entre aqui</p> </Link>
+                <Link to = "/"><h5>Já possui uma conta? <strong>Entre aqui</strong></h5> </Link>
             </Container>
         </Body>
     )
@@ -54,8 +54,6 @@ const Body = styled.div `
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
-
 `
 const Container = styled.div `
     display: flex;
@@ -63,42 +61,52 @@ const Container = styled.div `
     justify-content: center;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.4);
-    width: 223px;
-    height: 270px;
+    width: 330px;
     border-radius: 10px;
+    padding: 20px 0 30px 0;
+    margin-top: 40px;
 
     input{
-        width: 192px;
-        height: 25px;
+        width: 90%;
+        height: 40px;
         background-color: rgba(255, 255, 255, 0.8);
         border-radius: 5px;
-        margin-top: 7px;
-        margin-bottom: 7px;
-        color: black;
+        margin-bottom: 10px;
+        color: #051731;
+        font-size: 20px;
+
+        &::placeholder {
+            font-family: 'Lexend Mega';
+            font-weight: 400;
+            font-size: 20px;
+            color: #ADADAD;
+        }
     }
-    p{
+    strong{
         color: #FCCB6F;
-        font-size: 12px;
     }
     button{
-        width: 192px;
-        height: 25px;
+        width: 90%;
+        height: 40px;
         background-color: #FCCB6F;
-        color: black;
+        color: #051731;
         border-radius: 5px;
-        margin-top: 21px;
-        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
     }
     h5{
         color: white;
-        font-size: 12px;
+        font-size: 14px;
     }
 `
+
 const Logomarca = styled.div `
     display: flex;    
     position: relative;
     margin-top: 120px;
-    margin-bottom: 65px;
 
     h1{
         color: white;
