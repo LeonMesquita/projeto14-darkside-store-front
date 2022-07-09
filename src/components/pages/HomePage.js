@@ -44,17 +44,16 @@ export default function HomePage(){
                 <div>
                     {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}><h5>{type}</h5></button>)}
                 </div>
-
             </SuggestionsArea>
-        <AvailableArea>    
-            <ProductsArea>
-                {productsList.map((product) => 
-                <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
-                price={product.price} quantity={itemsQuantity} />)}
-            </ProductsArea>
-            <div className="sized-box"></div>
-            <ConfirmationButton />
-        </AvailableArea>
+            <AvailableArea>    
+                <ProductsArea>
+                    {productsList.map((product) => 
+                    <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
+                    price={product.price} quantity={itemsQuantity} />)}
+                </ProductsArea>
+                <div className="sized-box"></div>
+                <ConfirmationButton />
+            </AvailableArea>
         </>
     );
 }

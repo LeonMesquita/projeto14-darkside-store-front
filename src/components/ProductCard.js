@@ -100,6 +100,7 @@ const Productcard = styled.div`
        margin-top: 15px;
        margin-bottom: 15px;
     }
+    
     .image-container{
         width: 100%;
         height: 65%;
