@@ -22,7 +22,7 @@ export default function HomePage(){
     async function getProducts(productType){
         console.log(productType)
         try{
-            const promise = await axios.get(`${apiUrl}/products/${productType}`);
+            const promise = await axios.get(`${apiUrl}/products/${productType}`, authorization);
             console.log(promise.data);
             setProductsList(promise.data);
 

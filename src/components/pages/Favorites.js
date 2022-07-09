@@ -1,5 +1,6 @@
-import { useContext } from "react"
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import NavBar from "../NavBar";
 import ProductCard from "../ProductCard";
 import ConfirmationButton from "../ConfirmationButton";
@@ -7,10 +8,9 @@ import Context from '../../Context';
 
 export default function Favorites() {
 
-    //pegar os dados com axios.get
+    const {itemsQuantity, apiUrl, authorization} = useContext(Context);
 
-    //só para teste
-    const favoritesList = [
+    const [favoritesList, setFavoritesList] = useState([
         {   
             _id: 1,
             title: "Camiseta Star Wars",
@@ -26,9 +26,23 @@ export default function Favorites() {
             image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
             quantity: 2
         }
-    ];
+    ]);
 
-    const {itemsQuantity, setItemsQuantity} = useContext(Context);
+    //pegar os dados com axios.get
+    async function getFavorites() {
+        try {
+            const promise = await axios.get(`${apiUrl}/favorites`, authorization);
+            console.log(promise.data);
+            setFavoritesList(promise.data);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getFavorites();
+    }, []);
 
     return (
         <>
