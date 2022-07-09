@@ -4,12 +4,12 @@ import { useState, useContext, useEffect } from "react";
 import Context from '../Context';
 import axios from 'axios';
 export default function ProductCard({src, title, price, productId, quantity, add, remove, mark}){
-    const {apiUrl, totalOfProducts, setTotalOfProducts} = useContext(Context);
+    const {apiUrl, totalOfProducts, setTotalOfProducts, authorization} = useContext(Context);
     const [itemQuantity, setItemQuantity] = useState(0);
     const [cartList, setCartList] = useState([]);
     useEffect(async () => {
         try{
-            const promise = await axios.get(`${apiUrl}cart`);
+            const promise = await axios.get(`${apiUrl}/cart`);
             setCartList(promise.data);
             setQuantity(promise.data);
             
@@ -28,15 +28,17 @@ export default function ProductCard({src, title, price, productId, quantity, add
             }
         });
     }
+
+
     async function setCart(quantity){
         try{
-            await axios.post(`${apiUrl}cart`,
+            await axios.post(`${apiUrl}/cart`,
             {
                 productId,
                 itemQuantity: quantity
-            })
+            }, authorization);
         }catch(error){
-
+            console.log(error);
         }
     }
     function addItem(){

@@ -1,29 +1,29 @@
-import React, {useState, useContext} from "react";
+import { useState, useContext } from "react";
+import Context from '../../Context';
 import axios from "axios";
 import { Link, useNavigate} from "react-router-dom";
 import styled from "styled-components";
-import Context from "../../Context";
 import Logo from "../../images/Death Star.png";
 
 export default function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const {setUser} = useContext(Context);
     const navigate = useNavigate();
-    const apiUrl = "";
+    const {apiUrl, user, setUser} = useContext(Context);
 
     async function LogIn(e) {
 
         e.preventDefault();
         const body = {email, password};
         try {
-        const {data} = axios.post(`${apiUrl}/auth/login`, body);
-            setUser({token: data.token, name: data.name});
-            navigate("/");
+        const {data} = await axios.post(`${apiUrl}/login`, body);
+            setUser({token: data.token, name: data.name, email: data.email});
+            console.log(user);
+            navigate("/home");
        }
         catch(error) {
-            alert("Email ou senha incorretos");
+            //alert("Email ou senha incorretos");
         }
     }
 
