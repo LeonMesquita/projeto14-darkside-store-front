@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Request from "../Request";
+import NavBar from "../NavBar";
 
 export default function Historic() {
 
@@ -63,10 +64,13 @@ export default function Historic() {
     const requests = showRequests();
 
     return (
-        <Container>
-            <h1>Pedidos</h1>
-            {requests}
-        </Container>
+        <>
+            <NavBar />
+            <Container>
+                <h1>Pedidos</h1>
+                {requests}
+            </Container>
+        </>
     )
 }
 
