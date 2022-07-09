@@ -33,6 +33,10 @@ input:focus {
     color: #D49943;
 }
 
+.available-area{
+    width: 550px;
+}
+
 .sized-box{
     height: 110px;
 }
@@ -40,5 +44,10 @@ input:focus {
     .main-container{
         width: 100%;
     }
+
+    .available-area{
+        width: 100%;
+    }
+
 }
 

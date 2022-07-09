@@ -45,7 +45,7 @@ export default function HomePage(){
                     {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}><h5>{type}</h5></button>)}
                 </div>
             </SuggestionsArea>
-            <AvailableArea>    
+            <div className="available-area">    
                 <ProductsArea>
                     {productsList.map((product) => 
                     <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
@@ -53,7 +53,7 @@ export default function HomePage(){
                 </ProductsArea>
                 <div className="sized-box"></div>
                 <ConfirmationButton />
-            </AvailableArea>
+            </div>
         </>
     );
 }
@@ -67,14 +67,6 @@ const ProductsArea = styled.div`
     justify-content: space-around;
 `
 
-const AvailableArea = styled.div`
-    width: 550px;
-    min-height: 500px;
-
-    @media(max-width: 550px) {
-        width: 100%;
-    }
-`
 
 const SuggestionsArea = styled.div`
     height: 50px;
