@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { SearchOutline } from 'react-ionicons';
+import '../css/search-bar.css';
+
 
 export default function SearchBar({value, setValue, onclick}){
     return(
-        <Searchbar>
+        <div className="search-bar">
         <input placeholder="Escrever para achar você deve!"
                    type='text' value={value}
                    onChange={(e) => setValue(e.target.value)}/>
@@ -16,7 +18,7 @@ export default function SearchBar({value, setValue, onclick}){
                         onClick={onclick}
                     />
                     </button>
-        </Searchbar>
+        </div>
     );
 }
 
