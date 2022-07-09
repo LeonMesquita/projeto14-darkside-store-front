@@ -29,3 +29,10 @@
     cursor: pointer;
     border-radius: 0px  10px 10px 0px;
 }
+
+.search-bar ion-icon{
+    color: #D69A44;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
