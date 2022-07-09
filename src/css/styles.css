@@ -68,20 +68,33 @@ input:focus {
 
 
 
+.confirmation-button{
+    width: 550px;
+    height: 70px;
+    background-color: #D49943;
+    position: fixed;
+    bottom: 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
+.confirmation-button     p{
+    color: white;
+    font-size: 27px;
+    font-weight: 700;
+}
 
 
 .sized-box{
     height: 110px;
 }
 @media(max-width: 550px) {
-    .main-container{
+    .main-container, .confirmation-button, .available-area{
         width: 100%;
     }
 
-    .available-area{
-        width: 100%;
-    }
+
 
 }
 
