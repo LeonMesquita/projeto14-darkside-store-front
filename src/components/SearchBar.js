@@ -9,14 +9,8 @@ export default function SearchBar({value, setValue, onclick}){
         <input placeholder="Escrever para achar você deve!"
                    type='text' value={value}
                    onChange={(e) => setValue(e.target.value)}/>
-                    <button>
-                    <SearchOutline
-                        color={'#D69A44'}
-                        height="30px"
-                        width="30px"
-                        curor="pointer"
-                        onClick={onclick}
-                    />
+                    <button onClick={onclick}>
+                    <ion-icon name="search-outline"></ion-icon>
                     </button>
         </div>
     );
