@@ -5,9 +5,9 @@ export default function ConfirmationButton({onclick}){
     const {totalOfProducts} = useContext(Context);
 
     return(
-        <Confirmationbutton background={totalOfProducts > 0 ? "#D49943" : "lightgrey"} onClick={totalOfProducts > 0 ? onclick : null}>
+        <button className='confirmation-button' background={totalOfProducts > 0 ? "#D49943" : "lightgrey"} onClick={totalOfProducts > 0 ? onclick : null}>
             <p>Prosseguir para o carrinho</p>
-        </Confirmationbutton>
+        </button>
     );
 }
 
