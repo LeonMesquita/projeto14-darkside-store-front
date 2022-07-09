@@ -37,6 +37,41 @@ input:focus {
     width: 550px;
 }
 
+.products-area{
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+
+
+
+.separate-div{
+    border-top: solid 1px #3C4043;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+   
+}
+
+.separate-div  h2{
+    letter-spacing: -0.12em;
+    color: #ECECEC;
+    margin-left: 5px;
+    font-weight: 700;
+}
+
+
+
+
+
+
 .sized-box{
     height: 110px;
 }

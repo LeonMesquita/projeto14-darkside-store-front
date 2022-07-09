@@ -3,6 +3,8 @@ import AddProductButton from './AddProductButton';
 import { useState, useContext, useEffect } from "react";
 import Context from '../Context';
 import axios from 'axios';
+import '../css/product-style.css';
+
 export default function ProductCard({ src, title, price, productId, mark }) {
     const { apiUrl, totalOfProducts, setTotalOfProducts, authorization } = useContext(Context);
     const [itemQuantity, setItemQuantity] = useState(0);
@@ -60,12 +62,12 @@ export default function ProductCard({ src, title, price, productId, mark }) {
     }
 
     return (
-        <Productcard>
+        <div className='product-card'>
             <div className='image-container'>
                 <img src={src} alt='' />
-                <BookMark onClick={mark}>
+                <div className='bookmark' onClick={mark}>
                     <ion-icon name="bookmark-outline"></ion-icon>
-                </BookMark>
+                </div>
             </div>
 
             <span>
@@ -77,7 +79,7 @@ export default function ProductCard({ src, title, price, productId, mark }) {
                 </div>
             </span>
 
-        </Productcard>
+        </div>
     );
 }
 
@@ -101,12 +103,7 @@ const Productcard = styled.div`
        margin-bottom: 15px;
     }
     
-    .image-container{
-        width: 100%;
-        height: 65%;
-        position: relative;
-       
-    }
+
 
     img{
         width: 100%;
