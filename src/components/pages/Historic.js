@@ -1,24 +1,16 @@
 import styled from "styled-components";
+import Request from "../Request";
 
 export default function Historic() {
 
     //pegar os dados com axios.get
-    /*
-        {
-            title: "Camiseta Star Wars",
-            price: "89,90",
-            image: "https://image.png"
-            quantity: 1,
-            size: "M",
-            date: "DD/MM/YY"
-        } 
-    */
-
-    const pedidos = [
+    
+    //só para teste
+    const requestsList = [
         {
             id: "1",
             date: "12/04/2022",
-            products:[
+            products: [
                 {
                     title: "Camiseta Star Wars",
                     price: "89,90",
@@ -28,7 +20,7 @@ export default function Historic() {
                 },
                 {
                     title: "Caneca Star Wars",
-                    price: "89,90",
+                    price: "29,90",
                     image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
                     quantity: 2
                 }
@@ -37,7 +29,7 @@ export default function Historic() {
         {
             id: "2",
             date: "14/05/2022",
-            products:[
+            products: [
                 {
                     title: "Camiseta Star Wars",
                     price: "89,90",
@@ -47,7 +39,7 @@ export default function Historic() {
                 },
                 {
                     title: "Caneca Star Wars",
-                    price: "89,90",
+                    price: "29,90",
                     image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
                     quantity: 1
                 }
@@ -56,12 +48,39 @@ export default function Historic() {
 
     ];
 
+    function showRequests() {
+        if (requestsList.length === 0) {
+            return (
+                <></>
+            );
+        } else {
+            return (
+                requestsList.map((req, index) => <Request key={index} request={req} />)
+            );
+        }
+    }
+
+    const requests = showRequests();
+
     return (
         <Container>
-
+            <h1>Pedidos</h1>
+            {requests}
         </Container>
     )
 }
 
 const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-top: 40px;
+    white-space: nowrap;
+    color: #ECECEC;
+
+    h1 {
+        font-size: 30px;
+        color: #E19F41;
+        margin-bottom: 20px;
+    }
 `
