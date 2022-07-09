@@ -7,6 +7,8 @@ import Context from "../Context";
 import Login from "./pages/LoginPage";
 import SignUp from "./pages/SignUpPage";
 import styled from "styled-components";
+import CartPage from "./pages/CartPage";
+import NavBar from "./NavBar";
 
 export default function App(){
     //const apiUrl = 'http://localhost:5001'
@@ -27,14 +29,18 @@ export default function App(){
     }
     return(
         <MainContainer>
+            
             <Context.Provider value={{ apiUrl, authorization, totalOfProducts, setTotalOfProducts, user, setUser, itemsQuantity, setItemsQuantity }}>
                 <BrowserRouter>
-                    <Routes>
+                <NavBar />
+                    <Routes>               
                     <Route path="/" element={<Login />}/>
                     <Route path="/sign-up" element={<SignUp />}/>
                     <Route path="/home" element={<HomePage />}/>
                     <Route path="/favorites" element={<Favorites />}/>
-                    <Route path="/historic" element={<Historic />}/>  
+                    <Route path="/historic" element={<Historic />}/>
+                    <Route path="/cart" element={<CartPage />}/>  
+  
                     </Routes>
                 </BrowserRouter>
             </Context.Provider>
