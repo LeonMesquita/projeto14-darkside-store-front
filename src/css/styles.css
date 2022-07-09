@@ -2,16 +2,6 @@ body{
     background-image: linear-gradient(to right, #031027, #08203D, #031027);
 }
 
-.main-container{
-    min-height: 100vh;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-
 input{
     background-color: #3096B7;
     border: none;
@@ -21,6 +11,7 @@ input{
    
     color: white;
 }
+
 input:focus {
     outline: none;
     border: solid 2px #D49943;

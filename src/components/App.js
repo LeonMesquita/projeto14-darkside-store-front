@@ -6,6 +6,8 @@ import { useState } from "react";
 import Context from "../Context";
 import Login from "./pages/LoginPage";
 import SignUp from "./pages/SignUpPage";
+import styled from "styled-components";
+
 export default function App(){
     //const apiUrl = 'http://localhost:5001'
     const apiUrl = "https://darkside-store-api.herokuapp.com";
@@ -24,7 +26,7 @@ export default function App(){
         }
     }
     return(
-        <div className="main-container">
+        <MainContainer>
             <Context.Provider value={{ apiUrl, authorization, totalOfProducts, setTotalOfProducts, user, setUser, itemsQuantity, setItemsQuantity }}>
                 <BrowserRouter>
                     <Routes>
@@ -36,6 +38,15 @@ export default function App(){
                     </Routes>
                 </BrowserRouter>
             </Context.Provider>
-        </div>
+        </MainContainer>
     );
 };
+
+const MainContainer = styled.div`
+    min-height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+`
