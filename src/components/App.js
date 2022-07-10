@@ -10,9 +10,10 @@ import styled from "styled-components";
 import CartPage from "./pages/CartPage";
 import Checkout from "./pages/Checkout";
 import NavBar from "./NavBar";
+import Request from "./Request";
 
 export default function App(){
-    //const apiUrl = 'http://localhost:5001'
+    //const apiUrl = 'http://localhost:5000'
     const apiUrl = "https://darkside-store-api.herokuapp.com";
     const [totalOfProducts, setTotalOfProducts] = useState(0);
     const [itemsQuantity, setItemsQuantity] = useState(0);
@@ -33,7 +34,7 @@ export default function App(){
             
             <Context.Provider value={{ apiUrl, authorization, totalOfProducts, setTotalOfProducts, user, setUser, itemsQuantity, setItemsQuantity }}>
                 <BrowserRouter>
-                <NavBar />
+            
                     <Routes>               
                         <Route path="/" element={<Login />}/>
                         <Route path="/sign-up" element={<SignUp />}/>
@@ -41,7 +42,8 @@ export default function App(){
                         <Route path="/favorites" element={<Favorites />}/>
                         <Route path="/historic" element={<Historic />}/>
                         <Route path="/cart" element={<CartPage />}/>
-                        <Route path="/checkout" element={<Checkout />}/>    
+                        <Route path="/checkout" element={<Checkout />}/>
+                        <Route path="/request" element={<Request />}/>  
                     </Routes>
                 </BrowserRouter>
             </Context.Provider>

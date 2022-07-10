@@ -4,20 +4,22 @@ import { useState, useContext, useEffect } from "react";
 import Context from '../Context';
 import axios from 'axios';
 import '../css/product-style.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProductCard({ src, title, price, productId, mark }) {
     const { apiUrl, totalOfProducts, setTotalOfProducts, authorization } = useContext(Context);
     const [itemQuantity, setItemQuantity] = useState(0);
     const [cartList, setCartList] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(async () => {
         try {
-            const promise = await axios.get(`${apiUrl}/cart`);
-            setCartList(promise.data);
-            setQuantity(promise.data);
+            const promise = await axios.get(`${apiUrl}/cart`, authorization);
+            setCartList(promise.data.products);
+            setQuantity(promise.data.products);
 
         } catch (error) {
-            console.log(error);
+            //navigate('/');
         }
 
     }, []);
@@ -40,7 +42,8 @@ export default function ProductCard({ src, title, price, productId, mark }) {
                     itemQuantity: quantity
                 }, authorization);
         } catch (error) {
-            console.log(error);
+            setTotalOfProducts(0);
+            navigate('/');
         }
     }
 

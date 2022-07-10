@@ -11,10 +11,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function HomePage(){
     const [searchedProduct, setSearchedProduct] = useState('');
-    const {token, setToken, apiUrl, authorization, user, setUser, itemsQuantity, setItemsQuantity} = useContext(Context);
+    const {token, setToken, apiUrl, authorization, user, setUser} = useContext(Context);
     const [productsList, setProductsList] = useState([]);
     const [totalOfProducts, setTotalOfProducts] = useState(0);
     const navigate = useNavigate();
+    const [itemsQuantity, setItemsQuantity] = useState(0);
+
     
     //#D49943
     //#F5C974
@@ -24,8 +26,8 @@ export default function HomePage(){
     async function getProducts(productType){
         console.log(productType)
         try{
-            const promise = await axios.get(`${apiUrl}/products/${productType}`, authorization);
-            console.log(promise.data);
+
+            const promise = await axios.get(`${apiUrl}/products/${productType}`);
             setProductsList(promise.data);
 
         } catch(error){
@@ -40,6 +42,7 @@ export default function HomePage(){
 
     return(
         <>
+            <NavBar />
             <SearchBar value={searchedProduct} setValue={setSearchedProduct}/>
             <SuggestionsArea>
                 <div>
