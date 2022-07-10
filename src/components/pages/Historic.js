@@ -26,6 +26,22 @@ export default function Historic() {
                     price: "29,90",
                     image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
                     quantity: 2
+                },
+                {
+                    title: "Caneca Star Wars",
+                    price: "29,90",
+                    image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
+                    quantity: 2
+                },{
+                    title: "Caneca Star Wars",
+                    price: "29,90",
+                    image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
+                    quantity: 2
+                },{
+                    title: "Caneca Star Wars",
+                    price: "29,90",
+                    image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
+                    quantity: 2
                 }
             ]
         },
