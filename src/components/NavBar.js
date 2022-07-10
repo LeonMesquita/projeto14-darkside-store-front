@@ -64,16 +64,22 @@ export default function NavBar(){
                         <Dropdown>
                             <img src={yoda} alt=''/>
                             <ul className='dropdown-content'>
-                                <li onClick={() => navigate("/historic")}>Meus pedidos</li>
-                                <li onClick={() => navigate("/favorites")}>Favoritos</li>
-                                <li onClick={logout}>Sair</li>
+                                <li onClick={() => navigate("/historic")}>
+                                    <ion-icon name="person"></ion-icon>
+                                    Meus pedidos
+                                </li>
+                                <li onClick={() => navigate("/favorites")}>
+                                    <ion-icon name="star"></ion-icon>
+                                    Favoritos
+                                </li>
+                                <li onClick={logout}>
+                                    <ion-icon name="log-out"></ion-icon>
+                                    Sair
+                                </li>
                             </ul>
                         </Dropdown>
                     </div>                    
                 </div>
-
-
-
             </Navbar> 
             <div className='sized-box'></div>       
         </> 
@@ -99,15 +105,14 @@ const Navbar = styled.div`
         height: 37px;
         margin-left: 5px;
         transition: height 0.5s;
-        
     }
 
-    .navbar-container{
+    .navbar-container {
         width: 550px;
         margin: auto;
     }
 
-    .cart-products{
+    .cart-products {
   
         width: 25px;
         height: 25px;
@@ -122,10 +127,8 @@ const Navbar = styled.div`
         border-radius: 50%;
     }
 
-
-    p{
+    p {
         font-family: 'Lexend Mega', sans-serif;
-
         font-style: normal;
         font-weight: 400;
         font-size: 25px;
@@ -133,7 +136,7 @@ const Navbar = styled.div`
         color: #FFFFFF;
     }
 
-    h2{
+    h2 {
         font-family: 'Lexend Mega';
         font-style: normal;
         font-weight: 400;
@@ -144,13 +147,13 @@ const Navbar = styled.div`
         text-align: center;
     }
 
-    h6{
+    h6 {
         color: white;
         font-size: 17px;
         font-weight: 900;
     }
 
-    button{
+    button {
         border-radius: 50%;
         cursor: pointer;
         background: transparent;
@@ -158,21 +161,18 @@ const Navbar = styled.div`
         font-size: 32px;
         transition: font-size 0.5s;
         position: relative;
-
-        
         color: #F9D978;
         margin-right: 10px;
-
-
     }
 
-    div{
+    div {
         display: flex;
         align-items: center;
         min-width: 20%;
         justify-content: space-between;
     }
-    span{
+
+    span {
         margin-left: 10px;
         display: flex;
         flex-direction: column;
@@ -181,10 +181,10 @@ const Navbar = styled.div`
     }
 
     @media(max-width: 400px) {
-        p{
+        p {
             font-size: 18px;
         }
-        h2{
+        h2 {
             font-size: 10px;
         }
     }
@@ -207,13 +207,14 @@ const Dropdown = styled.button`
         z-index: 1;
         color: #4D4D4D; 
         font-size: 16px;
-        padding: 8px 16px;
+        padding: 8px 12px;
         text-align: start;
     }
 
     li {
         margin-bottom: 8px;
         white-space: nowrap;
+        display: flex;
 
         &:last-child{
             margin-bottom: 0;
@@ -221,6 +222,10 @@ const Dropdown = styled.button`
 
         &:hover {
             color: #08203C;
+        }
+
+        ion-icon {
+            margin-right: 6px;
         }
     }
 

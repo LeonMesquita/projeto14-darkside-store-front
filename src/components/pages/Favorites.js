@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import NavBar from "../NavBar";
 import ProductCard from "../ProductCard";
 import ConfirmationButton from "../ConfirmationButton";
 import Context from '../../Context';
@@ -28,7 +27,6 @@ export default function Favorites() {
         }
     ]);
 
-    //pegar os dados com axios.get
     async function getFavorites() {
         try {
             const promise = await axios.get(`${apiUrl}/favorites`, authorization);
@@ -46,8 +44,8 @@ export default function Favorites() {
 
     return (
         <>
-        <NavBar />
-            <AvailableArea>    
+            <AvailableArea> 
+                <h1>Seus Favoritos</h1>   
                 <ProductsArea>
                     {favoritesList.map((product) => 
                     <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
@@ -61,7 +59,7 @@ export default function Favorites() {
 }
 
 const ProductsArea = styled.div`
-    margin-top: 40px;
+    margin-top: 10px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -72,6 +70,12 @@ const ProductsArea = styled.div`
 const AvailableArea = styled.div`
     width: 550px;
     min-height: 500px;
+
+    h1 {
+        font-size: 30px;
+        color: #E19F41;
+        margin: 20px 0 0 10px;
+    }
 
     @media(max-width: 550px) {
         width: 100%;
