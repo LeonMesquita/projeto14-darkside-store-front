@@ -42,6 +42,7 @@ export default function ProductCard({ src, title, price, productId, mark }) {
                     itemQuantity: quantity
                 }, authorization);
         } catch (error) {
+            setTotalOfProducts(0);
             navigate('/');
         }
     }
