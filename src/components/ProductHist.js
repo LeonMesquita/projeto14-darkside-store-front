@@ -37,7 +37,7 @@ const Container = styled.div`
     flex: none;
 
     img {
-        width: 60px;
+        width: 70px;
         height: 80px;
         border-radius: 3px;
         margin-bottom: 15px;
