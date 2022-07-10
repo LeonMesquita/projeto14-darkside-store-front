@@ -8,6 +8,7 @@ import Login from "./pages/LoginPage";
 import SignUp from "./pages/SignUpPage";
 import styled from "styled-components";
 import CartPage from "./pages/CartPage";
+import Checkout from "./pages/Checkout";
 import NavBar from "./NavBar";
 
 export default function App(){
@@ -34,13 +35,13 @@ export default function App(){
                 <BrowserRouter>
                 <NavBar />
                     <Routes>               
-                    <Route path="/" element={<Login />}/>
-                    <Route path="/sign-up" element={<SignUp />}/>
-                    <Route path="/home" element={<HomePage />}/>
-                    <Route path="/favorites" element={<Favorites />}/>
-                    <Route path="/historic" element={<Historic />}/>
-                    <Route path="/cart" element={<CartPage />}/>  
-  
+                        <Route path="/" element={<Login />}/>
+                        <Route path="/sign-up" element={<SignUp />}/>
+                        <Route path="/home" element={<HomePage />}/>
+                        <Route path="/favorites" element={<Favorites />}/>
+                        <Route path="/historic" element={<Historic />}/>
+                        <Route path="/cart" element={<CartPage />}/>
+                        <Route path="/checkout" element={<Checkout />}/>    
                     </Routes>
                 </BrowserRouter>
             </Context.Provider>

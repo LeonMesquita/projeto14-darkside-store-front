@@ -40,7 +40,6 @@ export default function HomePage(){
 
     return(
         <>
-            
             <SearchBar value={searchedProduct} setValue={setSearchedProduct}/>
             <SuggestionsArea>
                 <div>

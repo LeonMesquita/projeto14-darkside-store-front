@@ -3,7 +3,6 @@ import Context from '../../Context';
 import styled from "styled-components";
 import axios from "axios";
 import Request from "../Request";
-import NavBar from "../NavBar";
 
 export default function Historic() {
 
@@ -50,7 +49,6 @@ export default function Historic() {
         }
     ]);
 
-    //pegar os dados com axios.get("/historic")
     async function getRequests() {
         try {
             const promise = await axios.get(`${apiUrl}/historic`, authorization);
@@ -83,9 +81,8 @@ export default function Historic() {
 
     return (
         <>
-            <NavBar />
             <Container>
-                <h1>Pedidos</h1>
+                <h1>Seus Pedidos</h1>
                 {requests}
             </Container>
         </>
@@ -95,14 +92,19 @@ export default function Historic() {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    width: 90%;
-    margin-top: 40px;
+    width: 550px;
+    margin-top: 20px;
     white-space: nowrap;
     color: #ECECEC;
+    padding: 0 10px;
 
     h1 {
         font-size: 30px;
         color: #E19F41;
         margin-bottom: 20px;
+    }
+
+    @media(max-width: 550px) {
+        width: 100%;
     }
 `
