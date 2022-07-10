@@ -6,12 +6,12 @@ import axios from 'axios';
 import '../css/product-style.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function ProductCard({ src, title, price, productId, isfavorite }) {
+export default function ProductCard({ src, title, price, productId }) {
     const { apiUrl, totalOfProducts, setTotalOfProducts, authorization } = useContext(Context);
     const [itemQuantity, setItemQuantity] = useState(0);
     const [cartList, setCartList] = useState([]);
     const navigate = useNavigate();
-    const [isFavorite, setIsFavorite] = useState(isfavorite);
+    const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(async () => {
         try {
@@ -31,7 +31,6 @@ export default function ProductCard({ src, title, price, productId, isfavorite }
         cart.map((item) => {
             if (item.productId === productId) {
                 setItemQuantity(item.itemQuantity);
-                console.log(item.itemQuantity);
             }
         });
     }
@@ -65,7 +64,6 @@ export default function ProductCard({ src, title, price, productId, isfavorite }
     }
 
     function removeItem() {
-        console.log(productId)
         if (itemQuantity > 0) {
             setItemQuantity(itemQuantity - 1);
             setTotalOfProducts(totalOfProducts - 1);
@@ -100,7 +98,7 @@ export default function ProductCard({ src, title, price, productId, isfavorite }
             <span>
                 <p>{title}</p>
                 <div className='separate-div'>
-                    <h2>R$ {price}</h2>
+                    <h2>R${price}</h2>
                     <AddProductButton text={itemQuantity} pressAdd={addItem} pressSub={removeItem} />
 
                 </div>

@@ -4,17 +4,33 @@ import axios from "axios";
 import ProductCard from "../ProductCard";
 import ConfirmationButton from "../ConfirmationButton";
 import Context from '../../Context';
+import NavBar from "../NavBar";
+import LoaderSpinner from "../LoaderSpinner";
 
 export default function Favorites() {
 
-    const {itemsQuantity, apiUrl, authorization} = useContext(Context);
+    const {apiUrl, authorization} = useContext(Context);
 
     const [favoritesList, setFavoritesList] = useState([]);
+    const [productsList, setProductsList] = useState([]);
+    
+    const [isLoading, setIsLoading] = useState(true);
+
+    async function getProducts(productType){
+        try{
+
+            const promise = await axios.get(`${apiUrl}/products/${productType}`);
+            setProductsList(promise.data);
+            setIsLoading(false);
+
+        } catch(error){
+            console.log(error);
+        }
+    }
 
     async function getFavorites() {
         try {
             const promise = await axios.get(`${apiUrl}/favorite`, authorization);
-            console.log(promise.data);
             setFavoritesList(promise.data);
 
         } catch (error) {
@@ -23,17 +39,20 @@ export default function Favorites() {
     }
 
     useEffect(() => {
+        getProducts('Tudo');
         getFavorites();
     }, []);
 
     return (
+        isLoading ? <LoaderSpinner loaderType="oval"/> :
         <>
+            <NavBar />
             <AvailableArea> 
                 <h1>Seus Favoritos</h1>   
                 <ProductsArea>
                     {favoritesList.map((product) => 
-                    <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
-                    price={product.price} quantity={itemsQuantity} isfavorite={true}/>)}
+                    <ProductCard key={product.productId} productId={product.productId} src={product.image} title={product.title}
+                    price={product.price}/>)}
                 </ProductsArea>
                 <div className="sized-box"></div>
                 <ConfirmationButton />
@@ -43,7 +62,7 @@ export default function Favorites() {
 }
 
 const ProductsArea = styled.div`
-    margin-top: 10px;
+    margin-top: 30px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;

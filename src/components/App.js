@@ -13,8 +13,8 @@ import NavBar from "./NavBar";
 import Request from "./Request";
 
 export default function App(){
-    const apiUrl = 'http://localhost:5000'
-   // const apiUrl = "https://darkside-store-api.herokuapp.com";
+    //const apiUrl = 'http://localhost:5000'
+    const apiUrl = "https://darkside-store-api.herokuapp.com";
     const [totalOfProducts, setTotalOfProducts] = useState(0);
     const [itemsQuantity, setItemsQuantity] = useState(0);
     const [user, setUser] = useState({

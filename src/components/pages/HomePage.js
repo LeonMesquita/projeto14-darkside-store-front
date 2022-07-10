@@ -15,9 +15,9 @@ export default function HomePage(){
     const {token, setToken, apiUrl, authorization, user, setUser} = useContext(Context);
     const [productsList, setProductsList] = useState([]);
     const [totalOfProducts, setTotalOfProducts] = useState(0);
-    const navigate = useNavigate();
+    
     const [isLoading, setIsLoading] = useState(true);
-
+const navigate = useNavigate();
     
     //#D49943
     //#F5C974
@@ -37,7 +37,7 @@ export default function HomePage(){
         }
     }
 
-    useEffect(() => {
+    useEffect(async () => {
         getProducts('Tudo');
 
     }, []);
@@ -56,7 +56,7 @@ export default function HomePage(){
            <div className="products-area">
                {productsList.map((product) => 
                <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
-               price={product.price} isfavorite={false}/>)}
+               price={product.price}/>)}
            </div>
            <div className="sized-box"></div>
            <ConfirmationButton onclick={() => navigate('/cart')}/>
