@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Logo from "../../images/Death Star.png";
 import { ThreeDots } from 'react-loader-spinner';
 import {Body, Container, Logomarca} from '../LoginStyled.js';
+import LoaderSpinner from "../LoaderSpinner";
 
 export default function Login() {
 
@@ -31,7 +32,7 @@ export default function Login() {
        }
         catch(error) {
             setCarregando(false);
-            //alert("Email ou senha incorretos");
+            alert("Email ou senha incorretos");
         }
     }
 
@@ -49,7 +50,7 @@ export default function Login() {
                 <>
                     <input type = "email" placeholder = "Email" value = {email} onChange = {e => setEmail(e.target.value)} required disabled={true} />
                     <input type = "password" placeholder = "Senha" value = {password} onChange = {e => setPassword(e.target.value)} required disabled={true} />
-                    <button disabled={true}><div><ThreeDots height={70} width={70} color="#07203D" /></div></button>
+                    <button disabled={true}><LoaderSpinner /></button>
                 </>
             )
         }

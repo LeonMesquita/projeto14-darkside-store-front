@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Logo from "../../images/Death Star.png";
 import { ThreeDots } from 'react-loader-spinner';
 import {Body, Container, Logomarca} from '../LoginStyled.js';
+import LoaderSpinner from "../LoaderSpinner";
 
 
 
@@ -34,7 +35,7 @@ export default function SignIn() {
         catch(error) {
             console.log(error)
             setCarregando(false);
-            //alert("Deu erro ao cadastrar")
+            alert("Cadastro inválido!");
         }
     }
 
@@ -56,7 +57,7 @@ export default function SignIn() {
                     <input type = "email" placeholder = "Email" value = {email} onChange = {e => setEmail(e.target.value)} required disabled={true} />
                     <input type = "password" placeholder = "Senha" value = {password} onChange = {e => setPassword(e.target.value)} required disabled={true} />
                     <input type = "password" placeholder = "Confirmar senha" value = {confirmPassword} onChange = {e => setConfirmPassword(e.target.value)} required disabled={true} />
-                    <button disabled={true}><ThreeDots height={70} width={70} color="#07203D" /></button>
+                    <button disabled={true}><LoaderSpinner /></button>
                 </>
             )
         }

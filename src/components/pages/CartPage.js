@@ -4,20 +4,24 @@ import Context from '../../Context.js';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar.js';
+import LoaderSpinner from '../LoaderSpinner.js';
 
 export default function CartPage(){
     const [cartList, setCartList] = useState([]);
     const { apiUrl, totalOfProducts, setTotalOfProducts, authorization } = useContext(Context);
     const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
+
 
     useEffect(async () => {
         try {
             const promise = await axios.get(`${apiUrl}/cart`, authorization);
             setCartList(promise.data.products);
             calcTotalPrice(promise.data.products);
+            setIsLoading(false);
         } catch (error) {
-           // navigate('/');
+           navigate('/');
         }
 
     }, []);
@@ -34,6 +38,7 @@ export default function CartPage(){
 
 
     return(
+        isLoading ? <LoaderSpinner loaderType='oval'/> :
         <>
             <NavBar />
             <Cart>
