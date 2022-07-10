@@ -3,57 +3,71 @@ import { useState, useContext, useEffect } from "react";
 import Context from '../../Context.js';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import NavBar from '../NavBar.js';
 
 export default function CartPage(){
     const [cartList, setCartList] = useState([]);
     const { apiUrl, totalOfProducts, setTotalOfProducts, authorization } = useContext(Context);
+    const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
 
     useEffect(async () => {
         try {
-            const promise = await axios.get(`${apiUrl}/cart`);
-            setCartList(promise.data);
+            const promise = await axios.get(`${apiUrl}/cart`, authorization);
+            setCartList(promise.data.products);
+            calcTotalPrice(promise.data.products);
         } catch (error) {
-            console.log(error);
+           // navigate('/');
         }
 
     }, []);
 
 
+    function calcTotalPrice(products){
+        let price = 0;
+        products.map((product) => {
+            price += Number(product.totalPrice)});
+
+        setTotalPrice(price.toFixed(2));
+
+    }
+
+
     return(
         <>
-                    <Cart>
-            <div className='title'>
-                <div className='available-area'>
-                    <ion-icon name="cart-outline"></ion-icon>
-                    <p>Seu carrinho de compras</p>                    
-                </div>
-
-            </div>
-            <div className='available-area'>
-
-                {cartList.length === 0 ? null :
-
-                cartList.map((item) =>
-                <Product>
-                    <div>
-                        <img src={item.image} alt=''/>
-                        <h3>{item.title}</h3>                        
+            <NavBar />
+            <Cart>
+                <div className='title'>
+                    <div className='available-area'>
+                        <ion-icon name="cart-outline"></ion-icon>
+                        <p>Seu carrinho de compras</p>                    
                     </div>
-                    <h2>{item.itemQuantity}</h2>
 
-                    <h2>R${item.price}</h2>
-                    <h2>R${item.totalPrice}</h2>
-                </Product>
-                )
+                </div>
+                <div className='available-area'>
 
-                }
-            </div>
+                    {cartList.length === 0 ? null :
+
+                    cartList.map((item) =>
+                    <Product>
+                        <div>
+                            <img src={item.image} alt=''/>
+                            <h3>{item.title}</h3>                        
+                        </div>
+                        <h2>{item.itemQuantity}</h2>
+
+                        <h2>R${item.price}</h2>
+                        <h2>R${item.totalPrice}</h2>
+                    </Product>
+                    )
+
+                    }
+                </div>
         </Cart>
         
 
         <div className='available-area'>
-        <h6 className='price-text'>Total: R$600,00</h6>
+        <h6 className='price-text'>Total: R${totalPrice}</h6>
             <Footer>
                 <button onClick={() => navigate('/home')} className='goback-button'>Escolher mais produtos</button>
                 <button className='finish-button'>Finalizar compra</button>
