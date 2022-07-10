@@ -15,13 +15,15 @@ export default function ProductHist({ product }) {
 
     return (
         <Container>
-            <img src={product.image} alt="" />
-            <div className="detalhes">
+            <div>
+                <img src={product.image} alt="" />
+            </div>
+            <Description>
                 <h5>{product.title}</h5>
                 <h6>{size}</h6>
                 <h6>Quantidade: <strong>{product.quantity}</strong></h6>
-                <h6>Preço unitário: <strong>R${product.price}</strong></h6>
-            </div>
+                <h6>Preço unit.: <strong>R${product.price}</strong></h6>
+            </Description>
         </Container>
     )
 }
@@ -32,21 +34,7 @@ const Container = styled.div`
     align-items: center;
     margin: 0 10px;
     width: 100%;
-
-    h5 {
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 9px;
-        margin-bottom: 20px;
-        color: #E19F41;
-        word-wrap: break-word;
-    }
-
-    h6 {
-        font-size: 14px;
-        line-height: 9px;
-        margin-bottom: 7px;
-    }
+    flex: none;
 
     img {
         width: 60px;
@@ -57,5 +45,25 @@ const Container = styled.div`
 
     strong {
         font-weight: bold;
+    }
+`
+
+const Description = styled.div`
+    width: 100%;
+    word-wrap: break-word;
+    padding-right: 10px;
+
+    h5 {
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 15px;
+        margin-bottom: 15px;
+        color: #E19F41;
+    }
+
+    h6 {
+        font-size: 11px;
+        line-height: 15px;
+        margin-bottom: 1px;
     }
 `

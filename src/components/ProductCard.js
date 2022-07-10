@@ -147,7 +147,6 @@ const Productcard = styled.div`
         letter-spacing: 1.5px;
         line-height: 140%;
         overflow: hidden;
-        
     }
 
     span{
@@ -156,6 +155,7 @@ const Productcard = styled.div`
         flex-direction: column;
         justify-content: space-between;
     }
+    
     .separate-div{
         border-top: solid 1px #3C4043;
         height: 50px;

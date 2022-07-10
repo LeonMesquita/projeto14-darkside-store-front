@@ -7,7 +7,23 @@ import NavBar from '../NavBar.js';
 import LoaderSpinner from '../LoaderSpinner.js';
 
 export default function CartPage(){
-    const [cartList, setCartList] = useState([]);
+    const [cartList, setCartList] = useState([
+        {
+            _id: 1,
+            title: "Camiseta Star Wars",
+            price: "89,90",
+            image: "https://www.camisetas4fun.com.br/media/product/16f/camiseta-star-wars-afa.jpg",
+            quantity: 1,
+            size: "M"
+        },
+        {
+            _id: 2,
+            title: "Caneca Star Warsssssssssssssssssssssssssss",
+            price: "29,90",
+            image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
+            quantity: 2
+        }
+    ]);
     const { apiUrl, totalOfProducts, setTotalOfProducts, authorization } = useContext(Context);
     const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();

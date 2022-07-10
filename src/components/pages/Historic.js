@@ -3,6 +3,7 @@ import Context from '../../Context';
 import styled from "styled-components";
 import axios from "axios";
 import Request from "../Request";
+import NavBar from "../NavBar";
 
 export default function Historic() {
 
@@ -80,7 +81,8 @@ export default function Historic() {
     const requests = showRequests();
 
     return (
-        <>
+        <>  
+            <NavBar />
             <Container>
                 <h1>Seus Pedidos</h1>
                 {requests}
@@ -94,12 +96,13 @@ const Container = styled.div`
     flex-direction: column;
     width: 550px;
     margin-top: 20px;
-    white-space: nowrap;
     color: #ECECEC;
     padding: 0 10px;
+    font-family: 'Lexend Mega';
 
     h1 {
-        font-size: 30px;
+        font-family: 'Lexend Mega';
+        font-size: 22px;
         color: #E19F41;
         margin-bottom: 20px;
     }

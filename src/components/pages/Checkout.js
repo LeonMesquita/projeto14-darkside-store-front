@@ -3,8 +3,11 @@ import Context from '../../Context';
 import styled from "styled-components";
 import axios from "axios";
 import ProductCheckout from "../ProductCheckout";
+import NavBar from "../NavBar";
 
 export default function Checkout() {
+
+    const { apiUrl, authorization } = useContext(Context);
 
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
@@ -35,7 +38,17 @@ export default function Checkout() {
             image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
             quantity: 2
         }
-    ])
+    ]);
+
+    useEffect(async () => {
+        try {
+            const promise = await axios.get(`${apiUrl}/cart`, authorization);
+            setCartList(promise.data.products);
+        } catch (error) {
+           console.log(error);
+        }
+
+    }, []);
 
     function showProducts() {
         return (
@@ -162,7 +175,7 @@ export default function Checkout() {
                         <option value="6x">6x de {(total / 6).toFixed(2).replace(".", ",")}</option>
                     </select>
                 </Inputs>
-                <button type="submit">Finalizar compra</button>
+                <button type="submit">Finalizar Pedido</button>
             </>
         );
     }
@@ -176,25 +189,28 @@ export default function Checkout() {
     const formCheckout = createFormCheckout();
 
     return (
-        <Container>
-            <Summary>
-                <h1>Produtos selecionados</h1>
-                {products}
-                <Shipping>
-                    <h5>Frete:</h5>
-                    <h5>Frete Grátis</h5>
-                </Shipping>
-                <Total>
-                    <h5>Total da compra:</h5>
-                    <h5>R${total.replace(".", ",")}</h5>
-                </Total>
-            </Summary>
-            <FormCheckout>
-                <form onSubmit={finalizeOrder}>
-                    {formCheckout}
-                </form>
-            </FormCheckout>
-        </Container>
+        <>
+            <NavBar />
+            <Container>
+                <Summary>
+                    <h1>Produtos selecionados</h1>
+                    {products}
+                    <Shipping>
+                        <h5>Frete:</h5>
+                        <h5>Frete Grátis</h5>
+                    </Shipping>
+                    <Total>
+                        <h5>Total da compra:</h5>
+                        <h5>R${total.replace(".", ",")}</h5>
+                    </Total>
+                </Summary>
+                <FormCheckout>
+                    <form onSubmit={finalizeOrder}>
+                        {formCheckout}
+                    </form>
+                </FormCheckout>
+            </Container>
+        </>
     );
 }
 
@@ -205,8 +221,6 @@ const Container = styled.div`
     padding: 20px 10px;
     width: 550px;
 
-    
-
     @media(max-width: 550px) {
         width: 100%;
     }
@@ -216,9 +230,10 @@ const Summary = styled.div`
     margin-bottom: 40px;
 
     >h1 {
-        font-size: 30px;
+        font-size: 22px;
         color: #E19F41;
         margin-bottom: 20px;
+        font-family: 'Lexend Mega';
     }
 `
 
@@ -227,12 +242,13 @@ const Shipping = styled.div`
     display: flex;
     justify-content: space-between;
     background-color: #FCCB6F;
-    color: #06222d;
+    color: #051731;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
     padding: 6px; 
     margin-bottom: 8px; 
     box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3); 
+    font-family: 'Lexend Mega';
 `
 
 const Total = styled.div`
@@ -240,17 +256,18 @@ const Total = styled.div`
     display: flex;
     justify-content: space-between;
     background-color: #FCCB6F;
-    color: #06222d;
+    color: #051731;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
     padding: 6px;
     box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3);
+    font-family: 'Lexend Mega';
 `
 
 const Inputs = styled.div`
     display: flex;
     label {
-        width: 170px;
+        width: 180px;
         text-align: end;
         padding-right: 15px;
         padding-top: 5px;
@@ -264,16 +281,19 @@ const FormCheckout = styled.div`
     box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3);
 
     h1 {
-        font-size: 30px;
+        font-size: 22px;
         color: #051731;
         margin-bottom: 28px;
         font-weight: bold;
+        font-family: 'Lexend Mega';
     }
 
     label {
         font-weight: bold;
         color: #051731;
-        font-size: 16px;
+        font-size: 11px;
+        font-family: 'Lexend Mega';
+        margin-top: 3px;
     }
 
     input, select {
@@ -285,10 +305,12 @@ const FormCheckout = styled.div`
         background-color: inherit;
         text-indent: 5px;
         color: #051731;
-        font-size: 14px;
+        font-size: 12px;
+        font-family: 'Lexend Mega';
 
         &::placeholder {
-            font-size: 12px;
+            font-size: 11px;
+            font-family: 'Lexend Mega';
         }
     }
 
@@ -301,7 +323,7 @@ const FormCheckout = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 26px;
+        font-size: 20px;
         width: 260px;
         height: 46px;
         margin: 30px auto 10px auto;
@@ -311,6 +333,7 @@ const FormCheckout = styled.div`
         color: #051731;
         font-weight: bold;
         box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
+        font-family: 'Lexend Mega';
 
         &:hover {
             color: #2a7b9e;
