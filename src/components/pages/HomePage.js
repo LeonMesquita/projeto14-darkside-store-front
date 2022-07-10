@@ -7,6 +7,7 @@ import SearchBar from "../SearchBar";
 import axios from 'axios';
 import NavBar from "../NavBar";
 import { useNavigate } from "react-router-dom";
+import LoaderSpinner from "../LoaderSpinner";
 
 
 export default function HomePage(){
@@ -14,9 +15,9 @@ export default function HomePage(){
     const {token, setToken, apiUrl, authorization, user, setUser} = useContext(Context);
     const [productsList, setProductsList] = useState([]);
     const [totalOfProducts, setTotalOfProducts] = useState(0);
-    const navigate = useNavigate();
-    const [itemsQuantity, setItemsQuantity] = useState(0);
-
+    
+    const [isLoading, setIsLoading] = useState(true);
+const navigate = useNavigate();
     
     //#D49943
     //#F5C974
@@ -29,36 +30,39 @@ export default function HomePage(){
 
             const promise = await axios.get(`${apiUrl}/products/${productType}`);
             setProductsList(promise.data);
+            setIsLoading(false);
 
         } catch(error){
             console.log(error);
         }
     }
 
-    useEffect(() => {
+    useEffect(async () => {
         getProducts('Tudo');
 
     }, []);
 
     return(
-        <>
-            <NavBar />
-            <SearchBar value={searchedProduct} setValue={setSearchedProduct}/>
-            <SuggestionsArea>
-                <div>
-                    {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}><h5>{type}</h5></button>)}
-                </div>
-            </SuggestionsArea>
-            <div className="available-area">    
-                <div className="products-area">
-                    {productsList.map((product) => 
-                    <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
-                    price={product.price} quantity={itemsQuantity} />)}
-                </div>
-                <div className="sized-box"></div>
-                <ConfirmationButton onclick={() => navigate('/cart')}/>
-            </div>
-        </>
+       isLoading ? <LoaderSpinner loaderType='oval'/> : 
+       <>
+       <NavBar />
+       <SearchBar value={searchedProduct} setValue={setSearchedProduct}/>
+       <SuggestionsArea>
+           <div>
+               {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}><h5>{type}</h5></button>)}
+           </div>
+       </SuggestionsArea>
+       <div className="available-area">    
+           <div className="products-area">
+               {productsList.map((product) => 
+               <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
+               price={product.price}/>)}
+           </div>
+           <div className="sized-box"></div>
+           <ConfirmationButton onclick={() => navigate('/cart')}/>
+       </div>
+   </>
+    
     );
 }
 

@@ -48,12 +48,12 @@
 }
 
 
-.bookmark{
+.favorite{
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    background: black;
-    color: #8A8A8A;
+    background: #202124;
+    color: red;
     font-size: 20px;
     position: absolute;
     right: 10px;
@@ -63,6 +63,8 @@
     justify-content: center;
     cursor: pointer;
 }
+
+
 
 
 
