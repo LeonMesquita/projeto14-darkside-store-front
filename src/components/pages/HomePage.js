@@ -26,6 +26,7 @@ export default function HomePage(){
     async function getProducts(productType){
         console.log(productType)
         try{
+
             const promise = await axios.get(`${apiUrl}/products/${productType}`);
             setProductsList(promise.data);
 
@@ -60,16 +61,6 @@ export default function HomePage(){
         </>
     );
 }
-
-const ProductsArea = styled.div`
-    margin-top: 40px;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-`
-
 
 const SuggestionsArea = styled.div`
     height: 50px;

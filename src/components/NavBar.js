@@ -45,13 +45,12 @@ export default function NavBar(){
         <>
             <Navbar>
                 <div className='navbar-container'>
-                    <div>
+                    <div onClick={() => navigate("/home")}>
                         <img src={star} alt='trooper'/>
                         <span>
                         <p>DARKSIDE</p>
                         <h2>STORE</h2>                         
                         </span>
-                
                     </div>
 
                     <div>
