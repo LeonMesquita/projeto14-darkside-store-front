@@ -11,8 +11,8 @@ import CartPage from "./pages/CartPage";
 import NavBar from "./NavBar";
 
 export default function App(){
-    //const apiUrl = 'http://localhost:5001'
-    const apiUrl = "https://darkside-store-api.herokuapp.com";
+    const apiUrl = 'http://localhost:5000'
+    //const apiUrl = "https://darkside-store-api.herokuapp.com";
     const [totalOfProducts, setTotalOfProducts] = useState(0);
     const [itemsQuantity, setItemsQuantity] = useState(0);
     const [user, setUser] = useState({

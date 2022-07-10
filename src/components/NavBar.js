@@ -95,7 +95,7 @@ const Navbar = styled.div`
     justify-content: space-between;
     top: 0;
     z-index: 1;
-    border-bottom: solid 2px #A7A7A7;;
+    border-bottom: solid 1px #A7A7A7;;
     img{
         height: 37px;
         margin-left: 5px;
