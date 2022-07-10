@@ -9,27 +9,11 @@ export default function Favorites() {
 
     const {itemsQuantity, apiUrl, authorization} = useContext(Context);
 
-    const [favoritesList, setFavoritesList] = useState([
-        {   
-            _id: 1,
-            title: "Camiseta Star Wars",
-            price: "89,90",
-            image: "https://www.camisetas4fun.com.br/media/product/16f/camiseta-star-wars-afa.jpg",
-            quantity: 1,
-            size: "M"
-        },
-        {   
-            _id: 2,
-            title: "Caneca Star Wars",
-            price: "29,90",
-            image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
-            quantity: 2
-        }
-    ]);
+    const [favoritesList, setFavoritesList] = useState([]);
 
     async function getFavorites() {
         try {
-            const promise = await axios.get(`${apiUrl}/favorites`, authorization);
+            const promise = await axios.get(`${apiUrl}/favorite`, authorization);
             console.log(promise.data);
             setFavoritesList(promise.data);
 
@@ -49,7 +33,7 @@ export default function Favorites() {
                 <ProductsArea>
                     {favoritesList.map((product) => 
                     <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
-                    price={product.price} quantity={itemsQuantity} />)}
+                    price={product.price} quantity={itemsQuantity} isfavorite={true}/>)}
                 </ProductsArea>
                 <div className="sized-box"></div>
                 <ConfirmationButton />

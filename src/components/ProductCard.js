@@ -6,17 +6,20 @@ import axios from 'axios';
 import '../css/product-style.css';
 import { useNavigate } from 'react-router-dom';
 
-export default function ProductCard({ src, title, price, productId, mark }) {
+export default function ProductCard({ src, title, price, productId, isfavorite }) {
     const { apiUrl, totalOfProducts, setTotalOfProducts, authorization } = useContext(Context);
     const [itemQuantity, setItemQuantity] = useState(0);
     const [cartList, setCartList] = useState([]);
     const navigate = useNavigate();
+    const [isFavorite, setIsFavorite] = useState(isfavorite);
 
     useEffect(async () => {
         try {
-            const promise = await axios.get(`${apiUrl}/cart`, authorization);
-            setCartList(promise.data.products);
-            setQuantity(promise.data.products);
+           const promise = await axios.get(`${apiUrl}/cart`, authorization);
+            const promise2 = await axios.get(`${apiUrl}/favorite`, authorization);
+           setCartList(promise.data.products);
+           setQuantity(promise.data.products);
+            setFavorite(promise2.data);
 
         } catch (error) {
             //navigate('/');
@@ -30,6 +33,12 @@ export default function ProductCard({ src, title, price, productId, mark }) {
                 setItemQuantity(item.itemQuantity);
                 console.log(item.itemQuantity);
             }
+        });
+    }
+    function setFavorite(favorites){
+        favorites.map((item) => {
+            if(item.productId === productId)
+                setIsFavorite(true);
         });
     }
 
@@ -64,12 +73,27 @@ export default function ProductCard({ src, title, price, productId, mark }) {
         }
     }
 
+
+    async function favoriteProduct(){
+        let action = '';
+        if (!isFavorite)  action = "add";
+        else action = "remove";
+        setIsFavorite(!isFavorite);
+
+        try{
+            await axios.post(`${apiUrl}/favorite/${action}`, {productId}, authorization);
+
+        }catch(error){
+
+        }
+    }
+
     return (
         <div className='product-card'>
             <div className='image-container'>
                 <img src={src} alt='' />
-                <div className='bookmark' onClick={mark}>
-                    <ion-icon name="bookmark-outline"></ion-icon>
+                <div className='favorite' onClick={() => favoriteProduct()}>
+                    <ion-icon name={!isFavorite ? "heart-outline" : "heart"}></ion-icon>
                 </div>
             </div>
 

@@ -16,7 +16,6 @@ export default function HomePage(){
     const [productsList, setProductsList] = useState([]);
     const [totalOfProducts, setTotalOfProducts] = useState(0);
     const navigate = useNavigate();
-    const [itemsQuantity, setItemsQuantity] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
     
@@ -57,7 +56,7 @@ export default function HomePage(){
            <div className="products-area">
                {productsList.map((product) => 
                <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
-               price={product.price} quantity={itemsQuantity} />)}
+               price={product.price} isfavorite={false}/>)}
            </div>
            <div className="sized-box"></div>
            <ConfirmationButton onclick={() => navigate('/cart')}/>
