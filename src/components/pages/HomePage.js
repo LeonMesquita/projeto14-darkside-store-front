@@ -27,7 +27,6 @@ export default function HomePage(){
         console.log(productType)
         try{
             const promise = await axios.get(`${apiUrl}/products/${productType}`);
-            console.log(promise.data);
             setProductsList(promise.data);
 
         } catch(error){
@@ -42,7 +41,7 @@ export default function HomePage(){
 
     return(
         <>
-            
+            <NavBar />
             <SearchBar value={searchedProduct} setValue={setSearchedProduct}/>
             <SuggestionsArea>
                 <div>

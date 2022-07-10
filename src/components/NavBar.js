@@ -18,20 +18,20 @@ export default function NavBar(){
         }
     }
 
-    const {apiUrl, totalOfProducts, setTotalOfProducts} = useContext(Context);
+    const {apiUrl, totalOfProducts, setTotalOfProducts, authorization} = useContext(Context);
     const location = useLocation();
     useEffect(async () => {
         try{
-            const promise = await axios.get(`${apiUrl}/cart`);
-            console.log(promise.data);
-            calcTotalPrice(promise.data);
+            const promise = await axios.get(`${apiUrl}/cart`, authorization);
+            console.log(promise.data)
+            calcTotalQuantity(promise.data.products);
         }catch(error){
-            console.log(error);
+           // navigate('/');
         }
 
     },[]);
 
-    function calcTotalPrice(cart){  
+    function calcTotalQuantity(cart){  
         let sum = 0;
         cart.map((item) => {
             sum += item.itemQuantity;
