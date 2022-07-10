@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import ProductHist from "./ProductHist";
+import { useRef } from "react";
+
 
 export default function Request({ request }) {
 
@@ -24,37 +26,56 @@ export default function Request({ request }) {
             ]
         }
     */
+    const carousel = useRef(null);
 
     function showProducts() {
         return (
-            request.products.map((product, index) => <ProductHist key={index} product={product} />)
+            request.products.map((product, index) => <ProductHist key={index} product={product} carousel={carousel} />)
         );
     }
 
     function calculateTotal() {
         let total = 0;
         request.products.forEach((product) => {
-            const priceInNumber = parseFloat(product.price.replace(',','.'));
-            total += priceInNumber*product.quantity;
+            const priceInNumber = parseFloat(product.price.replace(',', '.'));
+            total += priceInNumber * product.quantity;
         })
 
-        return total.toFixed(2).replace(".",",");
+        return total.toFixed(2).replace(".", ",");
+    }
+
+    function handleLeftClick(e) {
+        e.preventDefault();
+        carousel.current.scrollLeft -= carousel.current.offsetWidth;
+    }
+
+    function handleRightClick(e) {
+        e.preventDefault();
+        carousel.current.scrollLeft += carousel.current.offsetWidth;
     }
 
     const products = showProducts();
     const total = calculateTotal();
 
-    return(
+    return (
         <Container>
-            <Products>
-                {products}
-            </Products>
+            <ContainerProducts>
+                <Carousel ref={carousel}>
+                    <Products>
+                        {products}
+                    </Products>
+                </Carousel>
+                <Buttons>
+                        <button onClick={handleLeftClick}><ion-icon name="chevron-back-circle"></ion-icon></button>
+                        <button onClick={handleRightClick}><ion-icon name="chevron-forward-circle"></ion-icon></button>
+                </Buttons>
+            </ContainerProducts>
             <Summary>
                 <h2>Resumo da compra</h2>
                 <div>
-                    <h3>Número do pedido: <strong>{request.id}</strong></h3>
+                    <h3>Pedido: <strong>{request.id}</strong></h3>
                     <h3>Data: <strong>{request.date}</strong></h3>
-                    <h3>Valor total: <strong>R${total}</strong></h3>
+                    <h3>TOTAL: <strong>R${total}</strong></h3>
                 </div>
             </Summary>
         </Container>
@@ -72,37 +93,72 @@ const Container = styled.div`
     width: 100%;
 `
 
+const ContainerProducts = styled.div`
+    width: 55%;
+    border-right: 2px solid #A7A7A7;
+    padding-right: 10px;
+    position: relative;
+`
+
+const Carousel = styled.div`
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
+`
+
 const Products = styled.div`
     display: flex;
     align-items: flex-start;
-    width: 50%;
-    overflow-x: scroll;
-    border-right: 2px solid #A7A7A7;
+    width: 170px;
 `
 
 const Summary = styled.div`
-    width: 50%;
+    width: 45%;
     padding: 0px 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    word-break: break-all;
+    word-wrap: break-word;
+    justify-content: center;
 
     h2 {
         font-weight: bold;
-        font-size: 16px;
-        line-height: 9px;
+        font-size: 12px;
+        line-height: 15px;
         margin-bottom: 30px;
         color: #E19F41;
+        text-align: center;
     }
 
     h3 {
-        font-size: 14px;
-        line-height: 9px;
+        font-size: 11px;
+        line-height: 15px;
         margin-bottom: 7px;
     }
 
     strong {
         font-weight: bold;
+    }
+`
+
+const Buttons = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    position: absolute;
+    top: 30px;
+
+    button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 32px;
+        color: #ffffff;
+        border-radius: 50%;
+        filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.6));
     }
 `

@@ -43,6 +43,7 @@ const Container = styled.div`
     color: #ffffff;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3);
+    font-family: 'Lexend Mega';
 
     img {
         width: 80px;
@@ -58,13 +59,13 @@ const Details = styled.div`
     width: calc(60% - 80px);
 
     h1 {
-        font-size: 16px;
+        font-size: 13px;
         margin-bottom: 6px;
         color: #E19F41;
     }
 
     h2 {
-        font-size: 14px;
+        font-size: 11px;
     }
     
     strong {
@@ -79,14 +80,14 @@ const Quantity = styled.div`
     width: 16%;
 
     h3 {
-        font-size: 16px;
+        font-size: 13px;
         margin-bottom: 6px;
         color: #E19F41;
         margin-bottom: 20px;
     }
 
     h4 {
-        font-size: 14px;
+        font-size: 11px;
     }
 `
 
@@ -97,13 +98,13 @@ const Total = styled.div`
     width: 24%;
 
     h3 {
-        font-size: 16px;
+        font-size: 13px;
         margin-bottom: 6px;
         color: #E19F41;
         margin-bottom: 20px;
     }
 
     h4 {
-        font-size: 14px;
+        font-size: 11px;
     }
 `

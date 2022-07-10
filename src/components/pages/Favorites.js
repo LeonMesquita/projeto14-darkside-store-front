@@ -4,6 +4,7 @@ import axios from "axios";
 import ProductCard from "../ProductCard";
 import ConfirmationButton from "../ConfirmationButton";
 import Context from '../../Context';
+import NavBar from "../NavBar";
 
 export default function Favorites() {
 
@@ -44,6 +45,7 @@ export default function Favorites() {
 
     return (
         <>
+            <NavBar />
             <AvailableArea> 
                 <h1>Seus Favoritos</h1>   
                 <ProductsArea>
@@ -72,7 +74,8 @@ const AvailableArea = styled.div`
     min-height: 500px;
 
     h1 {
-        font-size: 30px;
+        font-family: 'Lexend Mega';
+        font-size: 22px;
         color: #E19F41;
         margin: 20px 0 0 10px;
     }
