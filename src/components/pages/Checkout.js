@@ -4,10 +4,11 @@ import styled from "styled-components";
 import axios from "axios";
 import ProductCheckout from "../ProductCheckout";
 import NavBar from "../NavBar";
+import Footer from "../Footer";
 
 export default function Checkout() {
 
-    const { apiUrl, authorization } = useContext(Context);
+    const { apiUrl, authorization, orderBody } = useContext(Context);
 
     const [street, setStreet] = useState("");
     const [city, setCity] = useState("");
@@ -21,34 +22,32 @@ export default function Checkout() {
     const [CVV, setCVV] = useState("");
     const [installments, setInstallments] = useState("");
 
-    //acho que essa variavel precisa ser global, mas vou criar aqui só pra teste
-    const [cartList, setCartList] = useState([
-        {
-            _id: 1,
-            title: "Camiseta Star Wars",
-            price: "89,90",
-            image: "https://www.camisetas4fun.com.br/media/product/16f/camiseta-star-wars-afa.jpg",
-            quantity: 1,
-            size: "M"
-        },
-        {
-            _id: 2,
-            title: "Caneca Star Warsssssssssssssssssssssssssss",
-            price: "29,90",
-            image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
-            quantity: 2
-        }
-    ]);
+    const [cartList, setCartList] = useState([...orderBody.products]);
+    
 
-    useEffect(async () => {
-        try {
-            const promise = await axios.get(`${apiUrl}/cart`, authorization);
-            setCartList(promise.data.products);
-        } catch (error) {
-           console.log(error);
-        }
+    console.log(orderBody);
 
-    }, []);
+    /*
+        date: "10/07/2022"
+        email: "leo@gmail.com"
+        name: "leo"
+        products: (3) [{…}, {…}, {…}]
+        totalPrice: "707.00"
+    */
+
+        /*
+            products:
+            {
+                image: "https://img.elo7.com.br/product/original/2C68ACB/camiseta-star-wars-logo-arte-camisa-star-wars-imagem.jpg"
+                itemQuantity: 2
+                price: 38.9
+                productId: "62c87eeddaa7673f12466da0"
+                title: "Camiseta Star Wars Logo"
+                totalPrice: 77.8
+            }
+        */
+
+
 
     function showProducts() {
         return (
@@ -56,18 +55,233 @@ export default function Checkout() {
         );
     }
 
-    function calculateTotal() {
-        let total = 0;
-        cartList.forEach((product) => {
-            const priceInNumber = parseFloat(product.price.replace(',', '.'));
-            total += priceInNumber * product.quantity;
-        })
-
-        return total.toFixed(2);
+    function finalizeOrder(event) {
+        event.preventDefault();
+        console.log("terminarr");
     }
 
-    const total = calculateTotal();
+    const products = showProducts();
+   // const formCheckout = createFormCheckout();
+   //
+    return (
+        <>
+            <NavBar />
+           
+                <Container>
+                     <div className="available-area">
+                    <Summary>
+                        <h1>Produtos selecionados</h1>
+                        {products}
 
+
+                    </Summary>
+      </div>
+                </Container>  
+
+            <PayButton>
+                <h5>Selecionar endereço de entrega</h5>
+            </PayButton>   
+            <PayButton>
+                <h5>Selecionar forma de pagamento</h5>    
+            </PayButton>           
+      
+
+            <Shipping>
+                <div className="available-area">
+                        <h5>Frete:</h5>
+                        <h5>Frete Grátis</h5>
+                </div>
+
+            </Shipping>
+            <Shipping>
+            <div className="available-area">
+            <h5>Total da compra:</h5>
+                <h5>R${orderBody.totalPrice.replace(".", ",")}</h5>
+                </div>
+            </Shipping>
+            <Footer>
+                <button  className='goback-button'>Cancelar compra</button>
+                <button  className='finish-button'>Efetuar pagamento</button>
+            </Footer>
+        </>
+    );
+}
+
+/*
+                <FormCheckout>
+                    <form onSubmit={finalizeOrder}>
+                        {formCheckout}
+                    </form>
+                </FormCheckout>
+*/
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 20px 10px;
+    width: 100%;
+    height: 100vh;
+    max-height: 55vh;
+    border-bottom: solid 1px #F9CA6F;
+    margin-bottom: 10px;
+    overflow-y: scroll;
+
+    .available-area{
+        height: 100%;
+        display: flex;
+        flex-direction: column;  
+        margin: auto;
+    }
+
+    @media(max-width: 550px) {
+        width: 100%;
+    }
+`
+
+const Summary = styled.div`
+    margin-bottom: 40px;
+
+    >h1 {
+        font-size: 22px;
+        color: #E19F41;
+        margin-bottom: 20px;
+        font-family: 'Lexend Mega';
+    }
+`
+
+const Shipping = styled.div`
+    width: 100%;
+   
+   
+    background-color: #FCCB6F;
+    color: #051731;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px; 
+    margin-bottom: 8px; 
+    box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3); 
+    font-family: 'Lexend Mega';
+
+    div{
+        
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+    }
+`
+
+
+
+const Inputs = styled.div`
+    display: flex;
+    label {
+        width: 180px;
+        text-align: end;
+        padding-right: 15px;
+        padding-top: 5px;
+    }
+`
+
+const FormCheckout = styled.div`
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px 10px 10px;
+    border-radius: 3px;
+    box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3);
+
+    h1 {
+        font-size: 22px;
+        color: #051731;
+        margin-bottom: 28px;
+        font-weight: bold;
+        font-family: 'Lexend Mega';
+    }
+
+    label {
+        font-weight: bold;
+        color: #051731;
+        font-size: 11px;
+        font-family: 'Lexend Mega';
+        margin-top: 3px;
+    }
+
+    input, select {
+        border: 1px solid #051731;
+        border-radius: 2px;
+        width: 100%;
+        height: 26px;
+        margin-bottom: 10px;
+        background-color: inherit;
+        text-indent: 5px;
+        color: #051731;
+        font-size: 12px;
+        font-family: 'Lexend Mega';
+
+        &::placeholder {
+            font-size: 11px;
+            font-family: 'Lexend Mega';
+        }
+    }
+
+    form {
+        width: 100%;
+    }
+
+    button {
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        width: 260px;
+        height: 46px;
+        margin: 30px auto 10px auto;
+        padding: 10px;
+        background-color: #FCCB6F;
+        border-radius: 5px;
+        color: #051731;
+        font-weight: bold;
+        box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
+        font-family: 'Lexend Mega';
+
+        &:hover {
+            color: #2a7b9e;
+        }
+    }
+`
+
+const Validate = styled.div`
+    display: flex;
+    width: 100%;
+    select {
+        width: 70%;
+        margin-right: 10px;
+
+        &:last-child {
+            width: 30%;
+            margin-right: 0;
+        }
+    }
+`
+
+
+const PayButton = styled.button`
+    background: #FCCB6F;
+    width: 60%;
+    height: 40px;
+    max-width: 400px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    color: #051731;
+    font-size: 15px;
+    font-weight: 700;
+    
+`
+
+
+/*
     function createFormCheckout() {
         return (
             <>
@@ -180,177 +394,5 @@ export default function Checkout() {
         );
     }
 
-    function finalizeOrder(event) {
-        event.preventDefault();
-        console.log("terminarr");
-    }
 
-    const products = showProducts();
-    const formCheckout = createFormCheckout();
-
-    return (
-        <>
-            <NavBar />
-            <Container>
-                <Summary>
-                    <h1>Produtos selecionados</h1>
-                    {products}
-                    <Shipping>
-                        <h5>Frete:</h5>
-                        <h5>Frete Grátis</h5>
-                    </Shipping>
-                    <Total>
-                        <h5>Total da compra:</h5>
-                        <h5>R${total.replace(".", ",")}</h5>
-                    </Total>
-                </Summary>
-                <FormCheckout>
-                    <form onSubmit={finalizeOrder}>
-                        {formCheckout}
-                    </form>
-                </FormCheckout>
-            </Container>
-        </>
-    );
-}
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    padding: 20px 10px;
-    width: 550px;
-
-    @media(max-width: 550px) {
-        width: 100%;
-    }
-`
-
-const Summary = styled.div`
-    margin-bottom: 40px;
-
-    >h1 {
-        font-size: 22px;
-        color: #E19F41;
-        margin-bottom: 20px;
-        font-family: 'Lexend Mega';
-    }
-`
-
-const Shipping = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    background-color: #FCCB6F;
-    color: #051731;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 6px; 
-    margin-bottom: 8px; 
-    box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3); 
-    font-family: 'Lexend Mega';
-`
-
-const Total = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    background-color: #FCCB6F;
-    color: #051731;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 6px;
-    box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3);
-    font-family: 'Lexend Mega';
-`
-
-const Inputs = styled.div`
-    display: flex;
-    label {
-        width: 180px;
-        text-align: end;
-        padding-right: 15px;
-        padding-top: 5px;
-    }
-`
-
-const FormCheckout = styled.div`
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 10px 20px 10px 10px;
-    border-radius: 3px;
-    box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3);
-
-    h1 {
-        font-size: 22px;
-        color: #051731;
-        margin-bottom: 28px;
-        font-weight: bold;
-        font-family: 'Lexend Mega';
-    }
-
-    label {
-        font-weight: bold;
-        color: #051731;
-        font-size: 11px;
-        font-family: 'Lexend Mega';
-        margin-top: 3px;
-    }
-
-    input, select {
-        border: 1px solid #051731;
-        border-radius: 2px;
-        width: 100%;
-        height: 26px;
-        margin-bottom: 10px;
-        background-color: inherit;
-        text-indent: 5px;
-        color: #051731;
-        font-size: 12px;
-        font-family: 'Lexend Mega';
-
-        &::placeholder {
-            font-size: 11px;
-            font-family: 'Lexend Mega';
-        }
-    }
-
-    form {
-        width: 100%;
-    }
-
-    button {
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        width: 260px;
-        height: 46px;
-        margin: 30px auto 10px auto;
-        padding: 10px;
-        background-color: #FCCB6F;
-        border-radius: 5px;
-        color: #051731;
-        font-weight: bold;
-        box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
-        font-family: 'Lexend Mega';
-
-        &:hover {
-            color: #2a7b9e;
-        }
-    }
-`
-
-const Validate = styled.div`
-    display: flex;
-    width: 100%;
-    select {
-        width: 70%;
-        margin-right: 10px;
-
-        &:last-child {
-            width: 30%;
-            margin-right: 0;
-        }
-    }
-`
+*/

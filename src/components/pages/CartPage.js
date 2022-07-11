@@ -2,29 +2,16 @@ import styled from 'styled-components';
 import { useState, useContext, useEffect } from "react";
 import Context from '../../Context.js';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import NavBar from '../NavBar.js';
 import LoaderSpinner from '../LoaderSpinner.js';
+import dayjs from 'dayjs';
+import Footer from '../Footer.js';
+dayjs().format()
 
 export default function CartPage(){
-    const [cartList, setCartList] = useState([
-        {
-            _id: 1,
-            title: "Camiseta Star Wars",
-            price: "89,90",
-            image: "https://www.camisetas4fun.com.br/media/product/16f/camiseta-star-wars-afa.jpg",
-            quantity: 1,
-            size: "M"
-        },
-        {
-            _id: 2,
-            title: "Caneca Star Warsssssssssssssssssssssssssss",
-            price: "29,90",
-            image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
-            quantity: 2
-        }
-    ]);
-    const { apiUrl, totalOfProducts, setTotalOfProducts, authorization } = useContext(Context);
+    const [cartList, setCartList] = useState([]);
+    const { apiUrl, authorization, setOrderBody, user } = useContext(Context);
     const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
@@ -49,6 +36,18 @@ export default function CartPage(){
             price += Number(product.totalPrice)});
 
         setTotalPrice(price.toFixed(2));
+
+    }
+
+    async function finishOrder(){
+        setOrderBody({
+            name: user.name,
+            email: user.email,
+            date:  dayjs().format("DD/MM/YYYY"),
+            totalPrice,
+            products: cartList
+        });
+        navigate('/checkout');
 
     }
 
@@ -91,7 +90,7 @@ export default function CartPage(){
         <h6 className='price-text'>Total: R${totalPrice}</h6>
             <Footer>
                 <button onClick={() => navigate('/home')} className='goback-button'>Escolher mais produtos</button>
-                <button className='finish-button'>Finalizar compra</button>
+                <button onClick={() => finishOrder()} className='finish-button'>Finalizar compra</button>
             </Footer>
         </div>
         </>
@@ -191,15 +190,3 @@ const Product = styled.div`
 
 `
 
-const Footer = styled.div`
-    position: fixed;
-    bottom: 0;
-    display: flex;
-    width: 550px;
-    justify-content: space-evenly;
-
-    @media(max-width: 550px){
-        width: 100%;
-    }
-
-`

@@ -13,8 +13,8 @@ import NavBar from "./NavBar";
 import Request from "./Request";
 
 export default function App(){
-    //const apiUrl = 'http://localhost:5000'
-    const apiUrl = "https://darkside-store-api.herokuapp.com";
+    const apiUrl = 'http://localhost:5000'
+    //const apiUrl = "https://darkside-store-api.herokuapp.com";
     const [totalOfProducts, setTotalOfProducts] = useState(0);
     const [itemsQuantity, setItemsQuantity] = useState(0);
     const [user, setUser] = useState({
@@ -22,6 +22,8 @@ export default function App(){
         name: '',
         email: ''
     });
+
+    const [orderBody, setOrderBody] = useState({});
 
 
     const authorization = {
@@ -32,7 +34,8 @@ export default function App(){
     return(
         <MainContainer>
             
-            <Context.Provider value={{ apiUrl, authorization, totalOfProducts, setTotalOfProducts, user, setUser, itemsQuantity, setItemsQuantity }}>
+            <Context.Provider value={{ apiUrl, authorization, totalOfProducts, setTotalOfProducts,
+                user, setUser, itemsQuantity, setItemsQuantity, orderBody, setOrderBody }}>
                 <BrowserRouter>
             
                     <Routes>               
@@ -43,7 +46,7 @@ export default function App(){
                         <Route path="/historic" element={<Historic />}/>
                         <Route path="/cart" element={<CartPage />}/>
                         <Route path="/checkout" element={<Checkout />}/>
-                        <Route path="/request" element={<Request />}/>  
+                        <Route path="/a" element={<Request />}/>  
                     </Routes>
                 </BrowserRouter>
             </Context.Provider>

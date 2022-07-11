@@ -10,27 +10,38 @@ import styled from "styled-components"
     } 
 */
 
+        /*
+            products:
+            {
+                image: "https://img.elo7.com.br/product/original/2C68ACB/camiseta-star-wars-logo-arte-camisa-star-wars-imagem.jpg"
+                itemQuantity: 2
+                price: 38.9
+                productId: "62c87eeddaa7673f12466da0"
+                title: "Camiseta Star Wars Logo"
+                totalPrice: 77.8
+            }
+        */
+
 export default function ProductCheckout({ product }) {
 
-    const size = product.size ? <h2><strong>Tamanho: </strong>{product.size}</h2> : null;
+    //const size = product.size ? <h2><strong>Tamanho: </strong>{product.size}</h2> : null;
 
-    const totalPartial = (product.price.replace(",",".")*product.quantity).toFixed(2);
+    //const totalPartial = product.totalPrice.replace(",",".").toFixed(2);
 
     return (
         <Container>
             <img src={product.image} alt="" />
             <Details>
                 <h1><strong>{product.title}</strong></h1>
-                {size}
-                <h2><strong>Preço: </strong> R${product.price}</h2>
+                <h2><strong>Preço: </strong> R${product.price.toFixed(2)}</h2>
             </Details>
             <Quantity>
                 <h3><strong>Qtd.</strong></h3>
-                <h4>{product.quantity}</h4>
+                <h4>{product.itemQuantity}</h4>
             </Quantity>
             <Total>
                 <h3><strong>Total</strong></h3>
-                <h4>R${totalPartial.replace(".",",")}</h4>
+                <h4>R${product.totalPrice.toFixed(2)}</h4>
             </Total>
         </Container>
     )

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import ProductHist from "./ProductHist";
 import { useRef } from "react";
+import {useLocation, useNavigate} from 'react-router-dom';
+
 
 
 export default function Request({ request }) {
@@ -26,6 +28,9 @@ export default function Request({ request }) {
             ]
         }
     */
+        const location = useLocation();
+       // const registerType = location.state.registerType;
+       //navigate('/add-register', {state:{registerType: 'entry'}})}
     const carousel = useRef(null);
 
     function showProducts() {
