@@ -32,7 +32,7 @@ export default function ProductCheckout({ product }) {
         <Container>
             <img src={product.image} alt="" />
             <Details>
-                <h1><strong>{product.title}</strong></h1>
+                <p><strong>{product.title}</strong></p>
                 <h2><strong>Preço: </strong> R${product.price.toFixed(2)}</h2>
             </Details>
             <Quantity>
@@ -69,7 +69,7 @@ const Details = styled.div`
     font-size: 14px;
     width: calc(60% - 80px);
 
-    h1 {
+    p {
         font-size: 13px;
         margin-bottom: 6px;
         color: #E19F41;

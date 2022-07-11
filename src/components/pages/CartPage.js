@@ -5,9 +5,7 @@ import axios from 'axios';
 import {useLocation, useNavigate} from 'react-router-dom';
 import NavBar from '../NavBar.js';
 import LoaderSpinner from '../LoaderSpinner.js';
-import dayjs from 'dayjs';
 import Footer from '../Footer.js';
-dayjs().format()
 
 export default function CartPage(){
     const [cartList, setCartList] = useState([]);
@@ -43,7 +41,6 @@ export default function CartPage(){
         setOrderBody({
             name: user.name,
             email: user.email,
-            date:  dayjs().format("DD/MM/YYYY"),
             totalPrice,
             products: cartList
         });

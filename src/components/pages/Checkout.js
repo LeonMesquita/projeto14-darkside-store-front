@@ -7,6 +7,8 @@ import NavBar from "../NavBar";
 import Footer from "../Footer";
 import ConfirmationDialog from "../ConfirmationDialog";
 import { useNavigate } from "react-router-dom";
+import dayjs from 'dayjs';
+
 
 export default function Checkout() {
 
@@ -15,6 +17,15 @@ export default function Checkout() {
 
 
     const [cartList, setCartList] = useState([...orderBody.products]);
+    let defaultAddress = {
+        rua: 'Rua Don Pedro II',
+        bairro: 'Bairro Bandeirantes',
+        numero: 35,
+        cidade: 'Fortaleza',
+        estado: 'Ceará'
+    }
+
+    const defaultPayment = 'Boleto';
 
 
     const navigate = useNavigate();
@@ -47,9 +58,24 @@ export default function Checkout() {
         );
     }
 
-    function finalizeOrder(event) {
+    async function finalizeOrder(event) {
         event.preventDefault();
-        console.log("terminarr");
+        console.log('entrou')
+        const order = {
+            ...orderBody,
+            date:  dayjs().format("DD/MM/YYYY"),
+            address: defaultAddress,
+            payment: defaultPayment
+        }
+        try{
+            await axios.post(`${apiUrl}/order`, order, authorization);
+        }catch{
+
+        }
+    }
+
+    async function cancelOrder(){
+        
     }
 
 
@@ -89,8 +115,8 @@ export default function Checkout() {
             <Footer>
                 <button onClick={() => navigate('/address')}  className='goback-button'>Selecionar endereço</button>
                 <button onClick={() => navigate('/payment')} className='finish-button'>Selecionar pagamento</button>
-                <button  className='goback-button'>Cancelar compra</button>
-                <button  className='finish-button'>Efetuar pagamento</button>
+                <button onClick={cancelOrder} className='goback-button'>Cancelar compra</button>
+                <button onClick={finalizeOrder}  className='finish-button'>Efetuar pagamento</button>
             </Footer>
         </>
     );
@@ -107,7 +133,7 @@ const Container = styled.div`
     height: 100vh;
     max-height: 55vh;
     border-bottom: solid 1px #F9CA6F;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     overflow-y: scroll;
 
     .available-area{

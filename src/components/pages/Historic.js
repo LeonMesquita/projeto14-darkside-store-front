@@ -7,6 +7,28 @@ import NavBar from "../NavBar";
 
 export default function Historic() {
 
+    /*
+    objeto do pedido:
+    
+    {
+    _id: new ObjectId("62cc30349931b274bdbb8042"),
+    name: 'test',
+    email: 'test@gmail.com',
+    totalPrice: '707.00',
+    products: [ [Object], [Object], [Object] ],
+    date: '11/07/2022',
+    address: {
+      rua: 'Rua Don Pedro II',
+      bairro: 'Bairro Bandeirantes',
+      numero: 35,
+      cidade: 'Fortaleza',
+      estado: 'Ceará'
+    },
+    payment: 'Boleto',
+    userId: new ObjectId("62cb05776739428bc174e17c")
+  }
+    */
+
     const { apiUrl, authorization } = useContext(Context);
 
     const [requestsList, setRequestsList] = useState([
