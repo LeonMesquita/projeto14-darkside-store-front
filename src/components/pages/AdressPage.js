@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Inputs, FormCheckout} from '../FormStyles'; 
 import ContextCheckout from "../../ContextCheckout";
@@ -9,8 +9,15 @@ export default function AddressPage(){
 
     const { adress, setAdress, city, setCity, state, setState, CEP, setCEP } = useContext(ContextCheckout);
 
+    useEffect(() => {
+        setAdress("");
+        setCity("");
+        setState("");
+        setCEP("");
+    }, []);
+
     return (
-        <FormCheckout>
+        <FormCheckout onSubmit={() => navigate("/checkout")}>
             <h1>Endereço da entrega</h1>
 
             <Inputs>
@@ -62,7 +69,7 @@ export default function AddressPage(){
             <hr></hr>
 
             
-            <button onClick={() => navigate("/checkout")}>Confirmar Endereço</button>
+            <button type='submit'>Confirmar Endereço</button>
         </FormCheckout>
     );
 }
