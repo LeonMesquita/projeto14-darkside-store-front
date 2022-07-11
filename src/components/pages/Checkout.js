@@ -16,15 +16,13 @@ import sadYoda from '../../images/sad.png';
 export default function Checkout() {
 
     const { apiUrl, authorization, orderBody, setTotalOfProducts } = useContext(Context);
+    const { adress, city, state, CEP, installments, total, setTotal } = useContext(ContextCheckout)
 
-    const [adress, setAdress] = useState("Rua Don Pedro II, 35");
-    const [city, setCity] = useState("Fortaleza");
-    const [state, setState] = useState("Ceará");
-    const [CEP, setCEP] = useState("60767-305");
-    const [installments, setInstallments] = useState("1");
+
     const [total, setTotal] = useState(orderBody.totalPrice);
     const [dialog, setDialog] = useState(false);
     const dialogMessage = "Tem certeza de que deseja cancelar a compra?"
+    setTotal(orderBody.totalPrice);
 
     const [cartList, setCartList] = useState([...orderBody.products]);
 
@@ -50,7 +48,7 @@ export default function Checkout() {
         }
     */
 
-    
+
 
     function showProducts() {
         return (
@@ -64,7 +62,7 @@ export default function Checkout() {
         console.log('entrou')
         const order = {
             ...orderBody,
-            date:  dayjs().format("DD/MM/YYYY")
+            date: dayjs().format("DD/MM/YYYY")
         }
 
         const finish = window.confirm(`            Confirme os dados para finalizar a compra:
@@ -73,22 +71,22 @@ export default function Checkout() {
             ${adress}
             ${city}, ${state} 
             ${CEP}
-            Pagamento: ${installments}x de R$${(total/Number(installments)).toFixed(2).replace(".",",")}
+            Pagamento: ${installments}x de R$${(total / Number(installments)).toFixed(2).replace(".", ",")}
         `);
 
-        if(finish) {
+        if (finish) {
             try {
                 await axios.post(`${apiUrl}/order`, order, authorization);
                 await axios.delete(`${apiUrl}/cart`, authorization);
                 setTotalOfProducts(0);
                 navigate('/home');
-            } catch{
+            } catch {
                 alert('Não foi possível concluir o pedido!');
             }
         }
     }
 
-    async function cancelOrder(){
+    async function cancelOrder() {
         navigate("/home");
     }
 
@@ -96,6 +94,7 @@ export default function Checkout() {
 
     return (
         <>
+
             <NavBar />
             
 
@@ -121,23 +120,20 @@ export default function Checkout() {
             </Total>
 
 
-            <ContextCheckout.Provider value={{ adress, setAdress, city, setCity, state, setState, CEP, setCEP, installments, setInstallments, total }}>
-                <FooterCheckout>
-                    <button onClick={() => navigate('/address')} className='finish-button infos'>
-                        <h6>Selecionar endereço</h6>
-                        <ion-icon name="home-outline"></ion-icon>
-                    </button>
-                    <button onClick={() => navigate('/payment')} className='finish-button infos'>
-                        <h6>Selecionar pagamento</h6>
-                        <ion-icon name="card-outline"></ion-icon>
-                    </button>
-                    <button onClick={() => setDialog(true)} className='goback-button'>Cancelar compra</button>
-                    <button onClick={finalizeOrder} className='finish-button'>Efetuar pagamento</button>
-                </FooterCheckout>
-            </ContextCheckout.Provider>
-            {dialog ? <ConfirmationDialog message={dialogMessage} image={sadYoda}
+            <FooterCheckout>
+                <button onClick={() => navigate('/address')} className='finish-button infos'>
+                    <h6>Selecionar endereço</h6>
+                    <ion-icon name="home-outline"></ion-icon>
+                </button>
+                <button onClick={() => navigate('/payment')} className='finish-button infos'>
+                    <h6>Selecionar pagamento</h6>
+                    <ion-icon name="card-outline"></ion-icon>
+                </button>
+                <button onClick={cancelOrder} className='goback-button'>Cancelar compra</button>
+                <button onClick={finalizeOrder} className='finish-button'>Efetuar pagamento</button>
+            </FooterCheckout>
+                        {dialog ? <ConfirmationDialog message={dialogMessage} image={sadYoda}
             onclickNo={() => setDialog(false)} onclickYes={() => navigate('/home')}
-            /> : null}
         </>
     );
 }
@@ -211,7 +207,6 @@ const Total = styled.div`
         justify-content: space-between;
     }
 `
-//    background-image: linear-gradient(to right, #031027, #08203D, #031027);
 
 const FooterCheckout = styled.div`
     position: fixed;
@@ -221,6 +216,9 @@ const FooterCheckout = styled.div`
     padding-top: 15px;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    z-index: 1;
+    background-image: linear-gradient(to right, #031027, #08203D, #031027);
+
     button {
         width: calc(50% - 20px);
         max-width: 300px;
