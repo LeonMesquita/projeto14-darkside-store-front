@@ -1,194 +1,155 @@
-import styled from 'styled-components';
-import { useState, useContext, useEffect } from "react";
-import Context from '../../Context.js';
-import axios from 'axios';
-import {useLocation, useNavigate} from 'react-router-dom';
-import NavBar from '../NavBar.js';
-import LoaderSpinner from '../LoaderSpinner.js';
-import dayjs from 'dayjs';
-import Footer from '../Footer.js';
-dayjs().format()
+import { useState, useEffect, useContext } from "react";
+import Context from '../../Context';
+import styled from "styled-components";
+import axios from "axios";
+import ProductCheckout from "../ProductCheckout";
+import NavBar from "../NavBar";
+import Footer from "../Footer";
+import ConfirmationDialog from "../ConfirmationDialog";
+import { useNavigate } from "react-router-dom";
 
-export default function CartPage(){
-    const [cartList, setCartList] = useState([]);
-    const { apiUrl, authorization, setOrderBody, user } = useContext(Context);
-    const [totalPrice, setTotalPrice] = useState(0);
+export default function Checkout() {
+
+    const { apiUrl, authorization, orderBody } = useContext(Context);
+
+
+
+    const [cartList, setCartList] = useState([...orderBody.products]);
+
+
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(true);
+
+    /*
+        date: "10/07/2022"
+        email: "leo@gmail.com"
+        name: "leo"
+        products: (3) [{…}, {…}, {…}]
+        totalPrice: "707.00"
+    */
+
+        /*
+            products:
+            {
+                image: "https://img.elo7.com.br/product/original/2C68ACB/camiseta-star-wars-logo-arte-camisa-star-wars-imagem.jpg"
+                itemQuantity: 2
+                price: 38.9
+                productId: "62c87eeddaa7673f12466da0"
+                title: "Camiseta Star Wars Logo"
+                totalPrice: 77.8
+            }
+        */
 
 
-    useEffect(async () => {
-        try {
-            const promise = await axios.get(`${apiUrl}/cart`, authorization);
-            setCartList(promise.data.products);
-            calcTotalPrice(promise.data.products);
-            setIsLoading(false);
-        } catch (error) {
-           navigate('/');
-        }
 
-    }, []);
-
-
-    function calcTotalPrice(products){
-        let price = 0;
-        products.map((product) => {
-            price += Number(product.totalPrice)});
-
-        setTotalPrice(price.toFixed(2));
-
+    function showProducts() {
+        return (
+            cartList.map((product, index) => <ProductCheckout key={index} product={product} />)
+        );
     }
 
-    async function finishOrder(){
-        setOrderBody({
-            name: user.name,
-            email: user.email,
-            date:  dayjs().format("DD/MM/YYYY"),
-            totalPrice,
-            products: cartList
-        });
-        navigate('/checkout');
-
+    function finalizeOrder(event) {
+        event.preventDefault();
+        console.log("terminarr");
     }
 
 
-    return(
-        isLoading ? <LoaderSpinner loaderType='oval'/> :
+
+    const products = showProducts();
+
+    return (
         <>
             <NavBar />
-            <Cart>
-                <div className='title'>
-                    <div className='available-area'>
-                        <ion-icon name="cart-outline"></ion-icon>
-                        <p>Seu carrinho de compras</p>                    
-                    </div>
+           
+                <Container>
+                     <div className="available-area">
+                    <Summary>
+                        <h1>Produtos selecionados</h1>
+                        {products}
 
+
+                    </Summary>
+                     </div>
+                </Container>  
+      
+      
+
+            <Shipping>
+                <div className="available-area">
+                        <h5>Frete:</h5>
+                        <h5>Frete Grátis</h5>
                 </div>
-                <div className='available-area'>
 
-                    {cartList.length === 0 ? null :
-
-                    cartList.map((item) =>
-                    <Product>
-                        <div>
-                            <img src={item.image} alt=''/>
-                            <h3>{item.title}</h3>                        
-                        </div>
-                        <h2>{item.itemQuantity}</h2>
-
-                        <h2>R${item.price}</h2>
-                        <h2>R${item.totalPrice}</h2>
-                    </Product>
-                    )
-
-                    }
+            </Shipping>
+            <Shipping>
+            <div className="available-area">
+            <h5>Total da compra:</h5>
+                <h5>R${orderBody.totalPrice.replace(".", ",")}</h5>
                 </div>
-        </Cart>
-        
-
-        <div className='available-area'>
-        <h6 className='price-text'>Total: R${totalPrice}</h6>
+            </Shipping>
             <Footer>
-                <button onClick={() => navigate('/home')} className='goback-button'>Escolher mais produtos</button>
-                <button onClick={() => finishOrder()} className='finish-button'>Finalizar compra</button>
+                <button onClick={() => navigate('/address')}  className='goback-button'>Selecionar endereço</button>
+                <button onClick={() => navigate('/payment')} className='finish-button'>Selecionar pagamento</button>
+                <button  className='goback-button'>Cancelar compra</button>
+                <button  className='finish-button'>Efetuar pagamento</button>
             </Footer>
-        </div>
         </>
     );
 }
 
-const Cart = styled.div`
-width: 100%;
-height: 100vh;
-max-height: 70vh;
-border-bottom: solid 1px #F9CA6F;
-overflow-y: scroll;
-padding-bottom: 20px;
 
-    .title{
-        border-bottom: solid 1px #F9CA6F;
-        height: 80px;
-    }
 
-    .title div{
-        display: flex;
-        align-items: center;
-        height: 100%;
-        margin: auto;
-    }
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 20px 10px;
+    width: 100%;
+    height: 100vh;
+    max-height: 55vh;
+    border-bottom: solid 1px #F9CA6F;
+    margin-bottom: 10px;
+    overflow-y: scroll;
 
     .available-area{
+        height: 100%;
+        display: flex;
+        flex-direction: column;  
         margin: auto;
     }
 
-    ion-icon{
-        color: #F9D978;
-        font-size: 38px;
-        margin-left: 10px;
-        margin-right: 20px;
+    @media(max-width: 550px) {
+        width: 100%;
     }
-    p{
-        font-family: 'Lexend Mega';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-        line-height: 11px;
-        letter-spacing: -0.16em;
-        color: #E19F41;
-    }
-
-    h2, h3{
-        font-family: 'Lexend Mega';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        color: #ECECEC;
-    }
-
-    @media(max-width: 450px){
-        h3{
-            font-size: 8px;
-        }
-    }
-
-    @media(max-width: 385px){
-        h2{
-            font-size: 8px;
-        }
-    }
-
 `
 
+const Summary = styled.div`
+    margin-bottom: 40px;
 
-const Product = styled.div`
-    background: #03223F;
-    width: 95%;
-    height: 90px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
-    border-radius: 15px;
-    margin-top: 30px;
-    padding-right: 20px;
-
-    img{
-        border-radius: 15px;
-        height: 100%;
-        width: 80px;
-        margin-right: 8px;
+    h1 {
+        font-size: 22px;
+        color: #E19F41;
+        margin-bottom: 20px;
+        font-family: 'Lexend Mega';
     }
+`
+
+const Shipping = styled.div`
+    width: 100%;
+   
+   
+    background-color: #FCCB6F;
+    color: #051731;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px; 
+    margin-bottom: 8px; 
+    box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3); 
+    font-family: 'Lexend Mega';
 
     div{
-        height: 100%;
+        
         display: flex;
-        align-items: center;
-        width: 40%;
-        margin-right: 20px;
+        justify-content: space-between;
+        margin: auto;
     }
-
-
-`
-
-
 `
