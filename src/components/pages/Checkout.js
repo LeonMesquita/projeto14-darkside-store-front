@@ -9,6 +9,8 @@ import ConfirmationDialog from "../ConfirmationDialog";
 import ContextCheckout from "../../ContextCheckout";
 import { useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
+import sadYoda from '../../images/sad.png';
+
 
 
 export default function Checkout() {
@@ -16,6 +18,10 @@ export default function Checkout() {
     const { apiUrl, authorization, orderBody, setTotalOfProducts } = useContext(Context);
     const { adress, city, state, CEP, installments, total, setTotal } = useContext(ContextCheckout)
 
+
+    const [total, setTotal] = useState(orderBody.totalPrice);
+    const [dialog, setDialog] = useState(false);
+    const dialogMessage = "Tem certeza de que deseja cancelar a compra?"
     setTotal(orderBody.totalPrice);
 
     const [cartList, setCartList] = useState([...orderBody.products]);
@@ -90,6 +96,7 @@ export default function Checkout() {
         <>
 
             <NavBar />
+            
 
             <Container>
                 <div className="available-area">
@@ -112,6 +119,7 @@ export default function Checkout() {
                 </div>
             </Total>
 
+
             <FooterCheckout>
                 <button onClick={() => navigate('/address')} className='finish-button infos'>
                     <h6>Selecionar endereço</h6>
@@ -124,6 +132,8 @@ export default function Checkout() {
                 <button onClick={cancelOrder} className='goback-button'>Cancelar compra</button>
                 <button onClick={finalizeOrder} className='finish-button'>Efetuar pagamento</button>
             </FooterCheckout>
+                        {dialog ? <ConfirmationDialog message={dialogMessage} image={sadYoda}
+            onclickNo={() => setDialog(false)} onclickYes={() => navigate('/home')}
         </>
     );
 }
