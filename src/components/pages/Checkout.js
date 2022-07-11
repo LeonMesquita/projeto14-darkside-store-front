@@ -6,6 +6,7 @@ import ProductCheckout from "../ProductCheckout";
 import NavBar from "../NavBar";
 import Footer from "../Footer";
 import ConfirmationDialog from "../ConfirmationDialog";
+import ContextCheckout from "../../ContextCheckout";
 import { useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 
@@ -14,19 +15,14 @@ export default function Checkout() {
 
     const { apiUrl, authorization, orderBody, setTotalOfProducts } = useContext(Context);
 
-
+    const [adress, setAdress] = useState("Rua Don Pedro II, 35");
+    const [city, setCity] = useState("Fortaleza");
+    const [state, setState] = useState("Ceará");
+    const [CEP, setCEP] = useState("60767-305");
+    const [installments, setInstallments] = useState("1");
+    const [total, setTotal] = useState(orderBody.totalPrice);
 
     const [cartList, setCartList] = useState([...orderBody.products]);
-    let defaultAddress = {
-        rua: 'Rua Don Pedro II',
-        bairro: 'Bairro Bandeirantes',
-        numero: 35,
-        cidade: 'Fortaleza',
-        estado: 'Ceará'
-    }
-
-    const defaultPayment = 'Boleto';
-
 
     const navigate = useNavigate();
 
@@ -50,6 +46,8 @@ export default function Checkout() {
         }
     */
 
+    
+
     function showProducts() {
         return (
             cartList.map((product, index) => <ProductCheckout key={index} product={product} />)
@@ -58,29 +56,37 @@ export default function Checkout() {
 
     async function finalizeOrder(event) {
         event.preventDefault();
+
         console.log('entrou')
         const order = {
             ...orderBody,
-            date:  dayjs().format("DD/MM/YYYY"),
-            address: defaultAddress,
-            payment: defaultPayment
+            date:  dayjs().format("DD/MM/YYYY")
         }
-        try{
-            await axios.post(`${apiUrl}/order`, order, authorization);
-            await axios.delete(`${apiUrl}/cart`, authorization);
-            setTotalOfProducts(0);
-            navigate('/home');
-        }catch{
-            alert('Não foi possível concluir o pedido!');
 
+        const finish = window.confirm(`            Confirme os dados para finalizar a compra:
+            
+            Endereço da entrega:
+            ${adress}
+            ${city}, ${state} 
+            ${CEP}
+            Pagamento: ${installments}x de R$${(total/Number(installments)).toFixed(2).replace(".",",")}
+        `);
+
+        if(finish) {
+            try {
+                await axios.post(`${apiUrl}/order`, order, authorization);
+                await axios.delete(`${apiUrl}/cart`, authorization);
+                setTotalOfProducts(0);
+                navigate('/home');
+            } catch{
+                alert('Não foi possível concluir o pedido!');
+            }
         }
     }
 
     async function cancelOrder(){
-        
+        navigate("/home");
     }
-
-
 
     const products = showProducts();
 
@@ -109,18 +115,20 @@ export default function Checkout() {
                 </div>
             </Total>
 
-            <FooterCheckout>
-                <button onClick={() => navigate('/address')} className='finish-button infos'>
-                    <h6>Selecionar endereço</h6>
-                    <ion-icon name="home-outline"></ion-icon>
-                </button>
-                <button onClick={() => navigate('/payment')} className='finish-button infos'>
-                    <h6>Selecionar pagamento</h6>
-                    <ion-icon name="card-outline"></ion-icon>
-                </button>
-                <button className='goback-button'>Cancelar compra</button>
-                <button className='finish-button'>Efetuar pagamento</button>
-            </FooterCheckout>
+            <ContextCheckout.Provider value={{ adress, setAdress, city, setCity, state, setState, CEP, setCEP, installments, setInstallments, total }}>
+                <FooterCheckout>
+                    <button onClick={() => navigate('/address')} className='finish-button infos'>
+                        <h6>Selecionar endereço</h6>
+                        <ion-icon name="home-outline"></ion-icon>
+                    </button>
+                    <button onClick={() => navigate('/payment')} className='finish-button infos'>
+                        <h6>Selecionar pagamento</h6>
+                        <ion-icon name="card-outline"></ion-icon>
+                    </button>
+                    <button onClick={cancelOrder} className='goback-button'>Cancelar compra</button>
+                    <button onClick={finalizeOrder} className='finish-button'>Efetuar pagamento</button>
+                </FooterCheckout>
+            </ContextCheckout.Provider>
         </>
     );
 }
@@ -162,24 +170,6 @@ const Summary = styled.div`
         color: #E19F41;
         margin-bottom: 20px;
         font-family: 'Lexend Mega';
-    }
-`
-
-const Shipping = styled.div`
-    width: 100%;
-    background-color: #FCCB6F;
-    color: #051731;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 6px; 
-    margin-bottom: 8px; 
-    box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3); 
-    font-family: 'Lexend Mega';
-
-    div{
-        display: flex;
-        justify-content: space-between;
-        margin: auto;
     }
 `
 

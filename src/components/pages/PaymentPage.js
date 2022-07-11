@@ -1,13 +1,19 @@
 import {Inputs, FormCheckout, Validate} from '../FormStyles';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ContextCheckout from "../../ContextCheckout";
+
 export default function PaymentPage(){
     const [cardNumber, setCardNumber] = useState("");
     const [name, setName] = useState("");
     const [monthValidade, setMonthValidade] = useState("");
     const [yearValidade, setYearValidade] = useState("");
     const [CVV, setCVV] = useState("");
-    const [installments, setInstallments] = useState("");
-    const total = 500.6;
+
+    const navigate = useNavigate();
+
+    const { installments, setInstallments, total } = useContext(ContextCheckout);
+
     return(
         <FormCheckout>
         <h1>Pagamento</h1>
@@ -56,15 +62,15 @@ export default function PaymentPage(){
             <Inputs>
                 <label for="installments">Parcelas: </label>
                 <select id="installments" name="installments" value={installments} onChange={e => setInstallments(e.target.value)}>
-                    <option value="1x">1x de {total}</option>
-                    <option value="2x">2x de {(total / 2).toFixed(2)}</option>
-                    <option value="3x">3x de {(total / 3).toFixed(2)}</option>
-                    <option value="4x">4x de {(total / 4).toFixed(2)}</option>
-                    <option value="5x">5x de {(total / 5).toFixed(2)}</option>
-                    <option value="6x">6x de {(total / 6).toFixed(2)}</option>
+                    <option value="1">1x de {total}</option>
+                    <option value="2">2x de {(total / 2).toFixed(2)}</option>
+                    <option value="3">3x de {(total / 3).toFixed(2)}</option>
+                    <option value="4">4x de {(total / 4).toFixed(2)}</option>
+                    <option value="5">5x de {(total / 5).toFixed(2)}</option>
+                    <option value="6">6x de {(total / 6).toFixed(2)}</option>
                 </select>
             </Inputs>
-            <button type="submit">Confirmar Pagamento</button>
+            <button onClick={() => navigate("/checkout")}>Confirmar Pagamento</button>
         </FormCheckout>
     );
 }

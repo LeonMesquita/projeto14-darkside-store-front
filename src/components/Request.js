@@ -77,7 +77,6 @@ export default function Request({ request }) {
             <Summary>
                 <h2>Resumo da compra</h2>
                 <div>
-                    <h3>Pedido: <strong>{request._id}</strong></h3>
                     <h3>Data: <strong>{request.date}</strong></h3>
                     <h3>TOTAL: <strong>R${total}</strong></h3>
                 </div>
