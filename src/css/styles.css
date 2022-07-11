@@ -38,6 +38,7 @@ input:focus {
 
 .available-area{
     width: 80%;
+    position: relative;
 }
 
 .products-area{
@@ -118,8 +119,17 @@ input:focus {
     font-size: 20px;
     margin-right: 30px;
     margin-top: 12px;
-    
+    font-family: 'Lexend Mega';
     text-align: end;
+    position: absolute;
+    right: 0;
+    top: 18px;
+}
+
+@media(max-width: 450px){
+    .price-text{
+        font-size: 15px;
+    }
 }
 
 .goback-button, .finish-button{

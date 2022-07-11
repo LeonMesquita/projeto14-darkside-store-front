@@ -15,7 +15,7 @@ export default function PaymentPage(){
     const { installments, setInstallments, total } = useContext(ContextCheckout);
 
     return(
-        <FormCheckout>
+        <FormCheckout onSubmit={() => navigate("/checkout")}>
         <h1>Pagamento</h1>
             <Inputs>
                 <label for="cardNumber">N° do cartão: </label>
@@ -70,7 +70,7 @@ export default function PaymentPage(){
                     <option value="6">6x de {(total / 6).toFixed(2)}</option>
                 </select>
             </Inputs>
-            <button onClick={() => navigate("/checkout")}>Confirmar Pagamento</button>
+            <button type='submit'>Confirmar Pagamento</button>
         </FormCheckout>
     );
 }
