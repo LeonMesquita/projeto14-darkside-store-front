@@ -83,11 +83,11 @@ export default function CartPage(){
 
                     }
                 </div>
+                <h6 className='price-text'>Total: R${totalPrice}</h6>
         </Cart>
         
 
         <div className='available-area'>
-        <h6 className='price-text'>Total: R${totalPrice}</h6>
             <Footer>
                 <button onClick={() => navigate('/home')} className='goback-button'>Escolher mais produtos</button>
                 <button onClick={() => finishOrder()} className='finish-button'>Finalizar compra</button>
@@ -104,6 +104,7 @@ max-height: 70vh;
 border-bottom: solid 1px #F9CA6F;
 overflow-y: scroll;
 padding-bottom: 20px;
+margin-bottom: 30px;
 
     &::-webkit-scrollbar {
         display: none;
@@ -147,6 +148,10 @@ padding-bottom: 20px;
         font-weight: 400;
         font-size: 12px;
         color: #ECECEC;
+    }
+
+    h6 {
+        font-family: 'Lexend Mega';
     }
 
     @media(max-width: 400px){
