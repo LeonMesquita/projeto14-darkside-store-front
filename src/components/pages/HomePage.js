@@ -83,7 +83,6 @@ export default function HomePage() {
                 <div className="confirmation-button">
                     <button onClick={() => navigate('/cart')}> <p>Ir para o carrinho</p></button>
                 </div>
-               
             </div>
         </>
     );

@@ -18,6 +18,7 @@ export default function CartPage(){
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
     const [dialog, setDialog] = useState(false);
+    const [isEmpty, setIsEmpty] = useState(true);
 
 
 
@@ -27,8 +28,10 @@ export default function CartPage(){
             setCartList(promise.data.products);
             calcTotalPrice(promise.data.products);
             setIsLoading(false);
+            setIsEmpty(false);
         } catch (error) {
-           navigate('/');
+           //navigate('/home');
+           setIsLoading(false);
         }
 
     }, []);
@@ -76,6 +79,12 @@ export default function CartPage(){
         isLoading ? <LoaderSpinner loaderType='oval'/> :
         <>
             <NavBar />
+           {cartList.length === 0  ?
+           <EmptyCart>
+                <h1>Seu carrinho está vazio</h1>
+                <button onClick={() => navigate('/home')} className='goback-button'>Voltar para home</button>
+           </EmptyCart> :
+            <>
             <Cart>
                 <div className='title'>
                     <div className='available-area'>
@@ -86,7 +95,7 @@ export default function CartPage(){
                 </div>
                 <div className='available-area'>
 
-                    {cartList.length === 0 ? <h6>Você não adicionou nenhum produto ai carrinho ainda :/</h6> :
+                    {
 
                     cartList.map((item) =>
                     <Product>
@@ -124,6 +133,8 @@ export default function CartPage(){
         {dialog ? <ConfirmationDialog message="Tem certeza de que deseja excluir o carrinho? :(" image={sadYoda}
             onclickNo={() => setDialog(false)} onclickYes={deleteCart}
             /> : null}
+            </>
+           }
         </>
     );
 }
@@ -238,3 +249,31 @@ const Product = styled.div`
 
 `
 
+
+const EmptyCart = styled.div`
+min-height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+margin: auto;
+    h1{
+        font-size: 35px;
+        color: white;
+    }
+
+    button{
+        position: fixed;
+        bottom: 10px;
+        width: 300px;
+        cursor: pointer;
+    }
+
+@media(max-width: 330px){
+    button{
+        width: 90%;
+    }
+}
+    
+
+`

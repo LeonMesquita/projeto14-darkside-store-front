@@ -17,10 +17,8 @@ export default function Checkout() {
 
     const { apiUrl, authorization, orderBody, setTotalOfProducts } = useContext(Context);
     const { adress, city, state, CEP, installments, total, setTotal } = useContext(ContextCheckout)
-
-
     const [dialog, setDialog] = useState(false);
-    const dialogMessage = "Tem certeza de que deseja cancelar a compra?"
+    const dialogMessage = "Tem certeza de que deseja cancelar a compra?";
     setTotal(orderBody.totalPrice);
 
     const [cartList, setCartList] = useState([...orderBody.products]);
@@ -85,9 +83,7 @@ export default function Checkout() {
         }
     }
 
-    async function cancelOrder() {
-        navigate("/home");
-    }
+
 
     const products = showProducts();
 
@@ -129,7 +125,7 @@ export default function Checkout() {
                     <h6>Selecionar pagamento</h6>
                     <ion-icon name="card-outline"></ion-icon>
                 </button>
-                <button onClick={cancelOrder} className='goback-button'>Cancelar compra</button>
+                <button onClick={() => setDialog(true)} className='goback-button'>Cancelar compra</button>
                 <button onClick={finalizeOrder} className='finish-button'>Efetuar pagamento</button>
             </FooterCheckout>
 

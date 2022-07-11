@@ -16,7 +16,6 @@ import AddressPage from "./pages/AdressPage";
 import PaymentPage from "./pages/PaymentPage";
 
 export default function App(){
-    //const apiUrl = 'http://localhost:5000'
     const apiUrl = "https://darkside-store-api.herokuapp.com";
     const [totalOfProducts, setTotalOfProducts] = useState(0);
     const [itemsQuantity, setItemsQuantity] = useState(0);
