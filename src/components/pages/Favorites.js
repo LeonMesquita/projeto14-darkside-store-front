@@ -5,33 +5,32 @@ import ProductCard from "../ProductCard";
 import ConfirmationButton from "../ConfirmationButton";
 import Context from '../../Context';
 import NavBar from "../NavBar";
+import LoaderSpinner from "../LoaderSpinner";
 
 export default function Favorites() {
 
-    const {itemsQuantity, apiUrl, authorization} = useContext(Context);
+    const {apiUrl, authorization} = useContext(Context);
 
-    const [favoritesList, setFavoritesList] = useState([
-        {   
-            _id: 1,
-            title: "Camiseta Star Wars",
-            price: "89,90",
-            image: "https://www.camisetas4fun.com.br/media/product/16f/camiseta-star-wars-afa.jpg",
-            quantity: 1,
-            size: "M"
-        },
-        {   
-            _id: 2,
-            title: "Caneca Star Wars",
-            price: "29,90",
-            image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
-            quantity: 2
+    const [favoritesList, setFavoritesList] = useState([]);
+    const [productsList, setProductsList] = useState([]);
+    
+    const [isLoading, setIsLoading] = useState(true);
+
+    async function getProducts(productType){
+        try{
+
+            const promise = await axios.get(`${apiUrl}/products/${productType}`);
+            setProductsList(promise.data);
+            setIsLoading(false);
+
+        } catch(error){
+            console.log(error);
         }
-    ]);
+    }
 
     async function getFavorites() {
         try {
-            const promise = await axios.get(`${apiUrl}/favorites`, authorization);
-            console.log(promise.data);
+            const promise = await axios.get(`${apiUrl}/favorite`, authorization);
             setFavoritesList(promise.data);
 
         } catch (error) {
@@ -40,18 +39,20 @@ export default function Favorites() {
     }
 
     useEffect(() => {
+        getProducts('Tudo');
         getFavorites();
     }, []);
 
     return (
+        isLoading ? <LoaderSpinner loaderType="oval"/> :
         <>
             <NavBar />
             <AvailableArea> 
                 <h1>Seus Favoritos</h1>   
                 <ProductsArea>
                     {favoritesList.map((product) => 
-                    <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
-                    price={product.price} quantity={itemsQuantity} />)}
+                    <ProductCard key={product.productId} productId={product.productId} src={product.image} title={product.title}
+                    price={product.price}/>)}
                 </ProductsArea>
                 <div className="sized-box"></div>
                 <ConfirmationButton />
@@ -61,7 +62,7 @@ export default function Favorites() {
 }
 
 const ProductsArea = styled.div`
-    margin-top: 10px;
+    margin-top: 30px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;

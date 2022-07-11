@@ -7,6 +7,7 @@ import SearchBar from "../SearchBar";
 import axios from 'axios';
 import NavBar from "../NavBar";
 import { useNavigate } from "react-router-dom";
+import LoaderSpinner from "../LoaderSpinner";
 
 import sadBabyYoda from "../../images/sad.png"
 
@@ -16,10 +17,10 @@ export default function HomePage() {
     const { token, setToken, apiUrl, authorization, user, setUser } = useContext(Context);
     const [productsList, setProductsList] = useState([]);
     const [totalOfProducts, setTotalOfProducts] = useState(0);
+    
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
-    const [itemsQuantity, setItemsQuantity] = useState(0);
-
-
+    
     //#D49943
     //#F5C974
     const productTypeList = ['Tudo', 'Camisetas', 'Canecas', 'Funkos', 'Actions'];
@@ -31,13 +32,14 @@ export default function HomePage() {
 
             const promise = await axios.get(`${apiUrl}/products/${productType}`);
             setProductsList(promise.data);
+            setIsLoading(false);
 
         } catch (error) {
             setProductsList([]);
         }
     }
 
-    useEffect(() => {
+    useEffect(async () => {
         getProducts('Tudo');
 
     }, []);

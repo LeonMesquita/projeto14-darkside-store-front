@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import trooper from '../images/trooper.png';
 import star from '../images/Death_Star.svg';
 import yoda from '../images/Yoda.svg';
 import { useNavigate } from 'react-router-dom';
