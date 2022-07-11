@@ -7,6 +7,7 @@ const Footer = styled.div`
     display: flex;
     width: 550px;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 
     @media(max-width: 550px){
         width: 100%;

@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 
-export default function ConfirmationDialog({message, onclickYes, onclickNo}){
+export default function ConfirmationDialog({message, firstText, secondText}){
     return(
         <Dialog>
             <div>
                 <h3>{message}</h3>
             <span>
-                <button onClick={onclickYes}>Sim</button>
-                <button onClick={onclickNo}>Não</button>
+                <button >{firstText}</button>
+                <button >{secondText}</button>
 
             </span>
 
@@ -31,20 +31,23 @@ const Dialog = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-between;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: white;
-        width: 300px;
-        height: 200px;
+        background-color: #03223F;
+        width: 80%;
+        height: 40%;
         border-radius: 20px;
+        max-width: 500px;
+        max-height: 500px;
+        justify-content: space-between;
 
     }
 
     span{
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
         width: 100%;
@@ -53,14 +56,16 @@ const Dialog = styled.div`
     }
 
     button{
-        width: 90px;
-        height: 30px;
-        background-color: #52B6FF;
+        width: 80%;
+        height: 50px;
+        background-color: #FCCB6F;
         cursor: pointer;
         border: none;
-        border-radius: 5px;
-        color: white;
-        font-weight: 700;
+        border-radius: 10px;
+        color: #1E1E1E;
+        font-weight: 900;
+        margin-top: 20px;
+        font-size: 20px;
     }
 
     h3{
@@ -68,6 +73,8 @@ const Dialog = styled.div`
         margin-top: 50px;
         font-family: 'Roboto',sans-serif;
         font-weight: normal;
+        color: white;
+        font-size: 20px;
     }
 
 `

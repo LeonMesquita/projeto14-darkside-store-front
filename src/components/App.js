@@ -11,6 +11,8 @@ import CartPage from "./pages/CartPage";
 import Checkout from "./pages/Checkout";
 import NavBar from "./NavBar";
 import Request from "./Request";
+import AddressPage from "./pages/AdressPage";
+import PaymentPage from "./pages/PaymentPage";
 
 export default function App(){
     const apiUrl = 'http://localhost:5000'
@@ -46,7 +48,9 @@ export default function App(){
                         <Route path="/historic" element={<Historic />}/>
                         <Route path="/cart" element={<CartPage />}/>
                         <Route path="/checkout" element={<Checkout />}/>
-                        <Route path="/a" element={<Request />}/>  
+                        <Route path="/address" element={<AddressPage />}/>
+                        <Route path="/payment" element={<PaymentPage />}/>
+                        <Route path="/request" element={<Request />}/>  
                     </Routes>
                 </BrowserRouter>
             </Context.Provider>
