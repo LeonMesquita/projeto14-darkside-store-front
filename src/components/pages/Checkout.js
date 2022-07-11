@@ -7,14 +7,25 @@ import NavBar from "../NavBar";
 import Footer from "../Footer";
 import ConfirmationDialog from "../ConfirmationDialog";
 import { useNavigate } from "react-router-dom";
+import dayjs from 'dayjs';
+
 
 export default function Checkout() {
 
-    const { apiUrl, authorization, orderBody } = useContext(Context);
+    const { apiUrl, authorization, orderBody, setTotalOfProducts } = useContext(Context);
 
 
 
     const [cartList, setCartList] = useState([...orderBody.products]);
+    let defaultAddress = {
+        rua: 'Rua Don Pedro II',
+        bairro: 'Bairro Bandeirantes',
+        numero: 35,
+        cidade: 'Fortaleza',
+        estado: 'Ceará'
+    }
+
+    const defaultPayment = 'Boleto';
 
 
     const navigate = useNavigate();
@@ -45,9 +56,28 @@ export default function Checkout() {
         );
     }
 
-    function finalizeOrder(event) {
+    async function finalizeOrder(event) {
         event.preventDefault();
-        console.log("terminarr");
+        console.log('entrou')
+        const order = {
+            ...orderBody,
+            date:  dayjs().format("DD/MM/YYYY"),
+            address: defaultAddress,
+            payment: defaultPayment
+        }
+        try{
+            await axios.post(`${apiUrl}/order`, order, authorization);
+            await axios.delete(`${apiUrl}/cart`, authorization);
+            setTotalOfProducts(0);
+            navigate('/home');
+        }catch{
+            alert('Não foi possível concluir o pedido!');
+
+        }
+    }
+
+    async function cancelOrder(){
+        
     }
 
 
