@@ -50,7 +50,7 @@ export default function ProductCheckout({ product }) {
 const Container = styled.div`
     padding: 6px;
     display: flex;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: #ffffff;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3);

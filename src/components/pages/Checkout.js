@@ -8,6 +8,7 @@ import Footer from "../Footer";
 import ConfirmationDialog from "../ConfirmationDialog";
 import { useNavigate } from "react-router-dom";
 
+
 export default function Checkout() {
 
     const { apiUrl, authorization, orderBody } = useContext(Context);
@@ -17,12 +18,14 @@ export default function Checkout() {
     const [cartList, setCartList] = useState([...orderBody.products]);
 
 
+
     const navigate = useNavigate();
+
 
     /*
         date: "10/07/2022"
-        email: "leo@gmail.com"
-        name: "leo"
+        email: "test@gmail.com"
+        name: "test"
         products: (3) [{…}, {…}, {…}]
         totalPrice: "707.00"
     */
@@ -47,9 +50,25 @@ export default function Checkout() {
         );
     }
 
+
     function finalizeOrder(event) {
         event.preventDefault();
-        console.log("terminarr");
+        const finish = window.confirm(`            Confirme os dados para finalizar a compra:
+            
+            Endereço da entrega:
+            ${adress}
+            ${city}, ${state} 
+            ${CEP}
+
+            Pagamento: ${installments}x de R$${(total/Number(installments)).toFixed(2).replace(".",",")}
+        `);
+
+        if(finish) {
+            //adicionar ao histórico
+            //limpar carrinho
+            //voltar para home
+            //salvar no historico
+        }
     }
 
 
@@ -92,6 +111,7 @@ export default function Checkout() {
                 <button  className='goback-button'>Cancelar compra</button>
                 <button  className='finish-button'>Efetuar pagamento</button>
             </Footer>
+
         </>
     );
 }
@@ -125,7 +145,7 @@ const Container = styled.div`
 const Summary = styled.div`
     margin-bottom: 40px;
 
-    >h1 {
+    h1 {
         font-size: 22px;
         color: #E19F41;
         margin-bottom: 20px;
@@ -153,4 +173,3 @@ const Shipping = styled.div`
         margin: auto;
     }
 `
-

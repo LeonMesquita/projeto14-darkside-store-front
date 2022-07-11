@@ -2,6 +2,10 @@ body{
     background-image: linear-gradient(to right, #031027, #08203D, #031027);
 }
 
+body::-webkit-scrollbar {
+    display: none;
+}
+
 input{
     background-color: #3096B7;
     border: none;
@@ -44,8 +48,6 @@ input:focus {
     align-items: center;
     justify-content: space-around;
 }
-
-
 
 
 

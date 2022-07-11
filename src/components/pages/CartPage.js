@@ -105,6 +105,10 @@ border-bottom: solid 1px #F9CA6F;
 overflow-y: scroll;
 padding-bottom: 20px;
 
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
     .title{
         border-bottom: solid 1px #F9CA6F;
         height: 80px;
@@ -145,13 +149,13 @@ padding-bottom: 20px;
         color: #ECECEC;
     }
 
-    @media(max-width: 450px){
+    @media(max-width: 400px){
         h3{
-            font-size: 8px;
+            font-size: 10px;
         }
     }
 
-    @media(max-width: 385px){
+    @media(max-width: 375px){
         h2{
             font-size: 8px;
         }
@@ -169,7 +173,7 @@ const Product = styled.div`
     align-items: center;
     margin: auto;
     border-radius: 15px;
-    margin-top: 30px;
+    margin-top: 20px;
     padding-right: 20px;
 
     img{
@@ -186,7 +190,6 @@ const Product = styled.div`
         width: 40%;
         margin-right: 20px;
     }
-
 
 `
 
