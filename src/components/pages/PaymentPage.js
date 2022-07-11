@@ -1,7 +1,7 @@
 import {Inputs, FormCheckout, Validate} from '../FormStyles';
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ContextCheckout from "../../ContextCheckout";
+import ContextCheckout from '../../ContextCheckout';
 
 export default function PaymentPage(){
     const [cardNumber, setCardNumber] = useState("");
