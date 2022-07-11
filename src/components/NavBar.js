@@ -53,7 +53,7 @@ export default function NavBar(){
                     </div>
 
                     <div>
-                        <button>
+                        <button onClick={() => navigate("/cart")}>
                         <ion-icon name="cart-outline"></ion-icon>
                         {totalOfProducts > 0 ? <div className='cart-products'><h6>{totalOfProducts}</h6></div>
                         : null    
@@ -112,7 +112,6 @@ const Navbar = styled.div`
     }
 
     .cart-products {
-  
         width: 25px;
         height: 25px;
         background: red;

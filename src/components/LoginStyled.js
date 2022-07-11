@@ -18,8 +18,9 @@ const Container = styled.div `
     width: 90%;
     max-width: 550px;
     border-radius: 10px;
-    padding: 20px 0 30px 0;
+    padding: 20px 10px 30px 10px;
     margin-top: 40px;
+    margin-bottom: 50px;
 
     div {
         width: 100%;
@@ -102,7 +103,7 @@ const Container = styled.div `
 const Logomarca = styled.div `
     display: flex;    
     position: relative;
-    margin-top: 120px;
+    margin-top: 100px;
     height: 45px;
     h1 {
         color: white;
