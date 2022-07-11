@@ -55,6 +55,7 @@ const Container = styled.div`
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3);
     font-family: 'Lexend Mega';
+    
 
     img {
         width: 80px;

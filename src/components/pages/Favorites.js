@@ -6,9 +6,10 @@ import ConfirmationButton from "../ConfirmationButton";
 import Context from '../../Context';
 import NavBar from "../NavBar";
 import LoaderSpinner from "../LoaderSpinner";
+import { useNavigate } from "react-router-dom";
 
 export default function Favorites() {
-
+    const navigate = useNavigate();
     const {apiUrl, authorization} = useContext(Context);
 
     const [favoritesList, setFavoritesList] = useState([]);
@@ -55,7 +56,9 @@ export default function Favorites() {
                     price={product.price}/>)}
                 </ProductsArea>
                 <div className="sized-box"></div>
-                <ConfirmationButton />
+                <div className="confirmation-button">
+                    <button onClick={() => navigate('/cart')}> <p>Ir para o carrinho</p></button>
+                </div>
             </AvailableArea>
         </>
     )

@@ -115,6 +115,7 @@ export default function Checkout() {
                 </div>
             </Total>
 
+
             <ContextCheckout.Provider value={{ adress, setAdress, city, setCity, state, setState, CEP, setCEP, installments, setInstallments, total }}>
                 <FooterCheckout>
                     <button onClick={() => navigate('/address')} className='finish-button infos'>
@@ -142,6 +143,7 @@ const Container = styled.div`
     padding: 20px 10px;
     width: 100%;
     height: 100vh;
+    max-height: 63vh;
     border-bottom: solid 1px #F9CA6F;
     margin-bottom: 140px;
     overflow-y: scroll;
@@ -194,23 +196,26 @@ const Total = styled.div`
     }
 
     >div {
+        width: 70%;
+        max-width: 600px;
+        margin: auto;
         display: flex;
         justify-content: space-between;
     }
 `
+//    background-image: linear-gradient(to right, #031027, #08203D, #031027);
 
 const FooterCheckout = styled.div`
     position: fixed;
     bottom: 0;
     display: flex;
-    width: 550px;
+    width: 650px;
     padding-top: 15px;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    background-image: linear-gradient(to right, #031027, #08203D, #031027);
-
     button {
         width: calc(50% - 20px);
+        max-width: 300px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -226,7 +231,7 @@ const FooterCheckout = styled.div`
         }
     }
 
-    @media(max-width: 550px){
+    @media(max-width: 650px){
         width: 100%;
     }
 `
