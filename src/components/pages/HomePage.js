@@ -81,13 +81,14 @@ export default function HomePage() {
                 </div>
                 <div className="sized-box"></div>
                 <div className="confirmation-button">
-                    <button onclick={() => navigate('/cart')}> <p>Ir para o carrinho</p></button>
+                    <button onClick={() => navigate('/cart')}> <p>Ir para o carrinho</p></button>
                 </div>
                
             </div>
         </>
     );
 }
+
 
 const SuggestionsArea = styled.div`
     height: 50px;
