@@ -38,13 +38,18 @@ export default function CartPage(){
     }
 
     async function finishOrder(){
-        setOrderBody({
-            name: user.name,
-            email: user.email,
-            totalPrice,
-            products: cartList
-        });
-        navigate('/checkout');
+
+        if (cartList.length > 0) {
+            setOrderBody({
+                name: user.name,
+                email: user.email,
+                totalPrice,
+                products: cartList
+            });
+            navigate('/checkout');
+        } else {
+            alert("adicione produtos ao carrinho para continuar")
+        }
 
     }
 
@@ -57,14 +62,13 @@ export default function CartPage(){
                 <div className='title'>
                     <div className='available-area'>
                         <ion-icon name="cart-outline"></ion-icon>
-                        <p>Seu carrinho</p>        
-                        <h6 className='price-text'>Total: R${totalPrice}</h6>            
+                        <p>Seu carrinho de compras</p>                    
                     </div>
 
                 </div>
                 <div className='available-area'>
 
-                    {cartList.length === 0 ? null :
+                    {cartList.length === 0 ? <h6>Você não adicionou nenhum produto ai carrinho ainda :/</h6> :
 
                     cartList.map((item) =>
                     <Product>
@@ -81,18 +85,14 @@ export default function CartPage(){
 
                     }
                 </div>
-               
-                </Cart>
+                <h6 className='price-text'>Total: R${totalPrice}</h6>
+        </Cart>
         
-                
-        <div className='available-area'>
-            
-            <Footer>
-                <div>
-                    <button onClick={() => navigate('/home')} className='goback-button'>Escolher mais produtos</button>
-                    <button onClick={() => finishOrder()} className='finish-button'>Finalizar compra</button>                    
-                </div>
 
+        <div className='available-area'>
+            <Footer>
+                <button onClick={() => navigate('/home')} className='goback-button'>Escolher mais produtos</button>
+                <button onClick={() => finishOrder()} className='finish-button'>Finalizar compra</button>
             </Footer>
         </div>
         </>
@@ -106,7 +106,7 @@ max-height: 70vh;
 border-bottom: solid 1px #F9CA6F;
 overflow-y: scroll;
 padding-bottom: 20px;
-margin-bottom: 10px;
+margin-bottom: 30px;
 
     &::-webkit-scrollbar {
         display: none;
@@ -115,12 +115,6 @@ margin-bottom: 10px;
     .title{
         border-bottom: solid 1px #F9CA6F;
         height: 80px;
-
-        @media(max-width: 450px){
-            p{
-                font-size: 15px;
-            }
-        }
     }
 
     .title div{
@@ -132,6 +126,15 @@ margin-bottom: 10px;
 
     .available-area{
         margin: auto;
+
+        h6 {
+            font-family: 'Lexend Mega';
+            font-size: 18px;
+            text-align: justify;
+            padding: 20px;
+            line-height: 20px;
+            color: #ffffff;
+        }
     }
 
     ion-icon{
@@ -158,7 +161,9 @@ margin-bottom: 10px;
         color: #ECECEC;
     }
 
-
+    h6 {
+        font-family: 'Lexend Mega';
+    }
 
     @media(max-width: 400px){
         h3{
@@ -178,7 +183,6 @@ margin-bottom: 10px;
 const Product = styled.div`
     background: #03223F;
     width: 95%;
-    max-width: 750px;
     height: 90px;
     display: flex;
     justify-content: space-between;
