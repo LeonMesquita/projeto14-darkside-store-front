@@ -19,7 +19,6 @@ export default function Checkout() {
     const { adress, city, state, CEP, installments, total, setTotal } = useContext(ContextCheckout)
 
 
-    const [total, setTotal] = useState(orderBody.totalPrice);
     const [dialog, setDialog] = useState(false);
     const dialogMessage = "Tem certeza de que deseja cancelar a compra?"
     setTotal(orderBody.totalPrice);
@@ -96,7 +95,7 @@ export default function Checkout() {
         <>
 
             <NavBar />
-            
+
 
             <Container>
                 <div className="available-area">
@@ -132,10 +131,11 @@ export default function Checkout() {
                 <button onClick={cancelOrder} className='goback-button'>Cancelar compra</button>
                 <button onClick={finalizeOrder} className='finish-button'>Efetuar pagamento</button>
             </FooterCheckout>
-                        {dialog ? <ConfirmationDialog message={dialogMessage} image={sadYoda}
-            onclickNo={() => setDialog(false)} onclickYes={() => navigate('/home')}
+
+            {dialog ? <ConfirmationDialog message={dialogMessage} image={sadYoda}
+                onclickNo={() => setDialog(false)} onclickYes={() => navigate('/home')} /> : null }
         </>
-    );
+    )
 }
 
 
