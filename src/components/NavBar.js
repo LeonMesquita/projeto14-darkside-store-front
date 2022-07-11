@@ -52,7 +52,7 @@ export default function NavBar(){
                         </span>
                     </div>
 
-                    <div>
+                    <div className="icons-div">
                         <button onClick={() => navigate("/cart")}>
                         <ion-icon name="cart-outline"></ion-icon>
                         {totalOfProducts > 0 ? <div className='cart-products'><h6>{totalOfProducts}</h6></div>
@@ -86,13 +86,13 @@ export default function NavBar(){
     );
 }
 
+//
 const Navbar = styled.div`
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Mega&family=Playball&family=Raleway:wght@400;700&family=Saira+Stencil+One&display=swap');
 
-
+    background-image: linear-gradient(to right, #031027, #08203D, #031027);
     width: 100%;
     height: 110px;
-    background-image: linear-gradient(to right, #031027, #08203D, #031027);
     position: fixed;
     display: flex;
     align-items: center;
@@ -107,8 +107,12 @@ const Navbar = styled.div`
     }
 
     .navbar-container {
-        width: 550px;
+        width: 80%;
         margin: auto;
+        @media(max-width: 767px) {
+        width: 100%
+
+    }
     }
 
     .cart-products {
@@ -166,7 +170,8 @@ const Navbar = styled.div`
     div {
         display: flex;
         align-items: center;
-        min-width: 20%;
+        width: 120px;
+        height: 100%;
         justify-content: space-between;
     }
 
@@ -185,11 +190,13 @@ const Navbar = styled.div`
         h2 {
             font-size: 10px;
         }
+        div{
+            min-width: 20%;
+        }
+
     }
 
-    @media(max-width: 550px) {
-        width: 100%
-    }
+
 `
 
 const Dropdown = styled.button`

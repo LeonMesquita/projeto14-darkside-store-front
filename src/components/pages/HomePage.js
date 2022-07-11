@@ -80,7 +80,10 @@ export default function HomePage() {
                     {products}
                 </div>
                 <div className="sized-box"></div>
-                <ConfirmationButton onclick={() => navigate('/cart')} />
+                <div className="confirmation-button">
+                    <button onclick={() => navigate('/cart')}> <p>Ir para o carrinho</p></button>
+                </div>
+               
             </div>
         </>
     );
@@ -107,13 +110,18 @@ const SuggestionsArea = styled.div`
 
     div{
         height: 100%;
-        max-width: 550px;
+        width: 767px;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
         overflow: hidden;
         margin: auto;
         
+    }
+    @media(max-width: 767px){
+        div{
+            width: 100%;
+        }
     }
     
     @media(max-width: 400px) {

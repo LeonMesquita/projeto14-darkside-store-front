@@ -37,7 +37,7 @@ input:focus {
 }
 
 .available-area{
-    width: 550px;
+    width: 80%;
 }
 
 .products-area{
@@ -46,7 +46,7 @@ input:focus {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 
@@ -71,22 +71,43 @@ input:focus {
 
 
 .confirmation-button{
-    width: 550px;
-    height: 70px;
-    background-color: #D49943;
+    width: 100%;
     position: fixed;
     bottom: 0;
+    left: 0;
     border: none;
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(to right, #031027, #08203D, #031027);
+    height: 95px;
+
+}
+
+.confirmation-button button{
+    width: 400px;
+    height: 70px;
+    background-color: #D49943;
     border-radius: 5px;
     cursor: pointer;
+    border: none;
+    align-self: flex-end;
+    margin-bottom: 10px;
+   
 }
 
 .confirmation-button     p{
     color: white;
     font-size: 27px;
     font-weight: 700;
+    
 }
 
+
+@media(max-width: 425px){
+    .confirmation-button button{
+        width: 93%;
+    }
+}
 
 .sized-box{
     height: 110px;
@@ -123,7 +144,7 @@ input:focus {
 
 }
 
-@media(max-width: 550px) {
+@media(max-width: 767px) {
     .main-container, .confirmation-button, .available-area{
         width: 100%;
     }

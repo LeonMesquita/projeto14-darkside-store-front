@@ -1,8 +1,9 @@
 .product-card{
     height: 350px;
     width: 45%;
+    max-width: 270px;
     background: #202124;
-    margin: 15px 00px;
+    margin-bottom: 20px;
     border-radius: 5px;
 
     transition: height 0.5s;
