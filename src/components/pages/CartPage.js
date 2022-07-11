@@ -57,7 +57,8 @@ export default function CartPage(){
                 <div className='title'>
                     <div className='available-area'>
                         <ion-icon name="cart-outline"></ion-icon>
-                        <p>Seu carrinho de compras</p>                    
+                        <p>Seu carrinho</p>        
+                        <h6 className='price-text'>Total: R${totalPrice}</h6>            
                     </div>
 
                 </div>
@@ -80,14 +81,18 @@ export default function CartPage(){
 
                     }
                 </div>
-                <h6 className='price-text'>Total: R${totalPrice}</h6>
-        </Cart>
+               
+                </Cart>
         
-
+                
         <div className='available-area'>
+            
             <Footer>
-                <button onClick={() => navigate('/home')} className='goback-button'>Escolher mais produtos</button>
-                <button onClick={() => finishOrder()} className='finish-button'>Finalizar compra</button>
+                <div>
+                    <button onClick={() => navigate('/home')} className='goback-button'>Escolher mais produtos</button>
+                    <button onClick={() => finishOrder()} className='finish-button'>Finalizar compra</button>                    
+                </div>
+
             </Footer>
         </div>
         </>
@@ -101,7 +106,7 @@ max-height: 70vh;
 border-bottom: solid 1px #F9CA6F;
 overflow-y: scroll;
 padding-bottom: 20px;
-margin-bottom: 30px;
+margin-bottom: 10px;
 
     &::-webkit-scrollbar {
         display: none;
@@ -110,6 +115,12 @@ margin-bottom: 30px;
     .title{
         border-bottom: solid 1px #F9CA6F;
         height: 80px;
+
+        @media(max-width: 450px){
+            p{
+                font-size: 15px;
+            }
+        }
     }
 
     .title div{
@@ -147,9 +158,7 @@ margin-bottom: 30px;
         color: #ECECEC;
     }
 
-    h6 {
-        font-family: 'Lexend Mega';
-    }
+
 
     @media(max-width: 400px){
         h3{
@@ -169,6 +178,7 @@ margin-bottom: 30px;
 const Product = styled.div`
     background: #03223F;
     width: 95%;
+    max-width: 750px;
     height: 90px;
     display: flex;
     justify-content: space-between;

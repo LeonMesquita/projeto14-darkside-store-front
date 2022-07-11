@@ -4,10 +4,18 @@ import styled from 'styled-components';
 const Footer = styled.div`
     position: fixed;
     bottom: 0;
+    left: 0;
     display: flex;
-    width: 550px;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    width: 100%;
+    
+    justify-content: center;
+
+    div{
+        width: 550px;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
 
     button {
         width: calc(50% - 20px);
