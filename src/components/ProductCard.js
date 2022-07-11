@@ -87,7 +87,7 @@ export default function ProductCard({ src, title, price, productId }) {
     }
 
     return (
-        <div className='product-card'>
+        <Productcard>
             <div className='image-container'>
                 <img src={src} alt='' />
                 <div className='favorite' onClick={() => favoriteProduct()}>
@@ -104,7 +104,7 @@ export default function ProductCard({ src, title, price, productId }) {
                 </div>
             </span>
 
-        </div>
+        </Productcard>
     );
 }
 
