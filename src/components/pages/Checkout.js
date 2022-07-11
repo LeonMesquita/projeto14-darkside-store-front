@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 
 export default function Checkout() {
 
-    const { apiUrl, authorization, orderBody } = useContext(Context);
+    const { apiUrl, authorization, orderBody, setTotalOfProducts } = useContext(Context);
 
 
 
@@ -69,7 +69,11 @@ export default function Checkout() {
         }
         try{
             await axios.post(`${apiUrl}/order`, order, authorization);
+            await axios.delete(`${apiUrl}/cart`, authorization);
+            setTotalOfProducts(0);
+            navigate('/home');
         }catch{
+            alert('Não foi possível concluir o pedido!');
 
         }
     }
