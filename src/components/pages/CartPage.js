@@ -6,13 +6,19 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import NavBar from '../NavBar.js';
 import LoaderSpinner from '../LoaderSpinner.js';
 import Footer from '../Footer.js';
+import ConfirmationDialog from "../ConfirmationDialog";
+import sadYoda from '../../images/sad_yoda.gif';
+
+
 
 export default function CartPage(){
     const [cartList, setCartList] = useState([]);
-    const { apiUrl, authorization, setOrderBody, user } = useContext(Context);
+    const { apiUrl, authorization, setOrderBody, user, setTotalOfProducts } = useContext(Context);
     const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
+    const [dialog, setDialog] = useState(false);
+
 
 
     useEffect(async () => {
@@ -46,6 +52,18 @@ export default function CartPage(){
         });
         navigate('/checkout');
 
+    }
+
+    async function deleteCart(){
+        try{
+            await axios.delete(`${apiUrl}/cart`, authorization);
+            setTotalOfProducts(0);
+            navigate('/home');
+
+        }catch{
+            alert("Não foi possível deletar o carrinho!");
+
+        }
     }
 
 
@@ -86,15 +104,21 @@ export default function CartPage(){
         
                 
         <div className='available-area'>
-            
+
             <Footer>
                 <div>
+                    
                     <button onClick={() => navigate('/home')} className='goback-button'>Escolher mais produtos</button>
-                    <button onClick={() => finishOrder()} className='finish-button'>Finalizar compra</button>                    
+                    <button onClick={() => finishOrder()} className='finish-button'>Finalizar compra</button>  
+                    <button onClick={() => setDialog(true)} className='delete-button'>Deletar carrinho</button>                    
+        
                 </div>
 
             </Footer>
         </div>
+        {dialog ? <ConfirmationDialog message="Tem certeza de que deseja excluir o carrinho? :(" image={sadYoda}
+            onclickNo={() => setDialog(false)} onclickYes={deleteCart}
+            /> : null}
         </>
     );
 }

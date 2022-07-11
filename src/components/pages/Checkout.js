@@ -135,6 +135,7 @@ export default function Checkout() {
                     <button onClick={finalizeOrder} className='finish-button'>Efetuar pagamento</button>
                 </FooterCheckout>
             </ContextCheckout.Provider>
+            
             {dialog ? <ConfirmationDialog message={dialogMessage} image={sadYoda}
             onclickNo={() => setDialog(false)} onclickYes={() => navigate('/home')}
             /> : null}

@@ -75,7 +75,7 @@ export default function SignIn() {
             </Logomarca>
             
             <Container>
-            <h3>Junte-se ao lado negro da força!</h3>
+            <h3>Junte-se ao lado Geek da força!</h3>
 
                 {formSignUp}
                 <Link to = "/"><h5>Já possui uma conta? <strong>Entre aqui</strong></h5> </Link>

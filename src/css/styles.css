@@ -132,7 +132,7 @@ input:focus {
     }
 }
 
-.goback-button, .finish-button{
+.goback-button, .finish-button, .delete-button{
     width: 200px;
     height: 50px;
     border-radius: 5px;
@@ -152,6 +152,11 @@ input:focus {
     background: #FCCB6F;
     color: #1E1E1E;
 
+}
+
+.delete-button{
+    background-color: #E19F41;
+    
 }
 
 @media(max-width: 767px) {
