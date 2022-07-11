@@ -32,8 +32,8 @@ export default function ProductCheckout({ product }) {
         <Container>
             <img src={product.image} alt="" />
             <Details>
-                <h1><strong>{product.title}</strong></h1>
-                <h2><strong>Preço: </strong> R${product.price.toFixed(2)}</h2>
+                <h3><strong>{product.title}</strong></h3>
+                <h4><strong>Preço: </strong> R${product.price.toFixed(2).replace(".",",")}</h4>
             </Details>
             <Quantity>
                 <h3><strong>Qtd.</strong></h3>
@@ -41,7 +41,7 @@ export default function ProductCheckout({ product }) {
             </Quantity>
             <Total>
                 <h3><strong>Total</strong></h3>
-                <h4>R${product.totalPrice.toFixed(2)}</h4>
+                <h4>R${product.totalPrice.toFixed(2).replace(".",",")}</h4>
             </Total>
         </Container>
     )
@@ -66,16 +66,16 @@ const Container = styled.div`
 
 const Details = styled.div`
     word-wrap: break-word;
-    font-size: 14px;
+    font-size: 12px;
     width: calc(60% - 80px);
 
-    h1 {
+    h3 {
         font-size: 13px;
         margin-bottom: 6px;
         color: #E19F41;
     }
 
-    h2 {
+    h4 {
         font-size: 11px;
     }
     
