@@ -77,7 +77,7 @@ const Dialog = styled.div`
         font-family: 'Roboto',sans-serif;
         font-weight: normal;
         color: white;
-        font-size: 25px;
+        font-size: 23px;
     }
 
     img{

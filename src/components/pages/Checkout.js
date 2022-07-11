@@ -119,6 +119,7 @@ export default function Checkout() {
             </Total>
 
 
+
             <FooterCheckout>
                 <button onClick={() => navigate('/address')} className='finish-button infos'>
                     <h6>Selecionar endereço</h6>
