@@ -2,16 +2,16 @@ import styled from "styled-components";
 
 /* formato objeto product
     {
-        title: "Camiseta Star Wars",
-        price: "89,90",
-        image: "https://www.camisetas4fun.com.br/media/product/16f/camiseta-star-wars-afa.jpg",
-        quantity: 1,
-        size: "M"
+        image: "https://img.elo7.com.br/product/original/2C68ACB/camiseta-star-wars-logo-arte-camisa-star-wars-imagem.jpg",
+        itemQuantity: 2,
+        price: 38.9,
+        productId: "62c87eeddaa7673f12466da0",
+        title: "Camiseta Star Wars Logo",
+        totalPrice: 77.8
     }
 */
 
 export default function ProductHist({ product }) {
-    const size = product.size ? <h6>Tamanho: <strong>{product.size}</strong></h6> : null;
 
     return (
         <Container>
@@ -20,9 +20,8 @@ export default function ProductHist({ product }) {
             </div>
             <Description>
                 <h5>{product.title}</h5>
-                <h6>{size}</h6>
-                <h6>Quantidade: <strong>{product.quantity}</strong></h6>
-                <h6>Preço unit.: <strong>R${product.price}</strong></h6>
+                <h6>Quantidade: <strong>{product.itemQuantity}</strong></h6>
+                <h6>Preço unit.: <strong>R${String(product.price).replace(".",",")}</strong></h6>
             </Description>
         </Container>
     )

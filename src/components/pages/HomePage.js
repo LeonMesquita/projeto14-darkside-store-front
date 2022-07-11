@@ -39,6 +39,7 @@ export default function HomePage() {
 
         } catch (error) {
             setProductsList([]);
+            setIsLoading(false);
         }
     }
 

@@ -42,8 +42,7 @@ export default function Request({ request }) {
     function calculateTotal() {
         let total = 0;
         request.products.forEach((product) => {
-            const priceInNumber = parseFloat(product.price.replace(',', '.'));
-            total += priceInNumber * product.quantity;
+            total += product.totalPrice;
         })
 
         return total.toFixed(2).replace(".", ",");
@@ -78,7 +77,7 @@ export default function Request({ request }) {
             <Summary>
                 <h2>Resumo da compra</h2>
                 <div>
-                    <h3>Pedido: <strong>{request.id}</strong></h3>
+                    <h3>Pedido: <strong>{request._id}</strong></h3>
                     <h3>Data: <strong>{request.date}</strong></h3>
                     <h3>TOTAL: <strong>R${total}</strong></h3>
                 </div>

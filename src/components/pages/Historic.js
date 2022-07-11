@@ -4,6 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import Request from "../Request";
 import NavBar from "../NavBar";
+import LoaderSpinner from "../LoaderSpinner";
 
 export default function Historic() {
 
@@ -31,71 +32,20 @@ export default function Historic() {
 
     const { apiUrl, authorization } = useContext(Context);
 
-    const [requestsList, setRequestsList] = useState([
-        {
-            id: "1",
-            date: "12/04/2022",
-            products: [
-                {
-                    title: "Camiseta Star Wars",
-                    price: "89,90",
-                    image: "https://www.camisetas4fun.com.br/media/product/16f/camiseta-star-wars-afa.jpg",
-                    quantity: 1,
-                    size: "M"
-                },
-                {
-                    title: "Caneca Star Wars",
-                    price: "29,90",
-                    image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
-                    quantity: 2
-                },
-                {
-                    title: "Caneca Star Wars",
-                    price: "29,90",
-                    image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
-                    quantity: 2
-                },{
-                    title: "Caneca Star Wars",
-                    price: "29,90",
-                    image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
-                    quantity: 2
-                },{
-                    title: "Caneca Star Wars",
-                    price: "29,90",
-                    image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
-                    quantity: 2
-                }
-            ]
-        },
-        {
-            id: "2",
-            date: "14/05/2022",
-            products: [
-                {
-                    title: "Camiseta Star Warssss sssssss",
-                    price: "89,90",
-                    image: "https://www.camisetas4fun.com.br/media/product/16f/camiseta-star-wars-afa.jpg",
-                    quantity: 2,
-                    size: "M"
-                },
-                {
-                    title: "Caneca Star Wars",
-                    price: "29,90",
-                    image: "https://static3.tcdn.com.br/img/img_prod/460977/caneca_star_wars_logo_preto_e_amarelo_64693_1_20201211171758.jpeg",
-                    quantity: 1
-                }
-            ]
-        }
-    ]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [requestsList, setRequestsList] = useState([]);
 
     async function getRequests() {
         try {
-            const promise = await axios.get(`${apiUrl}/historic`, authorization);
+            const promise = await axios.get(`${apiUrl}/order`, authorization);
             console.log(promise.data);
             setRequestsList(promise.data);
+            setIsLoading(false);
 
         } catch (error) {
             console.log(error);
+            setIsLoading(false);
         }
     }
 
@@ -105,20 +55,21 @@ export default function Historic() {
 
 
     function showRequests() {
-        if (requestsList.length === 0) {
-            return (
-                <></>
-            );
-        } else {
-            return (
+        if (requestsList.length !== 0 && !isLoading) {
+            return(
                 requestsList.map((req, index) => <Request key={index} request={req} />)
             );
+        } else if (!isLoading) {
+            return(
+                <p>Você ainda não realizou nenhum pedido :/</p>
+            )
         }
     }
 
     const requests = showRequests();
 
     return (
+        isLoading ? <LoaderSpinner loaderType="oval"/> :
         <>  
             <NavBar />
             <Container>
