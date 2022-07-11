@@ -17,6 +17,9 @@ export default function HomePage() {
     const { token, setToken, apiUrl, authorization, user, setUser } = useContext(Context);
     const [productsList, setProductsList] = useState([]);
     const [totalOfProducts, setTotalOfProducts] = useState(0);
+    const [itemsQuantity, setItemsQuantity] = useState(0);
+
+
     
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
@@ -45,11 +48,11 @@ export default function HomePage() {
     }, []);
 
     function createProducts() {
-        if (productsList.length !== 0) {
+        if (productsList.length !== 0 && !isLoading) {
             return (
                 productsList.map((product) => <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title} price={product.price} quantity={itemsQuantity} />)
             );
-        } else {
+        } else if (!isLoading) {
             return (
                 <NotFound>
                     <p>No momento não encontramos nenhum produto deste tipo nos nossos estoques</p>
@@ -57,12 +60,12 @@ export default function HomePage() {
                 </NotFound>
             )
         }
-
     }
 
     const products = createProducts()
 
     return (
+        isLoading ? <LoaderSpinner loaderType='oval'/> :
         <>
             <NavBar />
             <SearchBar value={searchedProduct} setValue={setSearchedProduct} />
