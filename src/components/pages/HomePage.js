@@ -8,30 +8,32 @@ import axios from 'axios';
 import NavBar from "../NavBar";
 import { useNavigate } from "react-router-dom";
 
+import sadBabyYoda from "../../images/sad.png"
 
-export default function HomePage(){
+
+export default function HomePage() {
     const [searchedProduct, setSearchedProduct] = useState('');
-    const {token, setToken, apiUrl, authorization, user, setUser} = useContext(Context);
+    const { token, setToken, apiUrl, authorization, user, setUser } = useContext(Context);
     const [productsList, setProductsList] = useState([]);
     const [totalOfProducts, setTotalOfProducts] = useState(0);
     const navigate = useNavigate();
     const [itemsQuantity, setItemsQuantity] = useState(0);
 
-    
+
     //#D49943
     //#F5C974
     const productTypeList = ['Tudo', 'Camisetas', 'Canecas', 'Funkos', 'Actions'];
 
 
-    async function getProducts(productType){
+    async function getProducts(productType) {
         console.log(productType)
-        try{
+        try {
 
             const promise = await axios.get(`${apiUrl}/products/${productType}`);
             setProductsList(promise.data);
 
-        } catch(error){
-            console.log(error);
+        } catch (error) {
+            setProductsList([]);
         }
     }
 
@@ -40,23 +42,39 @@ export default function HomePage(){
 
     }, []);
 
-    return(
+    function createProducts() {
+        if (productsList.length !== 0) {
+            return (
+                productsList.map((product) => <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title} price={product.price} quantity={itemsQuantity} />)
+            );
+        } else {
+            return (
+                <NotFound>
+                    <p>No momento não encontramos nenhum produto deste tipo nos nossos estoques</p>
+                    <img src={sadBabyYoda} alt="sad baby yoda" />
+                </NotFound>
+            )
+        }
+
+    }
+
+    const products = createProducts()
+
+    return (
         <>
             <NavBar />
-            <SearchBar value={searchedProduct} setValue={setSearchedProduct}/>
+            <SearchBar value={searchedProduct} setValue={setSearchedProduct} />
             <SuggestionsArea>
                 <div>
                     {productTypeList.map((type, index) => <button onClick={() => getProducts(type)} key={index}><h5>{type}</h5></button>)}
                 </div>
             </SuggestionsArea>
-            <div className="available-area">    
+            <div className="available-area">
                 <div className="products-area">
-                    {productsList.map((product) => 
-                    <ProductCard key={product._id} productId={product._id} src={product.image} title={product.title}
-                    price={product.price} quantity={itemsQuantity} />)}
+                    {products}
                 </div>
                 <div className="sized-box"></div>
-                <ConfirmationButton onclick={() => navigate('/cart')}/>
+                <ConfirmationButton onclick={() => navigate('/cart')} />
             </div>
         </>
     );
@@ -96,5 +114,30 @@ const SuggestionsArea = styled.div`
         h5{
             font-size: 13px;
         }
+    }
+`
+
+const NotFound = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 330px;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 10px 18px 0px rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 10px;
+
+    img {
+        width: 240px;
+        height: 160px;
+        border-radius: 10px;
+    }
+
+    p {
+        font-family: 'Lexend Mega';
+        text-align: justify;
+        color: #fff;
+        margin-bottom: 20px;
+        font-size: 14px;
     }
 `
