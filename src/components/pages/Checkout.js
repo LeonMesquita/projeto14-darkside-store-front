@@ -9,6 +9,8 @@ import ConfirmationDialog from "../ConfirmationDialog";
 import ContextCheckout from "../../ContextCheckout";
 import { useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
+import sadYoda from '../../images/sad.png';
+
 
 
 export default function Checkout() {
@@ -21,6 +23,8 @@ export default function Checkout() {
     const [CEP, setCEP] = useState("60767-305");
     const [installments, setInstallments] = useState("1");
     const [total, setTotal] = useState(orderBody.totalPrice);
+    const [dialog, setDialog] = useState(false);
+    const dialogMessage = "Tem certeza de que deseja cancelar a compra?"
 
     const [cartList, setCartList] = useState([...orderBody.products]);
 
@@ -93,6 +97,7 @@ export default function Checkout() {
     return (
         <>
             <NavBar />
+            
 
             <Container>
                 <div className="available-area">
@@ -126,10 +131,13 @@ export default function Checkout() {
                         <h6>Selecionar pagamento</h6>
                         <ion-icon name="card-outline"></ion-icon>
                     </button>
-                    <button onClick={cancelOrder} className='goback-button'>Cancelar compra</button>
+                    <button onClick={() => setDialog(true)} className='goback-button'>Cancelar compra</button>
                     <button onClick={finalizeOrder} className='finish-button'>Efetuar pagamento</button>
                 </FooterCheckout>
             </ContextCheckout.Provider>
+            {dialog ? <ConfirmationDialog message={dialogMessage} image={sadYoda}
+            onclickNo={() => setDialog(false)} onclickYes={() => navigate('/home')}
+            /> : null}
         </>
     );
 }
