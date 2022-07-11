@@ -125,7 +125,7 @@ const Container = styled.div`
 const Summary = styled.div`
     margin-bottom: 40px;
 
-    >h1 {
+    h1 {
         font-size: 22px;
         color: #E19F41;
         margin-bottom: 20px;
