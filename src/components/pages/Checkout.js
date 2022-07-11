@@ -38,19 +38,17 @@ export default function Checkout() {
         totalPrice: "707.00"
     */
 
-        /*
-            products:
-            {
-                image: "https://img.elo7.com.br/product/original/2C68ACB/camiseta-star-wars-logo-arte-camisa-star-wars-imagem.jpg"
-                itemQuantity: 2
-                price: 38.9
-                productId: "62c87eeddaa7673f12466da0"
-                title: "Camiseta Star Wars Logo"
-                totalPrice: 77.8
-            }
-        */
-
-
+    /*
+        products:
+        {
+            image: "https://img.elo7.com.br/product/original/2C68ACB/camiseta-star-wars-logo-arte-camisa-star-wars-imagem.jpg"
+            itemQuantity: 2
+            price: 38.9
+            productId: "62c87eeddaa7673f12466da0"
+            title: "Camiseta Star Wars Logo"
+            totalPrice: 77.8
+        }
+    */
 
     function showProducts() {
         return (
@@ -89,39 +87,40 @@ export default function Checkout() {
     return (
         <>
             <NavBar />
-           
-                <Container>
-                     <div className="available-area">
+
+            <Container>
+                <div className="available-area">
                     <Summary>
                         <h1>Produtos selecionados</h1>
                         {products}
-
-
                     </Summary>
-                     </div>
-                </Container>  
-      
-      
-
-            <Shipping>
-                <div className="available-area">
-                        <h5>Frete:</h5>
-                        <h5>Frete Grátis</h5>
                 </div>
+            </Container>
 
-            </Shipping>
-            <Shipping>
-            <div className="available-area">
-            <h5>Total da compra:</h5>
-                <h5>R${orderBody.totalPrice.replace(".", ",")}</h5>
+            <Total>
+                <div>
+                    <h5>Frete</h5>
+                    <h5>Frete Grátis</h5>
                 </div>
-            </Shipping>
-            <Footer>
-                <button onClick={() => navigate('/address')}  className='goback-button'>Selecionar endereço</button>
-                <button onClick={() => navigate('/payment')} className='finish-button'>Selecionar pagamento</button>
-                <button onClick={cancelOrder} className='goback-button'>Cancelar compra</button>
-                <button onClick={finalizeOrder}  className='finish-button'>Efetuar pagamento</button>
-            </Footer>
+                <hr></hr>
+                <div>
+                    <h6>TOTAL</h6>
+                    <h6>R${orderBody.totalPrice.replace(".", ",")}</h6>
+                </div>
+            </Total>
+
+            <FooterCheckout>
+                <button onClick={() => navigate('/address')} className='finish-button infos'>
+                    <h6>Selecionar endereço</h6>
+                    <ion-icon name="home-outline"></ion-icon>
+                </button>
+                <button onClick={() => navigate('/payment')} className='finish-button infos'>
+                    <h6>Selecionar pagamento</h6>
+                    <ion-icon name="card-outline"></ion-icon>
+                </button>
+                <button className='goback-button'>Cancelar compra</button>
+                <button className='finish-button'>Efetuar pagamento</button>
+            </FooterCheckout>
         </>
     );
 }
@@ -135,10 +134,13 @@ const Container = styled.div`
     padding: 20px 10px;
     width: 100%;
     height: 100vh;
-    max-height: 55vh;
     border-bottom: solid 1px #F9CA6F;
-    margin-bottom: 20px;
+    margin-bottom: 140px;
     overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 
     .available-area{
         height: 100%;
@@ -165,8 +167,6 @@ const Summary = styled.div`
 
 const Shipping = styled.div`
     width: 100%;
-   
-   
     background-color: #FCCB6F;
     color: #051731;
     font-weight: bold;
@@ -177,9 +177,66 @@ const Shipping = styled.div`
     font-family: 'Lexend Mega';
 
     div{
-        
         display: flex;
         justify-content: space-between;
         margin: auto;
+    }
+`
+
+const Total = styled.div`
+    width: 100%;
+    background-color: rgba(255,255,255,1);
+    color: #000000;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px;
+    box-shadow: 10px 5px 20px 8px rgba(0,0,0,0.3);
+    font-family: 'Lexend Mega';
+    position: fixed;
+    bottom: 150px;
+    padding: 15px;
+    z-index: 1;
+    
+
+    h5 {
+        font-size: 11px; 
+        margin-bottom: -5px;
+    }
+
+    >div {
+        display: flex;
+        justify-content: space-between;
+    }
+`
+
+const FooterCheckout = styled.div`
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    width: 550px;
+    padding-top: 15px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-image: linear-gradient(to right, #031027, #08203D, #031027);
+
+    button {
+        width: calc(50% - 20px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .infos {
+        background-color: #ffffff;
+        margin-bottom: 15px;    
+
+        ion-icon {
+            font-size: 38px;
+            padding: 0 10px 0 5px;
+        }
+    }
+
+    @media(max-width: 550px){
+        width: 100%;
     }
 `

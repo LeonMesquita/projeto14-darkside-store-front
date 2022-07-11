@@ -9,10 +9,13 @@ const Footer = styled.div`
     justify-content: space-evenly;
     flex-wrap: wrap;
 
+    button {
+        width: calc(50% - 20px);
+    }
+
     @media(max-width: 550px){
         width: 100%;
     }
-
 `
 
 export default Footer;
