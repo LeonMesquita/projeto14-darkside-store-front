@@ -5,6 +5,8 @@ import Context from '../Context';
 import axios from 'axios';
 import '../css/product-style.css';
 import { useNavigate } from 'react-router-dom';
+import LoaderSpinner from './LoaderSpinner';
+import ProductLoader from './ProductLoader';
 
 export default function ProductCard({ src, title, price, productId }) {
     const { apiUrl, totalOfProducts, setTotalOfProducts, authorization } = useContext(Context);
@@ -12,17 +14,21 @@ export default function ProductCard({ src, title, price, productId }) {
     const [cartList, setCartList] = useState([]);
     const navigate = useNavigate();
     const [isFavorite, setIsFavorite] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(async () => {
         try {
+           const promise2 = await axios.get(`${apiUrl}/favorite`, authorization);
            const promise = await axios.get(`${apiUrl}/cart`, authorization);
-            const promise2 = await axios.get(`${apiUrl}/favorite`, authorization);
+           
            setCartList(promise.data.products);
            setQuantity(promise.data.products);
-            setFavorite(promise2.data);
+            setFavorite(promise2.data); 
+            setIsLoading(false);
 
         } catch (error) {
             //navigate('/');
+            setIsLoading(false);
         }
 
     }, []);
@@ -87,8 +93,11 @@ export default function ProductCard({ src, title, price, productId }) {
     }
 
     return (
+        
         <div className='product-card'>
-            <div className='image-container'>
+           {isLoading ? <ProductLoader /> :
+           <>
+                       <div className='image-container'>
                 <img src={src} alt='' />
                 <div className='favorite' onClick={() => favoriteProduct()}>
                     <ion-icon name={!isFavorite ? "heart-outline" : "heart"}></ion-icon>
@@ -103,7 +112,9 @@ export default function ProductCard({ src, title, price, productId }) {
 
                 </div>
             </span>
+           </>
 
+}
         </div>
     );
 }
