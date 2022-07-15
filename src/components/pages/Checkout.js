@@ -10,6 +10,9 @@ import ContextCheckout from "../../ContextCheckout";
 import { useNavigate } from "react-router-dom";
 import dayjs from 'dayjs';
 import sadYoda from '../../images/sad.png';
+import check from '../../images/check.gif';
+
+import SuccessAlert from "../SuccessAlert";
 
 
 
@@ -18,6 +21,7 @@ export default function Checkout() {
     const { apiUrl, authorization, orderBody, setTotalOfProducts } = useContext(Context);
     const { adress, city, state, CEP, installments, total, setTotal } = useContext(ContextCheckout)
     const [dialog, setDialog] = useState(false);
+    const [alert, setAlert] = useState(false);
     const dialogMessage = "Tem certeza de que deseja cancelar a compra?";
     setTotal(orderBody.totalPrice);
 
@@ -48,7 +52,8 @@ export default function Checkout() {
 
 
     function showProducts() {
-        return (
+        if (!orderBody.products) navigate('/home');
+        else return (
             cartList.map((product, index) => <ProductCheckout key={index} product={product} />)
         );
     }
@@ -56,7 +61,6 @@ export default function Checkout() {
     async function finalizeOrder(event) {
         event.preventDefault();
 
-        console.log('entrou')
         const order = {
             ...orderBody,
             date: dayjs().format("DD/MM/YYYY")
@@ -76,7 +80,8 @@ export default function Checkout() {
                 await axios.post(`${apiUrl}/order`, order, authorization);
                 await axios.delete(`${apiUrl}/cart`, authorization);
                 setTotalOfProducts(0);
-                navigate('/home');
+                setAlert(true);
+
             } catch {
                 alert('Não foi possível concluir o pedido!');
             }
@@ -131,6 +136,7 @@ export default function Checkout() {
 
             {dialog ? <ConfirmationDialog message={dialogMessage} image={sadYoda}
                 onclickNo={() => setDialog(false)} onclickYes={() => navigate('/home')} /> : null }
+            {alert ? <SuccessAlert message='Parabéns! Seu pedido foi concluído com sucesso.' image={check} onclick={() => navigate('/home')}/> : null}
         </>
     )
 }
@@ -145,7 +151,6 @@ const Container = styled.div`
     width: 100%;
     height: 100vh;
     max-height: 63vh;
-    border-bottom: solid 1px #F9CA6F;
     margin-bottom: 140px;
     overflow-y: scroll;
 

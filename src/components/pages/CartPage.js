@@ -31,6 +31,7 @@ export default function CartPage(){
             setIsEmpty(false);
         } catch (error) {
            //navigate('/home');
+           setCartList([]);
            setIsLoading(false);
         }
 
@@ -79,7 +80,7 @@ export default function CartPage(){
         isLoading ? <LoaderSpinner loaderType='oval'/> :
         <>
             <NavBar />
-           {cartList.length === 0  ?
+           {cartList.length === 0  || !cartList ?
            <EmptyCart>
                 <h1>Seu carrinho está vazio</h1>
                 <button onClick={() => navigate('/home')} className='goback-button'>Voltar para home</button>
