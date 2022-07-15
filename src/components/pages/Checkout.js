@@ -178,7 +178,7 @@ const Summary = styled.div`
 
 const Total = styled.div`
     width: 100%;
-    background-color: rgba(255,255,255,1);
+    background-color: #E19F40;
     color: #000000;
     font-weight: bold;
     font-size: 16px;
@@ -194,6 +194,7 @@ const Total = styled.div`
     h5 {
         font-size: 11px; 
         margin-bottom: -5px;
+        font-weight: 900;
     }
 
     >div {
@@ -202,6 +203,10 @@ const Total = styled.div`
         margin: auto;
         display: flex;
         justify-content: space-between;
+    }
+
+    hr{
+        border: solid 1px black;
     }
 `
 

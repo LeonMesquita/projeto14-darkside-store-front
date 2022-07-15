@@ -89,7 +89,8 @@ export default function CartPage(){
                 <div className='title'>
                     <div className='available-area'>
                         <ion-icon name="cart-outline"></ion-icon>
-                        <p>Seu carrinho de compras</p>                    
+                        <p>Seu carrinho</p> 
+                        <h6 className='price-text'>Total: R${totalPrice}</h6>                   
                     </div>
 
                 </div>
@@ -112,7 +113,7 @@ export default function CartPage(){
 
                     }
                 </div>
-                <h6 className='price-text'>Total: R${totalPrice}</h6>
+                
         </Cart>
         
 
@@ -141,12 +142,10 @@ export default function CartPage(){
 
 const Cart = styled.div`
 width: 100%;
-height: 100vh;
-max-height: 70vh;
-border-bottom: solid 1px #F9CA6F;
+
 overflow-y: scroll;
 padding-bottom: 20px;
-margin-bottom: 30px;
+margin-bottom: 250px;
 
     &::-webkit-scrollbar {
         display: none;
@@ -155,6 +154,9 @@ margin-bottom: 30px;
     .title{
         border-bottom: solid 1px #F9CA6F;
         height: 80px;
+        display: flex;
+        align-items: center;
+       
     }
 
     .title div{
@@ -166,6 +168,7 @@ margin-bottom: 30px;
 
     .available-area{
         margin: auto;
+        position: relative;
 
         h6 {
             font-family: 'Lexend Mega';
@@ -174,6 +177,9 @@ margin-bottom: 30px;
             padding: 20px;
             line-height: 20px;
             color: #ffffff;
+            position: absolute;
+            right: 0;
+            top: 0;
         }
     }
 
