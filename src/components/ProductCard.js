@@ -18,20 +18,32 @@ export default function ProductCard({ src, title, price, productId }) {
 
     useEffect(async () => {
         try {
-           const promise2 = await axios.get(`${apiUrl}/favorite`, authorization);
+          
            const promise = await axios.get(`${apiUrl}/cart`, authorization);
-           
+            
            setCartList(promise.data.products);
            setQuantity(promise.data.products);
-            setFavorite(promise2.data); 
+            
             setIsLoading(false);
 
         } catch (error) {
             //navigate('/');
+            
+        }
+
+        try{
+        const promise2 = await axios.get(`${apiUrl}/favorite`, authorization);
+        setFavorite(promise2.data); 
+        setIsLoading(false);
+        }catch(error){
             setIsLoading(false);
         }
 
     }, []);
+
+    async function getIsFavorite(){
+
+    }
 
     function setQuantity(cart) {
         cart.map((item) => {
@@ -107,7 +119,7 @@ export default function ProductCard({ src, title, price, productId }) {
             <span>
                 <p>{title}</p>
                 <div className='separate-div'>
-                    <h2>R${price}</h2>
+                    <h2>R$ {price}</h2>
                     <AddProductButton text={itemQuantity} pressAdd={addItem} pressSub={removeItem} />
 
                 </div>
@@ -175,7 +187,7 @@ const Productcard = styled.div`
         align-items: center;
 
         h2{
-            letter-spacing: -0.12em;
+            letter-spacing: -0.6em;
             color: #ECECEC;
             margin-left: 5px;
             font-weight: 700;
