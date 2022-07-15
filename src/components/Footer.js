@@ -7,8 +7,12 @@ const Footer = styled.div`
     left: 0;
     display: flex;
     width: 100%;
-    
+    max-height: 20vh;
+    background-image: linear-gradient(to right, #031027, #08203D, #031027);
+    padding-top: 20px;
     justify-content: center;
+    border-top: solid 1px #F9CA6F;
+
 
     div{
         width: 550px;
