@@ -196,7 +196,6 @@ margin-bottom: 250px;
         font-weight: 400;
         font-size: 20px;
         line-height: 11px;
-        letter-spacing: -0.16em;
         color: #E19F41;
     }
 
